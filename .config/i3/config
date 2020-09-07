@@ -15,7 +15,7 @@ font pango:monospace 8
 
 #### Gaps ####
 # (super)+a -> toggle gaps
-bindsym $mod+a          gaps inner current toggle $inner_gaps 0
+bindsym $mod+a          gaps inner current toggle $inner_gaps
 # (super)+s -> increase inner gaps
 bindsym $mod+s			gaps inner current plus 5
 # (super)+shift+s -> decrease inner gaps
@@ -44,6 +44,10 @@ bindsym $mod+Return     exec $term
 bindsym $mod+w          exec --no-startup-id $BROWSER       
 # (super)+r -> opens ranger
 bindsym $mod+r          exec $term -e lf                    
+# (super)+p -> opens pulsemixer
+bindsym $mod+p          exec $term -e pulsemixer                    
+# (super)+t -> opens transmission TUI (tremc)
+bindsym $mod+t          exec $term -e tremc                  
 
 ### Panes ###
 
