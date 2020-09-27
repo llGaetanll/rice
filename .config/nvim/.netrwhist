@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/al/.config/dconf'
 let g:netrw_dirhist_1='/home/al/.config/wal'
 let g:netrw_dirhist_0='/home/al/.config/wal/templates'
 let g:netrw_dirhist_9='/home/al/.config/wal'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_6='/home/al/.config/wal/colorschemes'
 let g:netrw_dirhist_5='/home/al/.config/wal/colorschemes/dark'
 let g:netrw_dirhist_4='/home/al/.config/wal/colorschemes'
 let g:netrw_dirhist_3='/home/al/.config/wal/colorschemes/light'
-let g:netrw_dirhist_2='/home/al/.config/wal/colorschemes'
