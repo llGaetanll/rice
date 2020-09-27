@@ -6,21 +6,38 @@
 !.gitignore
 !README.md
 
+# ignore everything in .config
+.config/*
+
 # whitelisted directories
-!.config/
 !.local/bin/
+
+# .config bonanza
+!.config/Xresources
+!.config/fontconfig
+!.config/i3
+!.config/lf
+!.config/mpv
+!.config/neofetch
+
+!.config/nvim
+.config/nvim/plugged # re-ignore this
+
+!.config/polybar
+.config/polybar/fonts # re-ignore this
+
+!.config/sxiv
+!.config/tmux
+# TODO: whitelist transmission once set up with blocklist
+!.config/xinitrc
+!.config/zathura
+
+!.config/zsh
+.config/zsh/oh-my-zsh/ # re-ignore this
+
 
 # whitelisted files
 !*.profile
 !*.zprofile
 !*.xinitrc
 !*.xprofile
-
-# Ignored files & folders
-.config/discord/
-.config/polybar/fonts
-.config/nvim/plugged
-.config/zsh/oh-my-zsh/
-.config/ssh*
-.config/coc/extensions/node_modules
-.config/pulse/
