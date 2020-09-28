@@ -20,6 +20,7 @@
 !.config/mpv
 !.config/neofetch
 
+!.config/vim
 !.config/nvim
 .config/nvim/plugged # re-ignore this
 
@@ -35,6 +36,7 @@
 !.config/zsh
 .config/zsh/oh-my-zsh/ # re-ignore this
 
+!.config/mimeapps.list
 
 # whitelisted files
 !*.profile
