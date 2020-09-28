@@ -1,1 +1,0 @@
-/home/al/.config/xinitrc

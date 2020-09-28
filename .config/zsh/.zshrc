@@ -1,1 +1,0 @@
-/home/al/repo/dotfiles/zshrc
