@@ -1,0 +1,147 @@
+### Essentials Params ###
+set $inner_gaps 30
+set $outer_gaps 0
+# set def terminal (should be st)
+set $term --no-startup-id $TERMINAL 
+
+set $shutdown sudo -A shutdown -h now
+
+# I think this is the windows (super) key
+set $mod Mod4 
+
+set $shutdown systemctl poweroff
+set $reboot sudo -A reboot
+set $hibernate sudo -A systemctl suspend
+
+font pango:monospace 8
+
+#### Gaps ####
+# (super)+a -> toggle gaps
+bindsym $mod+a          gaps inner current toggle $inner_gaps
+# (super)+s -> increase inner gaps
+bindsym $mod+s			gaps inner current plus 5
+# (super)+shift+s -> decrease inner gaps
+bindsym $mod+Shift+s	gaps inner current minus 5
+
+#### Polybar ####
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+### Gaps & General Window Settings ###
+# enable if you want borders around your windows. I don't
+for_window [class="^.*"] border pixel 0
+gaps inner $inner_gaps
+gaps outer $outer_gaps
+
+#### Keybinds ####
+## Main
+#(super)+Backspace -> shutdown computer
+bindsym $mod+BackSpace  exec --no-startup-id prompt "Shutdown computer?" "$shutdown"                
+#(super)+Shif+Backspace -> reboot computer
+bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+# (super)+q -> kill focused window
+bindsym $mod+q          kill                
+# (super)+d -> launch dmenu to start a program
+bindsym $mod+d          exec dmenu_run      
+# (super)+PrintScreen -> opens screenshot menu
+bindsym $mod+Print      exec --no-startup-id screenshot
+# (super)+plus -> +5 volume
+bindsym $mod+plus		exec --no-startup-id pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
+# (super)+shift+plus -> +15 volume
+bindsym $mod+Shift+plus		exec --no-startup-id pulsemixer --change-volume +15 && pkill -RTMIN+10 i3blocks
+# (super)+minus -> -5 volume
+bindsym $mod+minus 		exec --no-startup-id pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
+# (super)+shift+minus -> -15 volume
+bindsym $mod+Shift+minus	exec --no-startup-id pulsemixer --change-volume -15 && pkill -RTMIN+10 i3blocks
+
+# (super)+Space -> toggle floating windows
+bindsym $mod+space 	floating toggle
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+## Other Programs
+# (super)+Enter -> open terminal (st)
+bindsym $mod+Return     exec $term                          
+# (super)+w     -> open web browser (firefox)
+bindsym $mod+w          exec --no-startup-id $BROWSER       
+# (super)+r -> opens ranger
+bindsym $mod+r          exec $term -e tmux new-session -Aslf -- lf
+# (super)+p -> opens pulsemixer
+bindsym $mod+p          exec $term -e pulsemixer                    
+# (super)+t -> opens transmission TUI (tremc)
+bindsym $mod+t          exec $term -e tremc                  
+
+### Panes ###
+
+## Focusing Panes
+# (super)+h -> focus left pane
+bindsym $mod+h          focus left          
+# (super)+j -> focus bottom pane
+bindsym $mod+j          focus down          
+# (super)+k -> focus bottom pane
+bindsym $mod+k          focus up          
+# (super)+l -> focus right pane
+bindsym $mod+l          focus right         
+
+## Moving Panes - Shift
+# (super)+shift+h -> move pane to left
+bindsym $mod+Shift+h    move left
+# (super)+shift+j -> move pane to left
+bindsym $mod+Shift+j    move down
+# (super)+shift+k -> move pane to right
+bindsym $mod+Shift+k    move up
+# (super)+shift+l -> move pane to right
+bindsym $mod+Shift+l    move right
+
+## Resizing Panes - Ctrl
+set $spacing 10
+# (super)+ctrl+h -> shrink pane width
+bindsym $mod+Control+h  resize shrink width $spacing px or $spacing ppt
+# (super)+ctrl+j -> shrink pane height
+bindsym $mod+Control+j  resize shrink height $spacing px or $spacing ppt
+# (super)+ctrl+k -> grow pane height
+bindsym $mod+Control+k  resize grow height $spacing px or $spacing ppt
+# (super)+ctrl+l -> grow pane width
+bindsym $mod+Control+l  resize grow width $spacing px or $spacing ppt
+
+### Misc ###
+# fullscreen focused application
+bindsym $mod+f          fullscreen toggle    
+# reload i3 config
+bindsym $mod+Shift+c    reload         
+
+### Workspaces ###
+# define workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1    workspace number $ws1
+bindsym $mod+2    workspace number $ws2
+bindsym $mod+3    workspace number $ws3
+bindsym $mod+4    workspace number $ws4
+bindsym $mod+5    workspace number $ws5
+bindsym $mod+6    workspace number $ws6
+bindsym $mod+7    workspace number $ws7
+bindsym $mod+8    workspace number $ws8
+bindsym $mod+9    workspace number $ws9
+bindsym $mod+0    workspace number $ws10
+
+# move focused containers to given workspace
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws10

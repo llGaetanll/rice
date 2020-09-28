@@ -1,0 +1,51 @@
+# .gitignore blacklists every file & folder in 
+# the same directory except what matters
+/*
+
+# whitelist gitignore and readme
+!.gitignore
+!README.md
+
+# ignore everything in .config (but still allow to add files from within)
+!.config
+.config/*
+
+# # whitelisted directories
+!.local/bin/
+
+# .config bonanza
+!.config/Xresources
+!.config/mimeapps.list
+!.config/i3
+!.config/lf
+!.config/mpv
+!.config/neofetch
+
+!.config/vim
+
+# this trick really sucks but I don't think we can do it any other way.
+# Basically: un-ignore parent dir, ignore all files within, unignore ones you want
+# git won't let you un-ignore files if the parent is ignored. So we have to do this
+# So this only keeps init.vim
+!.config/nvim
+.config/nvim/*
+!.config/nvim/init.vim
+
+# !.config/polybar
+# .config/polybar/fonts # re-ignore this
+
+!.config/sxiv
+!.config/tmux
+# TODO: whitelist transmission once set up with blocklist
+!.config/xinitrc
+!.config/zathura
+
+!.config/zsh
+.config/zsh/*
+!.config/zsh/.zshrc
+
+# whitelisted files
+!.profile
+!.zprofile
+!.xinitrc
+!.xprofile

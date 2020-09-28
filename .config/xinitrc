@@ -1,0 +1,5 @@
+. ~/.xprofile
+. ~/.profile
+
+# start i3 instance
+exec i3
