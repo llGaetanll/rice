@@ -123,7 +123,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 		let g:coc_global_extensions = [
 			\ 'coc-snippets', 
-			\ 'coc-pairs', 
+			\ 'coc-pairs',
 			\ 'coc-tsserver', 
 			\ 'coc-json',
 			\ 'coc-prettier',

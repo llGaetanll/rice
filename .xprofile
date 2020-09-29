@@ -6,3 +6,4 @@ xset s noblank
 
 sh setbg & # run some scripts on startup
 xset r rate 300 50 & # speed xrate up
+unclutter & # hide mouse if inactive
