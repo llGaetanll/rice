@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Mimeapp script for adding torrent to transmission-daemon, but will also start the daemon first if not running.
+
+# transmission-daemon sometimes fails to take remote requests in its first moments, hence the sleep.
+pidof transmission-daemon >/dev/null || (transmission-daemon && sleep 3)
+
+# Add torrent
+transmission-remote -a "$@"
