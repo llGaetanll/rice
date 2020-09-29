@@ -2,9 +2,15 @@
 I got some of this from [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/voidrice)
 
 ## Pictures
-![Sakura](blob:https://imgur.com/723b84b9-60e8-442b-a922-9c8d67ede853)
-![Village Night](blob:https://imgur.com/c96d2e74-b935-4181-957f-fabae723e63c)
-![Desert Sunset](blob:https://imgur.com/17577bd9-a498-4221-b93e-cfa4f2b841b4)
+<p align="center">
+  <img src="https://i.imgur.com/YRxF52A.png" alt="Sakura">
+</p>
+<p align="center">
+  <img src="https://i.imgur.com/5G9znYr.png" alt="Village Night">
+</p>
+<p align="center">
+  <img src="https://i.imgur.com/dj1WJtK.png" alt="Desert Sunset">
+</p>
 
 ## TODO
 ### zsh
