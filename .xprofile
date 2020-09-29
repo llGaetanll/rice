@@ -4,6 +4,7 @@ xset s off
 xset -dpma
 xset s noblank
 
-sh setbg & # run some scripts on startup
+sh setbg & # set wallpaper on startup
+sh start-polybar & # start polybar instance
 xset r rate 300 50 & # speed xrate up
 unclutter & # hide mouse if inactive
