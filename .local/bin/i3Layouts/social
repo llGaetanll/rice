@@ -1,0 +1,8 @@
+# Start Social Layout - Consists of Discord and Whatsapp
+
+i3-msg "workspace 3; append_layout $XDG_CONFIG_HOME/i3/layouts/social.json"
+
+# Start discord
+discord &
+# Start Firefox on Whatsapp window
+firefox --new-window https://web.whatsapp.com &

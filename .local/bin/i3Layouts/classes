@@ -1,0 +1,8 @@
+# Start Classes Layout - Consits of ELMS and Google Calendar
+
+i3-msg "workspace 1; append_layout $XDG_CONFIG_HOME/i3/layouts/classes.json"
+
+# Start Google Calendar
+firefox --new-window https://calendar.google.com/calendar &
+# Start ELMS page
+firefox --new-window https://elms.umd.edu &

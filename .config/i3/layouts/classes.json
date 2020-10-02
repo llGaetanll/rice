@@ -1,0 +1,45 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1400,
+       "width": 1536,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Google Calendar - Week of September 28, 2020 - Mozilla Firefox",
+    "percent": 0.3,
+    "swallows": [
+       {
+        "class": "^firefox$",
+        "instance": "^Navigator$",
+        "title": "Google Calendar"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1400,
+       "width": 1536,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Dashboard - Mozilla Firefox",
+    "percent": 0.7,
+    "swallows": [
+       {
+        "class": "^firefox$",
+        "instance": "^Navigator$",
+        "title": "ELMS"
+       }
+    ],
+    "type": "con"
+}
+

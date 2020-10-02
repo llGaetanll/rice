@@ -218,7 +218,7 @@ call plug#begin('~/.config/nvim/plugged')
 		" autocmd BufWritePost config.h,config.def.h !sudo -S make install
 
 		" Recompile CMSC 216 programs on save
-		autocmd BufWritePost *.c !gcc -std=c90 *c && ./a.out
+		" autocmd BufWritePost *.c !gcc -std=c90 *c && ./a.out
 	" }}}
 	 
 call plug#end()

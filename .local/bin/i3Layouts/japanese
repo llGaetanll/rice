@@ -1,0 +1,8 @@
+# Start Japanese Layout - Consists of RTK and hochanh's RTK helper
+
+i3-msg "workspace 2; append_layout $XDG_CONFIG_HOME/i3/layouts/japanese.json"
+
+# Start RTK pdf
+zathura &
+# Start RTK helper site
+firefox --new-window https://hochanh.github.io/rtk/rtk1-v6/index.html &

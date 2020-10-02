@@ -7,4 +7,5 @@ xset s noblank
 sh setbg & # set wallpaper on startup
 sh start-polybar & # start polybar instance
 xset r rate 300 50 & # speed xrate up
+xcompmgr -c & # enable terminal transparency in i3. This is quite laggy tho, so I left it off by default
 unclutter & # hide mouse if inactive
