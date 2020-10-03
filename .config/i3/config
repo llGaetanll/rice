@@ -64,7 +64,7 @@ bindsym $mod+Return     exec $term
 # (super)+w     -> open web browser (firefox)
 bindsym $mod+w          exec --no-startup-id $BROWSER       
 # (super)+r -> opens ranger
-bindsym $mod+r          exec $term -e tmux new-session -Aslf -- lf
+bindsym $mod+r          exec $term -e lf
 # (super)+p -> opens pulsemixer
 bindsym $mod+p          exec $term -e pulsemixer                    
 # (super)+t -> opens transmission TUI (tremc)

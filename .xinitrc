@@ -1,1 +1,1 @@
-/home/al/.config/xinitrc
+.config/xinitrc

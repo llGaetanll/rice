@@ -1,3 +1,5 @@
+*.dpi = 120
+
 ! DOOM-ONE
 ! *foreground:   #bfbfbf
 ! *background:   #282c34
