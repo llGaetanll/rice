@@ -7,4 +7,5 @@ xset s noblank
 sh setbg & # set wallpaper on startup
 sh start-polybar & # start polybar instance
 xset r rate 300 50 & # speed xrate up
+xcompmgr -c & # tranparent terminals & box shadows
 unclutter & # hide mouse if inactive
