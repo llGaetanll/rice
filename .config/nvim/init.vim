@@ -1,12 +1,16 @@
-call plug#begin('~/.config/nvim/plugged')
+" install vim plugged if not already on the system
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
+endif
 
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 	Plug 'benmills/vimux' " tmux integration
 	Plug 'tpope/vim-repeat' " repeat plugins
 	Plug 'tpope/vim-endwise' " adds end, endif automatically
 	Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
-
-	" Theme
-	Plug 'sainnhe/sonokai' 
 
 	" Language Specific plugins
 	Plug 'ap/vim-css-color' " preview colors while editing
@@ -36,6 +40,37 @@ call plug#begin('~/.config/nvim/plugged')
 		set softtabstop=4
 		set shiftwidth=4
 		set shiftround
+	" }}}
+	
+	" Theme {{{
+		
+		Plug 'sainnhe/sonokai' 
+		Plug 'AlessandroYorba/Alduin'
+
+		" commented out bar since it was causing lag after a while, might
+		" switch to a different version
+		
+		" " powerline bar at the bottom
+		" Plug 'vim-airline/vim-airline'
+		" Plug 'vim-airline/vim-airline-themes'
+
+		" " sets colors to that of 'minimalist'
+		" let g:airline_theme='minimalist'
+
+		" if !exists('g:airline_symbols')
+			" let g:airline_symbols = {}
+		" endif
+
+		" " powerline symbols
+		" let g:airline_left_sep = ''
+		" let g:airline_left_alt_sep = ''
+		" let g:airline_right_sep = ''
+		" let g:airline_right_alt_sep = ''
+		" let g:airline_symbols.branch = ''
+		" let g:airline_symbols.readonly = ''
+		" let g:airline_symbols.linenr = '☰'
+		" let g:airline_symbols.maxlinenr = ''
+
 	" }}}
 
 	" General Mappings {{{
@@ -223,4 +258,7 @@ call plug#begin('~/.config/nvim/plugged')
 	 
 call plug#end()
 
-colorscheme sonokai
+" I just like Alduin a bit more rn, 
+" but feel free to change this
+" colorscheme sonokai
+colorscheme alduin
