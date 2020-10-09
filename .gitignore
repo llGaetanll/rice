@@ -6,15 +6,20 @@
 !.gitignore
 !README.md
 
-# ignore everything in .config (but still allow to add files from within)
-!.config
-.config/*
-
 !.local
 .local/*
 
 # # whitelisted directories
 !.local/bin/
+!.local/share/
+
+.local/share/*
+!.local/share/fonts/
+!.local/share/bg*
+
+# ignore everything in .config (but still allow to add files from within)
+!.config
+.config/*
 
 # .config bonanza
 !.config/Xresources
