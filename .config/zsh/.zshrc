@@ -1,16 +1,11 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # A lot of this comes from LukeSmithxyz/voidrice
 # although I did modify and annotate some parts
 xdg_config=${XDG_CONFIG_HOME:-$HOME/.config}
-
-# source theme
-source $xdg_config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # History in cache directory
 HISTSIZE=10000
@@ -69,8 +64,9 @@ bindkey '^[[P' delete-char
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Load syntax highlighting; should be last.
-source $xdg_config/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+# Conditionally load syntax highlighting; should be last.
+[ -d "$xdg_config/zsh/plugins/fast-syntax-highlighting" ] &&\
+    source $xdg_config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
