@@ -50,6 +50,8 @@
 !.config/zsh
 .config/zsh/*
 !.config/zsh/.zshrc
+# this file is my custom prompt profile
+!.config/zsh/.p10k.zsh
 
 # whitelisted files
 !.profile
