@@ -6,8 +6,12 @@ set $term --no-startup-id $TERMINAL
 
 set $shutdown sudo -A shutdown -h now
 
-# I think this is the windows (super) key
+# set path for layouts scripts
+set $layouts $HOME/.local/bin/public/i3Layouts
+# Windows Key
 set $mod Mod4 
+# Alt Key
+set $alt Mod1 
 
 set $shutdown systemctl poweroff
 set $reboot sudo -A reboot
@@ -22,9 +26,6 @@ bindsym $mod+a          gaps inner current toggle $inner_gaps
 bindsym $mod+s			gaps inner current plus 5
 # (super)+shift+s -> decrease inner gaps
 bindsym $mod+Shift+s	gaps inner current minus 5
-
-#### Polybar ####
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 ### Gaps & General Window Settings ###
 # enable if you want borders around your windows. I don't
@@ -56,7 +57,15 @@ bindsym $mod+Shift+minus	exec --no-startup-id pulsemixer --change-volume -15 && 
 # (super)+Space -> toggle floating windows
 bindsym $mod+space 	floating toggle
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+floating_modifier           $mod
+# (super)+alt+f -> floating layout
+bindsym $mod+$alt+f 	    floating toggle
+# (super)+ctrl+s -> stacking layout
+bindsym $mod+$alt+s 	    layout stacking
+# (super)+ctrl+v -> split vertical
+bindsym $mod+$alt+v 	    layout splitv
+# (super)+ctrl+h -> split horizontal
+bindsym $mod+$alt+h 	    layout splith
 
 ## Other Programs
 # (super)+Enter -> open terminal (st)
@@ -64,7 +73,7 @@ bindsym $mod+Return     exec $term
 # (super)+w     -> open web browser (firefox)
 bindsym $mod+w          exec --no-startup-id $BROWSER       
 # (super)+r -> opens ranger
-bindsym $mod+r          exec $term -e tmux new-session -Aslf -- lf
+bindsym $mod+r          exec $term lf
 # (super)+p -> opens pulsemixer
 bindsym $mod+p          exec $term -e pulsemixer                    
 # (super)+t -> opens transmission TUI (tremc)
@@ -83,6 +92,9 @@ bindsym $mod+k          focus up
 bindsym $mod+l          focus right         
 
 ## Moving Panes - Shift
+# Commented out because you can move floating 
+# panes by holding down (super) and left click
+
 # (super)+shift+h -> move pane to left
 bindsym $mod+Shift+h    move left
 # (super)+shift+j -> move pane to left
@@ -93,15 +105,18 @@ bindsym $mod+Shift+k    move up
 bindsym $mod+Shift+l    move right
 
 ## Resizing Panes - Ctrl
-set $spacing 10
-# (super)+ctrl+h -> shrink pane width
-bindsym $mod+Control+h  resize shrink width $spacing px or $spacing ppt
-# (super)+ctrl+j -> shrink pane height
-bindsym $mod+Control+j  resize shrink height $spacing px or $spacing ppt
-# (super)+ctrl+k -> grow pane height
-bindsym $mod+Control+k  resize grow height $spacing px or $spacing ppt
-# (super)+ctrl+l -> grow pane width
-bindsym $mod+Control+l  resize grow width $spacing px or $spacing ppt
+# Commented out because you can resize floating 
+# panes by holding down (super) and right click
+
+# set $spacing 10
+# # (super)+ctrl+h -> shrink pane width
+# bindsym $mod+Control+h  resize shrink width $spacing px or $spacing ppt
+# # (super)+ctrl+j -> shrink pane height
+# bindsym $mod+Control+j  resize shrink height $spacing px or $spacing ppt
+# # (super)+ctrl+k -> grow pane height
+# bindsym $mod+Control+k  resize grow height $spacing px or $spacing ppt
+# # (super)+ctrl+l -> grow pane width
+# bindsym $mod+Control+l  resize grow width $spacing px or $spacing ppt
 
 ### Misc ###
 # fullscreen focused application
@@ -145,3 +160,9 @@ bindsym $mod+Shift+7    move container to workspace $ws7
 bindsym $mod+Shift+8    move container to workspace $ws8
 bindsym $mod+Shift+9    move container to workspace $ws9
 bindsym $mod+Shift+0    move container to workspace $ws10
+
+# Move workspaces between multiple monitors
+bindsym $mod+Control+h    move workspace to output left
+bindsym $mod+Control+j    move workspace to output down
+bindsym $mod+Control+k    move workspace to output up
+bindsym $mod+Control+l    move workspace to output right

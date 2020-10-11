@@ -1,0 +1,45 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1340,
+       "width": 1491,
+       "x": 30,
+       "y": 30
+    },
+    "name": "#💬off-topic - Discord",
+    "percent": 0.6,
+    "swallows": [
+       {
+        "class": "^discord$",
+        "instance": "^discord$",
+        "window_role": "^browser\\-window$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1400,
+       "width": 1522,
+       "x": 0,
+       "y": 0
+    },
+    "name": "WhatsApp - Mozilla Firefox",
+    "percent": 0.4,
+    "swallows": [
+       {
+        "class": "^firefox$",
+        "instance": "^Navigator$",
+        "title": "^WhatsApp\\ \\-\\ Mozilla\\ Firefox$",
+        "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
