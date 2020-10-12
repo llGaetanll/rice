@@ -2,10 +2,11 @@
 # This is to make scripts like `setbg` accessible
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
-export EDITOR="nvim"
-export TERMINAL="st"
-export BROWSER="firefox"
-export READER="zathura"
+export WM="bspwm" # default window manager to use. This env. var. is used in polybar and in xinitrc
+export EDITOR="nvim" # default text editor is neovim
+export TERMINAL="st" # default terminal is suckless' simple terminal
+export BROWSER="firefox" # default browser is firefox
+export READER="zathura" # default pdf reader is zathura
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
