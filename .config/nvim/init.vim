@@ -163,6 +163,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			\ 'coc-json',
 			\ 'coc-prettier',
 			\ 'coc-rls',
+			\ 'coc-clangd',
 		\ ]
 
 		set hidden " TextEdit might fail if hidden is not set.
@@ -242,7 +243,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	
 	" Markdown Preview {{{
 		" auto start plugin when opening markdown file (default: 0)
-		let g:mkdp_auto_start = 1
+		let g:mkdp_auto_start = 0
 
 		" auto close document when switching to another file (default: 1)
 		let g:mkdp_auto_close = 0
@@ -253,7 +254,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" autocmd BufWritePost config.h,config.def.h !sudo -S make install
 
 		" Recompile CMSC 216 programs on save
-		autocmd BufWritePost *.c !gcc -std=c90 *c && ./a.out
+		" autocmd BufWritePost *.c !gcc -std=c90 *c && ./a.out
 	" }}}
 	 
 call plug#end()

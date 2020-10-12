@@ -15,7 +15,9 @@
 
 .local/share/*
 !.local/share/fonts/
-!.local/share/bg*
+!.local/share/applications/
+# add default wallpaper
+!.local/share/default.png
 
 # ignore everything in .config (but still allow to add files from within)
 !.config
@@ -24,7 +26,9 @@
 # .config bonanza
 !.config/Xresources
 !.config/mimeapps.list
+!.config/sxhkd
 !.config/i3
+!.config/bspwm
 !.config/lf
 !.config/mpv
 !.config/neofetch

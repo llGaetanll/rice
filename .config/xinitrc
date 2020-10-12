@@ -1,5 +1,6 @@
 . ~/.xprofile
 . ~/.profile
 
-# start i3 instance
-exec i3
+# start the default window manager.
+# You can change it in .profile
+exec $WM

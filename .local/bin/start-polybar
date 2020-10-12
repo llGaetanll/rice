@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-## Add this to your wm startup file.
+## This file is sourced in .xprofile on startup
 
 # Terminate already running bar instances
 killall -q polybar
@@ -8,8 +8,8 @@ killall -q polybar
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# add polybar to every monitor
+# reload polybar on every monitor
 # see: https://github.com/polybar/polybar/issues/763#issuecomment-392960721
 for m in $(polybar --list-monitors | cut -d":" -f1); do
-    MONITOR=$m polybar -cr $XDG_CONFIG_HOME/polybar/default.ini default &
+    MONITOR=$m polybar -c $XDG_CONFIG_HOME/polybar/default.ini default &
 done
