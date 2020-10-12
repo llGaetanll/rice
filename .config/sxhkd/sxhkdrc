@@ -1,0 +1,82 @@
+### In this file are any keybinds that work in any window manager
+
+## Scripts {{{
+
+# Reload sxhkd
+super + shift + Escape
+	pkill -USR1 -x sxhkd
+# open screenshot menu
+super + Print
+	screenshot
+# shutdown/reboot computer
+super + {_,shift + } BackSpace
+	prompt {"Shutdown computer?" "sudo -A shutdown -h now", "Reboot computer?" "sudo -A reboot"}
+
+# volume up
+super + {equal,plus}
+	pulsemixer --change-volume {+5,+15}
+# volume down
+super + {_,shift + } minus
+	pulsemixer --change-volume {-5,-15}
+
+# }}}
+
+## Programs {{{
+
+# Applications
+super + {d,Return,w}
+	{dmenu_run,$TERMINAL,$BROWSER}
+
+# Terminal-based programs
+super + {r,p,t}
+	$TERMINAL -e {lf,pulsemixer,trans-start}
+
+# }}}
+
+## BSPWM {{{
+
+# window state - default is tiled
+super + alt + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# focus/move given window
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# Focus or send a window to the given desktop 
+# Remember to sync this with the number of desktops you have with bspwm
+super + {_,shift + }{1-9}
+	bspc {desktop -f,node -d} '^{1-9}'
+
+# close and kill a window
+super + {_,shift + }q
+	bspc node -{c,k}
+ 
+# # set the node flags
+# super + ctrl + {m,x,y,z}
+	# bspc node -g {marked,locked,sticky,private}
+
+# # focus the node for the given path jump
+# super + {p,b,comma,period}
+	# bspc node -f @{parent,brother,first,second}
+
+# # focus the next/previous window in the current desktop
+# super + {_,shift + }c
+	# bspc node -f {next,prev}.local.!hidden.window
+
+# # focus the next/previous desktop in the current monitor
+# super + bracket{left,right}
+	# bspc desktop -f {prev,next}.local
+
+# # focus the last node/desktop
+# super + {grave,Tab}
+	# bspc {node,desktop} -f last
+
+# # focus the older or newer node in the focus history
+# super + {o,i}
+	# bspc wm -h off; \
+	# bspc node {older,newer} -f; \
+	# bspc wm -h on
+
+# }}}
+

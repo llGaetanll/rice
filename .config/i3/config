@@ -1,87 +1,66 @@
-### Essentials Params ###
+### In this file are i3 specific keybinds. If you're looking for program-specific shortcuts see `sxhkdrc`
+
+## Params {{{
+
 set $inner_gaps 30
+gaps inner $inner_gaps
+
 set $outer_gaps 0
-# set def terminal (should be st)
+gaps outer $outer_gaps
+
 set $term --no-startup-id $TERMINAL 
-
 set $shutdown sudo -A shutdown -h now
-
-# set path for layouts scripts
+set $reboot sudo -A reboot
 set $layouts $HOME/.local/bin/public/i3Layouts
 # Windows Key
 set $mod Mod4 
 # Alt Key
 set $alt Mod1 
 
-set $shutdown systemctl poweroff
-set $reboot sudo -A reboot
-set $hibernate sudo -A systemctl suspend
-
 font pango:monospace 8
 
-#### Gaps ####
-# (super)+a -> toggle gaps
-bindsym $mod+a          gaps inner current toggle $inner_gaps
-# (super)+s -> increase inner gaps
-bindsym $mod+s			gaps inner current plus 5
-# (super)+shift+s -> decrease inner gaps
-bindsym $mod+Shift+s	gaps inner current minus 5
-
-### Gaps & General Window Settings ###
 # enable if you want borders around your windows. I don't
 for_window [class="^.*"] border pixel 0
-gaps inner $inner_gaps
-gaps outer $outer_gaps
-
-#### Keybinds ####
-## Main
-#(super)+Backspace -> shutdown computer
-bindsym $mod+BackSpace  exec --no-startup-id prompt "Shutdown computer?" "$shutdown"                
-#(super)+Shif+Backspace -> reboot computer
-bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
-# (super)+q -> kill focused window
-bindsym $mod+q          kill                
-# (super)+d -> launch dmenu to start a program
-bindsym $mod+d          exec dmenu_run      
-# (super)+PrintScreen -> opens screenshot menu
-bindsym $mod+Print      exec --no-startup-id screenshot
-# (super)+plus -> +5 volume
-bindsym $mod+plus		exec --no-startup-id pulsemixer --change-volume +5 && pkill -RTMIN+10 i3blocks
-# (super)+shift+plus -> +15 volume
-bindsym $mod+Shift+plus		exec --no-startup-id pulsemixer --change-volume +15 && pkill -RTMIN+10 i3blocks
-# (super)+minus -> -5 volume
-bindsym $mod+minus 		exec --no-startup-id pulsemixer --change-volume -5 && pkill -RTMIN+10 i3blocks
-# (super)+shift+minus -> -15 volume
-bindsym $mod+Shift+minus	exec --no-startup-id pulsemixer --change-volume -15 && pkill -RTMIN+10 i3blocks
-
-# (super)+Space -> toggle floating windows
-bindsym $mod+space 	floating toggle
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier           $mod
-# (super)+alt+f -> floating layout
+
+# }}}
+
+## Gaps {{{
+
+# toggle gaps
+bindsym $mod+a          gaps inner current toggle $inner_gaps
+# increase inner gaps
+bindsym $mod+s			gaps inner current plus 5
+# decrease inner gaps
+bindsym $mod+Shift+s	gaps inner current minus 5
+
+# }}}
+
+## Keybinds {{{
+
+# Main
+# kill focused window
+bindsym $mod+q          kill                
+# fullscreen focused application
+bindsym $mod+f          fullscreen toggle    
+# reload i3 config
+bindsym $mod+Shift+c    reload         
+
+# floating layout
 bindsym $mod+$alt+f 	    floating toggle
-# (super)+ctrl+s -> stacking layout
+# stacking layout
 bindsym $mod+$alt+s 	    layout stacking
-# (super)+ctrl+v -> split vertical
+# split vertical
 bindsym $mod+$alt+v 	    layout splitv
-# (super)+ctrl+h -> split horizontal
+# split horizontal
 bindsym $mod+$alt+h 	    layout splith
 
-## Other Programs
-# (super)+Enter -> open terminal (st)
-bindsym $mod+Return     exec $term                          
-# (super)+w     -> open web browser (firefox)
-bindsym $mod+w          exec --no-startup-id $BROWSER       
-# (super)+r -> opens ranger
-bindsym $mod+r          exec $term lf
-# (super)+p -> opens pulsemixer
-bindsym $mod+p          exec $term -e pulsemixer                    
-# (super)+t -> opens transmission TUI (tremc)
-bindsym $mod+t          exec $term -e tremc                  
+# }}}
 
-### Panes ###
+## Panes {{{
 
-## Focusing Panes
+# Focusing Panes
 # (super)+h -> focus left pane
 bindsym $mod+h          focus left          
 # (super)+j -> focus bottom pane
@@ -91,10 +70,7 @@ bindsym $mod+k          focus up
 # (super)+l -> focus right pane
 bindsym $mod+l          focus right         
 
-## Moving Panes - Shift
-# Commented out because you can move floating 
-# panes by holding down (super) and left click
-
+# Moving Panes - Shift
 # (super)+shift+h -> move pane to left
 bindsym $mod+Shift+h    move left
 # (super)+shift+j -> move pane to left
@@ -104,27 +80,21 @@ bindsym $mod+Shift+k    move up
 # (super)+shift+l -> move pane to right
 bindsym $mod+Shift+l    move right
 
-## Resizing Panes - Ctrl
-# Commented out because you can resize floating 
-# panes by holding down (super) and right click
+# Resizing Panes - Ctrl
+set $spacing 10
+# shrink pane width
+bindsym $mod+Control+h  resize shrink width $spacing px or $spacing ppt
+# shrink pane height
+bindsym $mod+Control+j  resize shrink height $spacing px or $spacing ppt
+# grow pane height
+bindsym $mod+Control+k  resize grow height $spacing px or $spacing ppt
+# grow pane width
+bindsym $mod+Control+l  resize grow width $spacing px or $spacing ppt
 
-# set $spacing 10
-# # (super)+ctrl+h -> shrink pane width
-# bindsym $mod+Control+h  resize shrink width $spacing px or $spacing ppt
-# # (super)+ctrl+j -> shrink pane height
-# bindsym $mod+Control+j  resize shrink height $spacing px or $spacing ppt
-# # (super)+ctrl+k -> grow pane height
-# bindsym $mod+Control+k  resize grow height $spacing px or $spacing ppt
-# # (super)+ctrl+l -> grow pane width
-# bindsym $mod+Control+l  resize grow width $spacing px or $spacing ppt
+# }}}
 
-### Misc ###
-# fullscreen focused application
-bindsym $mod+f          fullscreen toggle    
-# reload i3 config
-bindsym $mod+Shift+c    reload         
+## Workspaces {{{
 
-### Workspaces ###
 # define workspaces
 set $ws1 "1"
 set $ws2 "2"
@@ -135,7 +105,6 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1    workspace number $ws1
@@ -147,7 +116,6 @@ bindsym $mod+6    workspace number $ws6
 bindsym $mod+7    workspace number $ws7
 bindsym $mod+8    workspace number $ws8
 bindsym $mod+9    workspace number $ws9
-bindsym $mod+0    workspace number $ws10
 
 # move focused containers to given workspace
 bindsym $mod+Shift+1    move container to workspace $ws1
@@ -159,10 +127,5 @@ bindsym $mod+Shift+6    move container to workspace $ws6
 bindsym $mod+Shift+7    move container to workspace $ws7
 bindsym $mod+Shift+8    move container to workspace $ws8
 bindsym $mod+Shift+9    move container to workspace $ws9
-bindsym $mod+Shift+0    move container to workspace $ws10
 
-# Move workspaces between multiple monitors
-bindsym $mod+Control+h    move workspace to output left
-bindsym $mod+Control+j    move workspace to output down
-bindsym $mod+Control+k    move workspace to output up
-bindsym $mod+Control+l    move workspace to output right
+# }}}
