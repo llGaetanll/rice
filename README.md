@@ -113,6 +113,7 @@ The zoomer shell of course. Comes with syntax highlighting and a nice prompt.
 
 ## TODO
 - [X] add docs and list of shortcuts (not entirely finished)
+- [ ] add more pictures
 ### lf
 - [ ] add more quality-of-life keybinds for file renaming
 - [ ] incorporate `rsync` and `encFS` keybinds
@@ -120,4 +121,4 @@ The zoomer shell of course. Comes with syntax highlighting and a nice prompt.
 ### tmux
 - [ ] make it look nice & make it use colors from Xresources
 ### neofetch
-- ~~[ ] add random pic from folder~~ st image support is pretty mid
+- ~~add random pic from folder~~ st image support is pretty mid
