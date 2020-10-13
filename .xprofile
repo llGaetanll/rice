@@ -1,8 +1,8 @@
 # This file is sourced from ~/.config/xinitrc
 
-xset s off
-xset -dpma
-xset s noblank
+# xset s off
+# xset -dpma
+# xset s noblank
 xset r rate 300 50 & # speed xrate up
 
 setbg & # set wallpaper on startup
@@ -10,4 +10,7 @@ sleep 1 && start-polybar & # start polybar instance after 1 second timeout to al
 
 sxhkd & # start the simple X hotkey daemon - used for general keybinds
 unclutter & # hide mouse if inactive
-sleep 1 && compton --backend glx --paint-on-overlay --vsync opengl-swc & # add terminal transparency/blur
+
+# transparency addons. Only use one
+# xcompmgr -c & # add terminal transparency. Better performance but has some ghost shadows sometimes
+sleep 1 && compton --backend glx --paint-on-overlay --vsync opengl-swc & # add terminal transparency and blur. Works nicely but slows down computer a lot
