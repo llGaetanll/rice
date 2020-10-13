@@ -2,15 +2,14 @@
 I got some of this from [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/voidrice)
 
 ## Pictures
-<p align="center">
-  <img src="https://i.imgur.com/YRxF52A.png" alt="Sakura">
-</p>
-<p align="center">
-  <img src="https://i.imgur.com/5G9znYr.png" alt="Village Night">
-</p>
-<p align="center">
-  <img src="https://i.imgur.com/dj1WJtK.png" alt="Desert Sunset">
-</p>
+<div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-bottom: -10px;">
+  <img width=300 src="https://i.imgur.com/YRxF52A.png" alt="Sakura">
+  <img width=300 src="https://i.imgur.com/5G9znYr.png" alt="Village Night">
+  <img width=300 src="https://i.imgur.com/dj1WJtK.png" alt="Desert Sunset">
+</div>
+
+  
+
 
 ## What's included
 ### bspwm
