@@ -1,4 +1,5 @@
-# Basic vars
+## Basic vars {{{
+
 set shell bash
 set shellopts '-eu'
 set ifs "\n"
@@ -11,7 +12,11 @@ set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 # Vars that depend on environmental variables
 $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 
-# cmds/functions
+# }}}
+
+## Custom Commands {{{
+
+# This command is ran before opening a file. It determines which program should be used to read the file
 cmd open ${{
     case $(file --mime-type $f -b) in
 	image/vnd.djvu|application/pdf|application/octet-stream) setsid -f zathura $fx >/dev/null 2>&1 ;;
@@ -25,67 +30,60 @@ cmd open ${{
     esac
 }}
 
+# custom wrapper to mkdir. allows you to enter the name of the directory
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
+# custom wrapper to make a file. Opens in nvim
+cmd mkfile $nvim "$(echo $* | tr ' ' '\ ')"
+
+# custom wrapper to delete a file/folder. Will prompt you before continuing
 cmd delete ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	printf "%s\n\t" "$fx"
-	printf "delete?[y/N]"
-	read ans
-	[ $ans = "y" ] && rm -rf $fx
+    clear; tput cup $(($(tput lines)/3)); tput bold
+    set -f
+    printf "%s\n\t" "$fx"
+    printf "delete?[y/N]"
+    read ans
+    [ $ans = "y" ] && rm -rf $fx
 }}
 
-cmd moveto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Move to where?"
-	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
-	for x in $fx; do
-		eval mv -iv \"$x\" \"$dest\"
-	done &&
-	notify-send "🚚 File(s) moved." "File(s) moved to $dest."
-}}
+# }}}
 
-cmd copyto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Copy to where?"
-	dest="$(cut -d'	' -f2- ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf | sed 's|~|$HOME|' )" &&
-	for x in $fx; do
-		eval cp -ivr \"$x\" \"$dest\"
-	done &&
-	notify-send "📋 File(s) copied." "File(s) copies to $dest."
-}}
+## Bindings {{{
 
-cmd setbg "$1"
-cmd bulkrename $vidir
-
-## Bindings
-# ctrl + f -> fuzzy find file
+# fuzzy find file (ctrl + f)
 map <c-f> $lf -remote "send $id select '$(fzf)'"
-map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
-map gh
-map g top
-map D delete
-map C copyto
-map M moveto
-map <c-n> push :mkdir<space>
-map <c-r> reload
-map <enter> shell
-map x $$f
-map X !$f
-map o &mimeopen $f
-map O $mimeopen --ask $f
+# go home (~)
+map ~ $lf -remote "send $id select $HOME/"
 
-map A rename # at the very end
-map c push A<c-u> # new rename
-map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extention
-map a push A<a-b> # after extention
-map B bulkrename
+map gh
+map g top # go to top of directory (g)
+map D delete # delete selected node (D)
+
+# create new directory (ctrl + n)
+map <c-n> push :mkdir<space>
+# create new file (ctrl + v)
+map <c-v> push :mkfile<space>
+
+# reloads current directory (r)
+map r reload
+# opens current directory in new terminal window (enter)
+map <enter> &$TERMINAL
+
+# execute current file
+map x $$f # in current shell (x)
+map X &$f # in the background (X)
+
+# Rename keybinds
+map c push A<c-u> # new rename (c)
+
+map A rename # at the very end (A)
+map I push A<c-a> # at the very beginning (I)
+
+map a push A<a-b> # after extention (a)
+map i push A<a-b><a-b><a-f> # before extention (i)
+
+# set wallpaper (b)
+cmd setbg "$1"
 map b $setbg $f
 
-map <c-e> down
-map <c-y> up
-map V push :!nvim<enter>
+# }}}
