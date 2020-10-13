@@ -9,5 +9,5 @@ setbg & # set wallpaper on startup
 sleep 1 && start-polybar & # start polybar instance after 1 second timeout to allow setbg to change system colors
 
 sxhkd & # start the simple X hotkey daemon - used for general keybinds
-xcompmgr -c & # make terminals transparent and add box shadows to windows
 unclutter & # hide mouse if inactive
+sleep 1 && compton --backend glx --paint-on-overlay --vsync opengl-swc & # add terminal transparency/blur
