@@ -43,7 +43,6 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	" }}}
 	
 	" Theme {{{
-		
 		Plug 'sainnhe/sonokai' 
 		Plug 'AlessandroYorba/Alduin'
 
@@ -70,17 +69,19 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" let g:airline_symbols.readonly = ''
 		" let g:airline_symbols.linenr = '☰'
 		" let g:airline_symbols.maxlinenr = ''
-
 	" }}}
 
 	" General Mappings {{{
 		" `jk` will put you into normal mode
 		inoremap jk <esc>
 
+		" remap <esc> to clear highlighting
+		nnoremap <esc> :noh<return><esc>
+
 		" code folding settings
 		set foldmethod=indent
 		set foldlevelstart=99
-		set foldnestmax=10 " deepest fold is 10 levels
+		set foldnestmax=3 " deepest fold is 10 levels
 		set nofoldenable " don't fold by default
 		set foldlevel=1
 
@@ -96,7 +97,12 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" ctrl + p to fuzzy find git files
 		nnoremap <silent> <C-p> :GFiles<CR>
 		" ctrl + shift + p to fuzzy find all files
-		nnoremap <silent> <C-S-p> :Files<CR>
+		nnoremap <silent> <C-P> :Files<CR>
+
+		command! -bang -nargs=* GGrep
+			\ call fzf#vim#grep(
+			\   'git grep --line-number -- '.shellescape(<q-args>), 0,
+			\   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 	" }}}
 		
 	" NERDTree - Side menu like vscode {{{
