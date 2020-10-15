@@ -1,0 +1,12 @@
+#!/bin/sh
+
+alias \
+    nrd="npm run dev" \
+    ns="npm start" \
+    gs="git add" \
+    gs="git status" \
+    gp="git push" \
+    gc="git checkout" \
+    gb="git branch" \
+    dcu="docker-compose up" \
+    dcd="docker-compose down" \
