@@ -59,6 +59,8 @@ map gh
 map g top # go to top of directory (g)
 map D delete # delete selected node (D)
 
+# open current directory in nvim
+map V $nvim .
 # create new directory (ctrl + n)
 map <c-n> push :mkdir<space>
 # create new file (ctrl + v)
