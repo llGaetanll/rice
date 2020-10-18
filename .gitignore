@@ -23,9 +23,13 @@
 !.config
 .config/*
 
-# .config bonanza
+# .config files
 !.config/Xresources
+!.config/compton.conf
+!.config/aliasrc
 !.config/mimeapps.list
+
+# .config folders
 !.config/sxhkd
 !.config/i3
 !.config/bspwm
