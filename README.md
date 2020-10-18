@@ -1,5 +1,5 @@
 # Rice
-I got some of this from [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/voidrice)
+This repo contains all of the configuration files that I use on my main linux machines which run some version of Arch or Artix linux.
 
 ## Pictures
 <div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-bottom: -10px;">
@@ -7,9 +7,6 @@ I got some of this from [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/
   <img width=300 src="https://i.imgur.com/5G9znYr.png" alt="Village Night">
   <img width=300 src="https://i.imgur.com/dj1WJtK.png" alt="Desert Sunset">
 </div>
-
-  
-
 
 ## What's included
 ### bspwm
@@ -109,15 +106,18 @@ The zoomer shell of course. Comes with syntax highlighting and a nice prompt.
 #### Keybinds
 - `alt + z` Go into vi mode
 
+## Installation
+[llGaetanll/autorice](https://github.com/llGaetanll/autorice) is the repo that will install these dotfiles on a fresh install of an arch based distribution.
 
 ## TODO
 - [X] add docs and list of shortcuts (not entirely finished)
+- [ ] add wiki page for each program
 - [ ] add more pictures
 ### lf
-- [ ] add more quality-of-life keybinds for file renaming
 - [ ] incorporate `rsync` and `encFS` keybinds
-- [ ] add image previews pleaaaasse bro
-### tmux
-- [ ] make it look nice & make it use colors from Xresources
-### neofetch
-- ~~add random pic from folder~~ st image support is pretty mid
+- [ ] add image previews
+  - See: https://gitlab.com/Provessor/lfp
+
+## Inspiration
+- [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/voidrice) for the base dotfiles (my dots are quite different to these now though)
+- [lukesmithxyz/LARBS](https://github.com/lukesmithxyz/LARBS) for my auto-install script at [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
