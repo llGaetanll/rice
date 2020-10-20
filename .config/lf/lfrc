@@ -88,4 +88,9 @@ map i push A<a-b><a-b><a-f> # before extention (i)
 cmd setbg "$1"
 map b $setbg $f
 
+# set wallpaper (b)
+cmd toggle-crypt
+map e # unmap e
+map e $toggle-crypt # map e to toggle encfs
+
 # }}}

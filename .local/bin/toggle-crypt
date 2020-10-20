@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# This script toggles encryption in the current directory 
+# if a `.secure` folder is provided
+
+# check for `.secure` in current dir & decrypt
+[ ! -d "$(pwd)/.secure" ] && echo ".secure not found in current directory" && exit 1
+
+encrypt() {
+    encfs -u "$(pwd)/Secure" && rmdir "$(pwd)/Secure"
+}
+
+decrypt() {
+    mkdir "$(pwd)/Secure" && read -sp "Password: " p && echo "$p" | encfs -S "$(pwd)/.secure" "$(pwd)/Secure"
+}
+
+# if `Secure` exists, unmount it and rmdir
+# otherwise, create it and decrypt to it
+[ -d "$(pwd)/Secure" ] && \
+    encrypt || \
+    decrypt
