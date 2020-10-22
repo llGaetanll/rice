@@ -77,6 +77,12 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 
 		" remap <esc> to clear highlighting
 		nnoremap <esc> :noh<return><esc>
+		
+		" in normal mode, Y copies to the end of the line
+		nnoremap Y y$
+		
+		" in visual mode, <ctrl> + y copies to the system clipboard
+		vnoremap <C-y> "+y
 
 		" code folding settings
 		set foldmethod=indent
