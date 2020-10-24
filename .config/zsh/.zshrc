@@ -1,8 +1,9 @@
 xdg_config=${XDG_CONFIG_HOME:-$HOME/.config}
 
-# Conditionally source prompt if exists
+# Conditionally source prompt if exists, otherwise git clone it
 [ -d "$xdg_config/zsh/themes/powerlevel10k" ] &&\
-    source $xdg_config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+    source $xdg_config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme || \
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $xdg_config/zsh/themes/powerlevel10k
 
 # A lot of this comes from LukeSmithxyz/voidrice
 # although I did modify and annotate some parts
@@ -64,9 +65,10 @@ bindkey '^[[P' delete-char
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Conditionally load syntax highlighting; should be last.
+# Conditionally load syntax highlighting otherwise, clone it; should be last.
 [ -d "$xdg_config/zsh/plugins/fast-syntax-highlighting" ] &&\
-    source $xdg_config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    source $xdg_config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh || \
+    git clone https://github.com/zdharma/fast-syntax-highlighting $xdg_config/zsh/plugins/fast-syntax-highlighting
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
