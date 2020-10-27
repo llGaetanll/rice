@@ -15,6 +15,7 @@
 
 .local/share/*
 !.local/share/fonts/
+.local/share/fonts/.uuid
 !.local/share/applications/
 # add default wallpaper
 !.local/share/default.png
