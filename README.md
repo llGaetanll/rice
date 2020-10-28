@@ -6,6 +6,9 @@ This repo contains all of the configuration files that I use on my main linux ma
   <img width=300 src="https://i.imgur.com/YRxF52A.png" alt="Sakura">
   <img width=300 src="https://i.imgur.com/5G9znYr.png" alt="Village Night">
   <img width=300 src="https://i.imgur.com/dj1WJtK.png" alt="Desert Sunset">
+  <img width=300 src="https://i.imgur.com/xI0Cqum.png" alt="Blue Reef">
+  <img width=300 src="https://i.imgur.com/QcFoMaz.png" alt="Gruvbox">
+  <img width=300 src="https://i.imgur.com/5RSdbGZ.png" alt="Purple Sunset">
 </div>
 
 ## What's included
