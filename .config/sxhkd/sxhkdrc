@@ -19,10 +19,10 @@ super + {equal,plus}
 super + {_,shift + } minus
 	pulsemixer --change-volume {-5,-15}
 
-# # screen brightness up and down
-# super + control + {equal,plus}
-	# setbacklight {-10,+10}
-# }}}
+# screen brightness up and down
+super + control + {minus,equal}
+	setbacklight {-10,+10}
+}}}
 
 ## Programs {{{
 
