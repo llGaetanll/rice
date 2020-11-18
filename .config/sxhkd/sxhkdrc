@@ -51,13 +51,11 @@ super + {_,shift + }{h,j,k,l}
 # Note that this works with multiple monitors!
 # See: https://www.reddit.com/r/bspwm/comments/ibqo95/is_it_possible_to_not_splitup_workspaces_by/g22vg1u/
 super + {_,shift + }{1-9}
-    bspc {desktop -f,node -d} focused:^{1-9}; \
-    bspc query --monitors --monitor .!focused | \
-    xargs -I MONITOR bspc desktop -a MONITOR:^{1-9}
+    bspc {desktop -f,node -d} focused:^{1-9}
 
 # close and kill a window
 super + {_,shift + }q
-	bspc node -{c,k}
+    bspc node -{c,k}
  
 # # set the node flags
 # super + ctrl + {m,x,y,z}
