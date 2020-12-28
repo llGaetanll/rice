@@ -3,6 +3,8 @@
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
 export WM="bspwm" # default window manager to use. This env. var. is used in polybar and in xinitrc
+export BAR_HEIGHT=44 # used in polybar and dmenu
+
 export EDITOR="nvim" # default text editor is neovim
 export TERMINAL="st" # default terminal is suckless' simple terminal
 export BROWSER="firefox" # default browser is firefox
@@ -100,4 +102,4 @@ ex=🎯:\
 "
 
 # Start graphical server on tty1 if not already running.
-	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1  && exec startx
+	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1 && exec startx
