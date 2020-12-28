@@ -173,6 +173,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			\ 'coc-pairs',
 			\ 'coc-tsserver', 
 			\ 'coc-json',
+			\ 'coc-go',
 			\ 'coc-prettier',
 			\ 'coc-rls',
 			\ 'coc-clangd',
@@ -193,7 +194,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 
 		" Use K to show documentation in preview window.
-		nnoremap <silent> K :call <SID>show_documentation()<CR> 
+		" nnoremap <silent> K :call <SID>show_documentation()<CR> 
+		nnoremap K :call <SID>show_documentation()
 
 		function! s:show_documentation()
 			if (index(['vim','help'], &filetype) >= 0)
