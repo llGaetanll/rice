@@ -5,9 +5,11 @@
 # Reload sxhkd
 super + shift + Escape
 	pkill -USR1 -x sxhkd
-# open screenshot menu
-super + Print
-	screenshot
+
+# open screenshot menu or record videos
+super + {_,alt + }Print
+	{screenshot, record}
+
 # shutdown/reboot computer
 super + {_,shift + } BackSpace
 	prompt {"Shutdown computer?" "sudo -A shutdown -h now", "Reboot computer?" "sudo -A reboot"}
