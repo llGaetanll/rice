@@ -49,26 +49,26 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" commented out bar since it was causing lag after a while, might
 		" switch to a different version
 		
-		" " powerline bar at the bottom
-		" Plug 'vim-airline/vim-airline'
-		" Plug 'vim-airline/vim-airline-themes'
+		" powerline bar at the bottom
+		Plug 'vim-airline/vim-airline'
+		Plug 'vim-airline/vim-airline-themes'
 
-		" " sets colors to that of 'minimalist'
-		" let g:airline_theme='minimalist'
+		" sets colors to that of 'minimalist'
+		let g:airline_theme='minimalist'
 
-		" if !exists('g:airline_symbols')
-			" let g:airline_symbols = {}
-		" endif
+		if !exists('g:airline_symbols')
+			let g:airline_symbols = {}
+		endif
 
-		" " powerline symbols
-		" let g:airline_left_sep = ''
-		" let g:airline_left_alt_sep = ''
-		" let g:airline_right_sep = ''
-		" let g:airline_right_alt_sep = ''
-		" let g:airline_symbols.branch = ''
-		" let g:airline_symbols.readonly = ''
-		" let g:airline_symbols.linenr = '☰'
-		" let g:airline_symbols.maxlinenr = ''
+		" powerline symbols
+		let g:airline_left_sep = ''
+		let g:airline_left_alt_sep = ''
+		let g:airline_right_sep = ''
+		let g:airline_right_alt_sep = ''
+		let g:airline_symbols.branch = ''
+		let g:airline_symbols.readonly = ''
+		let g:airline_symbols.linenr = '☰'
+		let g:airline_symbols.maxlinenr = ''
 	" }}}
 
 	" General Mappings {{{
@@ -188,14 +188,14 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		command! -nargs=0 Prettier :CocCommand prettier.formatFile
 		" run on save
 		let g:prettier#autoformat = 1
-		" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+		autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 		set cmdheight=2 " Give more space for displaying messages.
 		set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 
 		" Use K to show documentation in preview window.
 		" nnoremap <silent> K :call <SID>show_documentation()<CR> 
-		nnoremap K :call <SID>show_documentation()
+		nnoremap K :call <SID>show_documentation()<CR>
 
 		function! s:show_documentation()
 			if (index(['vim','help'], &filetype) >= 0)
@@ -275,5 +275,5 @@ call plug#end()
 
 " I just like Alduin a bit more rn, 
 " but feel free to change this
-" colorscheme sonokai
-colorscheme alduin
+colorscheme sonokai
+" colorscheme alduin
