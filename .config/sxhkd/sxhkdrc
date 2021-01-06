@@ -26,6 +26,10 @@ super + control + {minus,equal}
 	setbacklight {-10,+10}
 }}}
 
+# display emojis
+super + grave
+	emoji
+
 ## Programs {{{
 
 # Applications
