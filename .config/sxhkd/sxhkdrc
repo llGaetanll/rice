@@ -22,7 +22,7 @@ super + {_,shift + } minus
 	pulsemixer --change-volume {-5,-15}
 
 # screen brightness up and down
-super + control + {minus,equal}
+super + alt + {minus,equal}
 	setbacklight {-10,+10}
 }}}
 
