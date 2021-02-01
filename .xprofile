@@ -1,5 +1,8 @@
 # This file is sourced from ~/.config/xinitrc
 
+# load Xresources
+xrdb ~/.config/Xresources
+
 # prevent computer from going to sleep
 xset -dpms
 xset r rate 300 50 & # speed xrate up
@@ -9,6 +12,9 @@ sleep 1 && start-polybar & # start polybar instance after 1 second timeout to al
 
 sxhkd & # start the simple X hotkey daemon - used for general keybinds
 unclutter & # hide mouse if inactive
+
+# remap caps lock to escape. I absolutely need this to survive in vim
+setxkbmap -option caps:escape
 
 # WM Compositors. Only use one
 # xcompmgr -c & # add terminal transparency. Better performance but has some ghost shadows sometimes

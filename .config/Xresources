@@ -17,3 +17,9 @@
 ! *color14:      #a9a1e1
 ! *color7:       #DFDFDF
 ! *color15:      #ffffff
+
+! For Xft.dpi, using integer multiples of 96 usually works best, e.g. 192 
+! for 200% scaling (athough for a chad like me, this is largely a suggestion)
+! see: https://wiki.archlinux.org/index.php/HiDPI#X_Resources
+Xft.dpi: 162
+Xft.antialias: true
