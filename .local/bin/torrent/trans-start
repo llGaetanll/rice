@@ -2,6 +2,10 @@
 
 # This script starts my transmission setup
 
+# check that vpn is running before starting
+# this checks if `wg show` produces any output. if it does, it means that the vpn is running, in which case we are good
+[ $(wg show 2>&1 | wc -l) -ne 1 ] && echo "vpn is down, exiting" && exit
+
 # transmission-daemon must be started to use tremc
 pidof transmission-daemon >/dev/null || (transmission-daemon && sleep 3)
 

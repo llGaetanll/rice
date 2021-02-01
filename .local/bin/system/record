@@ -39,9 +39,9 @@ gif() {
 
 	ffmpeg \
 	-f x11grab \
-	-framerate 15 \
 	-video_size "$W"x"$H" \
 	-i :0.0+"$X,$Y" \
+	-vf "fps=15,scale=500:-1:flags=lanczos" -loop 0 \
 	"$recordingsdir/gif-$(date '+%y%m%d-%H%M-%S').gif" &
 	echo $! > /tmp/recordingpid
 	updateicon "⏺️"

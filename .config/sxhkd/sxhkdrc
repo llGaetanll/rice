@@ -37,8 +37,8 @@ super + {d,Return,w}
 	{dmenu_run,$TERMINAL,$BROWSER}
 
 # Terminal-based programs
-super + {r,p,t}
-	$TERMINAL -e {lf,pulsemixer,trans-start}
+super + {r,p,t,n}
+	$TERMINAL -e {lf,pulsemixer,trans-start,neomutt}
 
 # }}}
 

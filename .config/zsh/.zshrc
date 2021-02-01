@@ -1,12 +1,14 @@
 xdg_config=${XDG_CONFIG_HOME:-$HOME/.config}
 
-# Conditionally source prompt if exists, otherwise git clone it
-[ -d "$xdg_config/zsh/themes/powerlevel10k" ] &&\
-    source $xdg_config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme || \
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $xdg_config/zsh/themes/powerlevel10k
+# # Conditionally source prompt if exists, otherwise git clone it
+# [ -d "$xdg_config/zsh/themes/powerlevel10k" ] &&\
+    # source $xdg_config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme || \
+    # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $xdg_config/zsh/themes/powerlevel10k
 
 # A lot of this comes from LukeSmithxyz/voidrice
 # although I did modify and annotate some parts
+
+source $xdg_config/zsh/themes/half-life.theme
 
 # History in cache directory
 HISTSIZE=10000

@@ -46,9 +46,6 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		Plug 'sainnhe/sonokai' 
 		Plug 'AlessandroYorba/Alduin'
 
-		" commented out bar since it was causing lag after a while, might
-		" switch to a different version
-		
 		" powerline bar at the bottom
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
@@ -60,11 +57,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			let g:airline_symbols = {}
 		endif
 
-		" powerline symbols
-		let g:airline_left_sep = ''
-		let g:airline_left_alt_sep = ''
-		let g:airline_right_sep = ''
-		let g:airline_right_alt_sep = ''
+		" " powerline symbols
+		" let g:airline_left_sep = ''
+		" let g:airline_left_alt_sep = ''
+		" let g:airline_right_sep = ''
+		" let g:airline_right_alt_sep = ''
 		let g:airline_symbols.branch = ''
 		let g:airline_symbols.readonly = ''
 		let g:airline_symbols.linenr = '☰'
@@ -72,8 +69,9 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	" }}}
 
 	" General Mappings {{{
-		" `jk` will put you into normal mode
-		inoremap jk <esc>
+		" turning off to get used to using capslock (remapped to esc) instead
+		" " `jk` will put you into normal mode
+		" inoremap jk <esc>
 
 		" remap <esc> to clear highlighting
 		nnoremap <esc> :noh<return><esc>
@@ -275,5 +273,5 @@ call plug#end()
 
 " I just like Alduin a bit more rn, 
 " but feel free to change this
-colorscheme sonokai
+" colorscheme sonokai
 " colorscheme alduin
