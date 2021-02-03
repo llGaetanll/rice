@@ -12,5 +12,5 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # see: https://github.com/polybar/polybar/issues/763#issuecomment-392960721
 for m in $(polybar --list-monitors | cut -d":" -f1); do
     # MONITOR=$m polybar -c $XDG_CONFIG_HOME/polybar/default.ini default &
-    MONITOR=$m polybar -c $XDG_CONFIG_HOME/polybar/8bitcolor.ini base &
+    MONITOR=$m polybar -c $XDG_CONFIG_HOME/polybar/minimal_solid.ini bar &
 done
