@@ -13,7 +13,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 
 export WM="bspwm" # default window manager to use. This env. var. is used in polybar and in xinitrc
-export POLYBAR="$XDG_CONFIG_HOME/polybar/powerlevel.ini" # path to the polybar loaded on startup
+export POLYBAR="$XDG_CONFIG_HOME/polybar/gradient.ini" # path to the polybar loaded on startup
 
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
