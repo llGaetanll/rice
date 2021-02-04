@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Spreadsheet
+Exec=/usr/bin/sc-im %U
