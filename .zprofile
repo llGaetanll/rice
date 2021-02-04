@@ -2,7 +2,6 @@
 # This is to make scripts like `setbg` accessible
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
-export WM="bspwm" # default window manager to use. This env. var. is used in polybar and in xinitrc
 export EDITOR="nvim" # default text editor is neovim
 export TERMINAL="st" # default terminal is suckless' simple terminal
 export BROWSER="firefox" # default browser is firefox
@@ -12,6 +11,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
+
+export WM="bspwm" # default window manager to use. This env. var. is used in polybar and in xinitrc
+export POLYBAR="$XDG_CONFIG_HOME/polybar/gradient.ini" # path to the polybar loaded on startup
 
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
@@ -100,4 +102,4 @@ ex=🎯:\
 "
 
 # Start graphical server on tty1 if not already running.
-	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1  && exec startx
+	[ "$(tty)" = "/dev/tty1" ] && ! pidof Xorg >/dev/null 2>&1 && exec startx

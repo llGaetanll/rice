@@ -1,0 +1,37 @@
+# !/bin/sh
+# if a `.sync` file is present in the current directory this script will automatically sync
+# all of its entries. 
+#
+# `.sync` should be in csv format, and contain columns "from" "to" "args"
+
+syncfile="$(pwd)/.sync"
+
+clearcomments() {
+    sed "s/\s*#.*//g; /^$/ d" $1
+}
+
+syncdir() {
+    echo $comment
+}
+
+loopsync() {
+    clearcomments $1 > .sync.tmp
+    
+    total=$(wc -l < .sync.tmp)
+    while IFS=, read -r to from args; do
+        n=$((n+1))
+        # echo "$comment" | grep -q "^\".*\"$" && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
+	done < .sync.tmp ;
+
+}
+
+syncall() {
+    loopsync $1
+
+    rm .sync.tmp
+}
+
+[ -e "$syncfile" ] && \
+    syncall $syncfile || \
+    echo ".sync file not found."
+
