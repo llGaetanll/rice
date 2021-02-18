@@ -256,7 +256,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	
 	" Markdown Preview {{{
 		" auto start plugin when opening markdown file (default: 0)
-		let g:mkdp_auto_start = 0
+		let g:mkdp_auto_start = 1
 
 		" auto close document when switching to another file (default: 1)
 		let g:mkdp_auto_close = 0
