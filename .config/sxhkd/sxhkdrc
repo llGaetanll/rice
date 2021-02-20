@@ -11,7 +11,7 @@ super + {_,alt + }Print
 	{screenshot, record}
 
 # shutdown/reboot computer
-super + {_,shift + } BackSpace
+super + {_,alt + } BackSpace
 	prompt {"Shutdown computer?" "sudo -A shutdown -h now", "Reboot computer?" "sudo -A reboot"}
 
 # volume up
