@@ -2,16 +2,18 @@
 
 This repo contains all of the configuration files that I use on my main linux machines which run some version of Arch or Artix linux.
 
-## Pictures
+# Pictures
 
 <div style="display: flex; flex-wrap: wrap; margin-right: -10px; margin-bottom: -10px;">
-  <img width=300 src="https://i.imgur.com/YRxF52A.png" alt="Sakura">
-  <img width=300 src="https://i.imgur.com/5G9znYr.png" alt="Village Night">
-  <img width=300 src="https://i.imgur.com/dj1WJtK.png" alt="Desert Sunset">
-  <img width=300 src="https://i.imgur.com/xI0Cqum.png" alt="Blue Reef">
-  <img width=300 src="https://i.imgur.com/QcFoMaz.png" alt="Gruvbox">
-  <img width=300 src="https://i.imgur.com/5RSdbGZ.png" alt="Purple Sunset">
+  <img width=33% src="https://i.imgur.com/YRxF52A.png" alt="Sakura">
+  <img width=33% src="https://i.imgur.com/5G9znYr.png" alt="Village Night">
+  <img width=33% src="https://i.imgur.com/dj1WJtK.png" alt="Desert Sunset">
+  <img width=33% src="https://i.imgur.com/xI0Cqum.png" alt="Blue Reef">
+  <img width=33% src="https://i.imgur.com/QcFoMaz.png" alt="Gruvbox">
+  <img width=33% src="https://i.imgur.com/5RSdbGZ.png" alt="Purple Sunset">
 </div>
+
+# Programs
 
 ## bspwm
 
@@ -76,11 +78,9 @@ fzf
 
 ## polybar
 
-The default polybar is `default.ini` and is ran from `.xprofile`. By default it uses colors in Xresources.
-The bar's workspace module is defined by the `WM` environment variable set in `zprofile` (all major env. variables are set in `zprofile` btw)
-to make it easier to switch between i3 gaps and bspwm. Note that not all modules are enabled on by default,
-if you want to change which modules are visible, look for the line with `modules-left` or `modules-right`
-towards the top in the `[bar/default]` section.
+The default polybar is `default.ini` and can be changed from `~/.xinitrc`. By default it
+uses pywal-generated theme colors. Note that not all polybar modules are enabled by default, if
+you want to change which modules are visible, you can do so in the bar's `ini` file.
 
 ### Modules
 
@@ -89,7 +89,7 @@ towards the top in the `[bar/default]` section.
 - cpu
 - memory
 - date
-- i3/bspwm
+- bspwm
 
 ## sxhkd
 
@@ -152,7 +152,7 @@ BSPWM offers different types of windows, here is how to switch between them.
 
 ## sxiv
 
-The simple x immage viewer.
+The simple x image viewer.
 
 #### Keybinds
 
@@ -161,9 +161,20 @@ The simple x immage viewer.
 
 ##### Custom Additions
 
-The prefix to use any of these is `ctrl + x`
+The prefix to use these commands is `ctrl + x`
 
 - `w` change the selected image to be your wallpaper
+- `c` copy the file to a given directory
+- `m` move the file to a given directory
+- `r` rotate the image 90 degrees clockwise and save
+- `R` rotate the image 90 degrees counterclockwise and save
+- `f` flips image across the y axis
+- `y` copies file name to clipboard
+- `Y` copies full path to clipboard
+- `d` delete the file
+- `g` open the file in Gimp
+  - note that Gimp is not installed by default so you will need to install it to be able to
+    use this
 
 ## zsh
 
@@ -182,16 +193,54 @@ The zoomer shell of course. Comes with syntax highlighting and a nice prompt.
 
 [llGaetanll/autorice](https://github.com/llGaetanll/autorice) is the repo that will install these dotfiles on a fresh install of an arch based distribution.
 
+# Post-Installation
+## Changing the Wallpaper
+- **With lf**
+  1. Navigate to the picture of your choice
+  2. Press `b`
+- With sxiv
+  1. Go to the picture of your choice
+  2. Press `ctrl` + `x` followed by `w`
+
+This triggers the `setbg` script which changes the file at `~/.local/share/bg`.
+
+## Changing the Polybar
+All system-dependent environment variables are placed in `~/.config/xinitrc`. Change the
+`$POLYBAR` variable to the path of the bar you want to use.
+
+Different polybars are available in `~/.config/polybar`.
+
+Note that you may need to install any required fonts by the polybar. Such fonts are listed
+in the bar's `ini` file and can be downloaded directly from the AUR.
+
+Finally to apply the changes simply restart bspwm using the following command
+```
+killall bspwm
+```
+
+## Bringing back Caps Lock
+In this system, I remapped caps lock to escape. This is to help me work in vim more easily
+but I can understand how this may turn off some people. To bring back caps lock simply
+comment out or delete the following line in `.xprofile`.
+
+```ini
+# remap caps lock to escape. I absolutely need this to survive in vim
+setxkbmap -option caps:escape
+```
+
 # TODO
 
-- [x] add docs and list of shortcuts (not entirely finished)
-- [ ] add wiki page for each program
+- [x] add docs and list of shortcuts
 - [ ] add more pictures
+- [ ] Look for pywal alternatives.
+ - pywal does not generate enough colors for nvim, which I rather would match system colors
+   than a custom theme.
 
 ## lf
 
-- [ ] add `rsync`
-- [x] add `encFS` keybinds
+- [ ] Add `rsync` keybind
+  - See: https://github.com/gokcehan/lf/issues/561
+- [x] Add `encFS` keybind
 - [ ] add image previews
   - See: https://gitlab.com/Provessor/lfp
 
