@@ -191,20 +191,26 @@ The zoomer shell of course. Comes with syntax highlighting and a nice prompt.
 
 # Installation
 
-[llGaetanll/autorice](https://github.com/llGaetanll/autorice) is the repo that will install these dotfiles on a fresh install of an arch based distribution.
+It is highly recommended you install these dotfiles on a clean arch-based system using [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
+since the script performs some automatic post installation cleanups not covered by this repo.
+
+I have successfully installed these dotfiles on both Arch and Artix.
 
 # Post-Installation
+
 ## Changing the Wallpaper
+
 - **With lf**
   1. Navigate to the picture of your choice
   2. Press `b`
-- With sxiv
+- **With sxiv**
   1. Go to the picture of your choice
   2. Press `ctrl` + `x` followed by `w`
 
 This triggers the `setbg` script which changes the file at `~/.local/share/bg`.
 
 ## Changing the Polybar
+
 All system-dependent environment variables are placed in `~/.config/xinitrc`. Change the
 `$POLYBAR` variable to the path of the bar you want to use.
 
@@ -214,11 +220,13 @@ Note that you may need to install any required fonts by the polybar. Such fonts 
 in the bar's `ini` file and can be downloaded directly from the AUR.
 
 Finally to apply the changes simply restart bspwm using the following command
+
 ```
 killall bspwm
 ```
 
 ## Bringing back Caps Lock
+
 In this system, I remapped caps lock to escape. This is to help me work in vim more easily
 but I can understand how this may turn off some people. To bring back caps lock simply
 comment out or delete the following line in `.xprofile`.
@@ -228,13 +236,23 @@ comment out or delete the following line in `.xprofile`.
 setxkbmap -option caps:escape
 ```
 
+## Reverse Scrolling Direction
+
+If you're installing this on a laptop, there's a chance you might want to reverse the scrolling direction like me.
+[This blog post](https://n00bsys0p.wordpress.com/2011/07/26/reverse-xorg-scrolling-in-linux-natural-scrolling/) describes how to do this very well.
+
+In my case, swapping `4` and `5` reversed vertical scrolling, and switching `6` and `7` reversed horizontal scrolling.
+
+If like me you got multiple slave pointer devices, simply try switching these numbers around on each of them, and undo your changes if you don't notice
+a difference in scrolling direction.
+
 # TODO
 
 - [x] add docs and list of shortcuts
 - [ ] add more pictures
 - [ ] Look for pywal alternatives.
- - pywal does not generate enough colors for nvim, which I rather would match system colors
-   than a custom theme.
+- pywal does not generate enough colors for nvim, which I rather would match system colors
+  than a custom theme.
 
 ## lf
 

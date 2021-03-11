@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Looking for Networks..."
+
+network=$(nmcli device wifi list | sed '1d; s/^ /#/g; s/^\*/%/g' -- | awk -F ' {2,}' '{ printf "%s\t%s\t$%s\t%s\n", $1, $3, $6, $8 }' - | smenu -c -m "Select WiFi Network" -S '/#/ /g' -S '/%/>/' -W $'\t' -L $'\n' -q -n30 -C 2)
+
+nmcli --ask device wifi connect $network
