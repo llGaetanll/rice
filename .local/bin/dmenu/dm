@@ -1,0 +1,22 @@
+#!/bin/sh
+# this script overrides dmenu_run and launches a theme-colored
+# version of dmenu using pywal generated colors.
+
+# note that the `unset LS_COLORS` is there because not having it
+# messes with lf's color system. It's not a great solution but it
+# works.
+
+[ -e "${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.sh" ] && \
+    . "${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.sh" && \
+    unset LS_COLORS && \
+    dmenu_run \
+        -nb "$color0" \
+        -sb "$color6" \
+        -sf "$color0" \
+        -nf "$color15" \
+        -nhb "$color1" \
+        -nhf "$color0" \
+        -shb "$color1" \
+        -shf "$color0" \
+        -h 50 \
+        $@
