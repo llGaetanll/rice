@@ -8,7 +8,7 @@ xset -dpms
 xset r rate 300 50 & # speed xrate up
 
 setbg & # set wallpaper on startup
-sleep 1 && start-polybar & # start polybar instance after 1 second timeout to allow setbg to change system colors
+sleep 1 && polybar-start & # start polybar instance after 1 second timeout to allow setbg to change system colors
 
 sxhkd & # start the simple X hotkey daemon - used for general keybinds
 unclutter & # hide mouse if inactive
