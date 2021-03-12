@@ -10,4 +10,3 @@ alias \
     gb="git branch" \
     dcu="docker-compose up" \
     dcd="docker-compose down" \
-    wifi="nmcli device wifi"
