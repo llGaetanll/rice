@@ -23,8 +23,6 @@ export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 
-# for tmux to set fonts properly within st
-
 # This is the list for lf icons:
 export LF_ICONS="di=📁:\
 fi=📃:\
