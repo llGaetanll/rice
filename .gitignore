@@ -59,6 +59,7 @@
 !.config/zsh
 .config/zsh/*
 !.config/zsh/.zshrc
+!.config/zsh/prompts
 # this file is my custom prompt profile
 !.config/zsh/.p10k.zsh
 
