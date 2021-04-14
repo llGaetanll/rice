@@ -10,3 +10,4 @@ alias \
     gb="git branch" \
     dcu="docker-compose up" \
     dcd="docker-compose down" \
+    synctime="sudo ntpdate pool.ntp.org" \
