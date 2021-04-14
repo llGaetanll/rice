@@ -17,6 +17,4 @@ unclutter & # hide mouse if inactive
 setxkbmap -option caps:escape
 
 # WM Compositors. Only use one
-# xcompmgr -c & # add terminal transparency. Better performance but has some ghost shadows sometimes
-# sleep 1 && compton --backend glx --paint-on-overlay --vsync opengl-swc & # add terminal transparency and blur. Works nicely but slows down computer a lot
-sleep 1 && compton --backend glx --blur-background & # add terminal transparency and blur. Works nicely but slows down computer a lot
+sleep 1 && picom --experimental-backends & # allows you to use blur on the main picom repo
