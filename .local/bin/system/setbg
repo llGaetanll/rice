@@ -12,7 +12,15 @@ bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
 [ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc"
 
 # run on a directory
-[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
+[ -d "$1" ] && \
+	ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && \
+	notify-send -i "$bgloc" "Random Wallpaper chosen."
+
+# allow user to tile/span chosen wallpaper
+case "$(printf "tile\\nspan" | dm -h 50 -c -i -p "Apply Wallpaper")" in
+	"tile") xwallpaper --zoom "$bgloc" ;;
+	"span") xwallpaper --no-randr --center "$bgloc" ;;
+esac
 
 # If pywal is installed, use it.
 command -v wal >/dev/null 2>&1 &&
@@ -21,5 +29,3 @@ command -v wal >/dev/null 2>&1 &&
 # update bspwm colorscheme
 # source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null
 source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc"
-
-xwallpaper --zoom "$bgloc"
