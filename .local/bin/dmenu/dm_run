@@ -18,6 +18,8 @@
         -nhf "$color0" \
         -shb "$color1" \
         -shf "$color0" \
-        -h 50 \
+        -h 70 \
+        -l 5 \
+        -c \
         "$@"
 

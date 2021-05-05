@@ -1,5 +1,5 @@
 #!/bin/sh
-# this script overrides dmenu_run and launches a theme-colored
+# this script overrides dmenu and launches a theme-colored
 # version of dmenu using pywal generated colors.
 
 # note that the `unset LS_COLORS` is there because not having it
@@ -18,5 +18,5 @@
         -nhf "$color0" \
         -shb "$color1" \
         -shf "$color0" \
-        -h 50 \
+        -h "${BAR_HEIGHT:-50}" \
         "$@"
