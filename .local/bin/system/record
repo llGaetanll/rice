@@ -23,7 +23,7 @@ killrecording() {
 
 # Different ways to record
 promptrecording() {
-	choice=$(printf "video\\nvideo selection\\naudio\\ngif" | dmenu -i -p "Recording Style")
+	choice=$(printf "video\\nvideo selection\\naudio\\ngif" | dm -i -p "Recording Style")
 	case "$choice" in
 		video) video;;
 		"video selection") videoselected;;
