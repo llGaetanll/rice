@@ -46,9 +46,6 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		Plug 'sainnhe/sonokai' 
 		Plug 'AlessandroYorba/Alduin'
 
-		" commented out bar since it was causing lag after a while, might
-		" switch to a different version
-		
 		" powerline bar at the bottom
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
@@ -72,8 +69,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	" }}}
 
 	" General Mappings {{{
-		" `jk` will put you into normal mode
-		inoremap jk <esc>
+		" leader key
+		let mapleader = ","
 
 		" remap <esc> to clear highlighting
 		nnoremap <esc> :noh<return><esc>
@@ -246,6 +243,14 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" make gutter column invisible
 		highlight! link SignColumn LineNr
 
+		" remap gutter keybinds
+		" <leader> + g + n -> next change
+		nmap <leader>gn <Plug>(GitGutterNextHunk)
+		" <leader> + g + p -> prev change
+		nmap <leader>gp <Plug>(GitGutterPrevHunk)
+		" <leader> + g + z -> fold and leave only changes
+		nmap <leader>gz :GitGutterFold<CR>
+
 		" customize gutter symbols
 		let g:gitgutter_sign_added = '>>'
 		let g:gitgutter_sign_modified = '~~'
@@ -256,23 +261,18 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	
 	" Markdown Preview {{{
 		" auto start plugin when opening markdown file (default: 0)
-		let g:mkdp_auto_start = 1
+		" see local.vim
 
 		" auto close document when switching to another file (default: 1)
 		let g:mkdp_auto_close = 0
 	" }}}
-	
-	" AutoCMDs {{{
-		" Recompile suckless programs automatically
-		" autocmd BufWritePost config.h,config.def.h !sudo -S make install
-
-		" Recompile CMSC 216 programs on save
-		" autocmd BufWritePost *.c !gcc -std=c90 *c && ./a.out
-	" }}}
 	 
 call plug#end()
 
-" I just like Alduin a bit more rn, 
-" but feel free to change this
-colorscheme sonokai
-" colorscheme alduin
+" the following file contains device-specific vim settings.
+" it should be ignore by git so feel free to change any 
+" parameters there
+if filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/local.vim"'))
+	source ~/.config/nvim/local.vim
+endif
+
