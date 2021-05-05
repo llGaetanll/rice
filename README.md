@@ -78,9 +78,15 @@ fzf
 
 ## polybar
 
-The default polybar is `default.ini` and can be changed from `~/.xinitrc`. By default it
-uses pywal-generated theme colors. Note that not all polybar modules are enabled by default, if
-you want to change which modules are visible, you can do so in the bar's `ini` file.
+Changing the polybar depends on your system. At startup in `~/.xprofile`, a script named `polybar-start`
+is ran. In previous versions, this script would launch the polybar defined by `$POLYBAR` on every visible
+display.
+
+However to allow users to load different polybars on different screens, this
+script can now be symlinked by the user. It is recommended to define your
+start scripts next to your polybars in `~/.config/polybar/`. By default, the
+`single.sh` script is linked to `polybar-start` which has the same functionality
+as before.
 
 ### Modules
 
