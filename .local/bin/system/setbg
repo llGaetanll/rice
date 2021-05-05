@@ -5,27 +5,61 @@
 #	If given a file, set that as the new wallpaper.
 #	If given a directory, choose random file in it.
 
-# Location of link to wallpaper link.
-bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
+promptwall() {
+	# if $1 is a file, get the full path
+	[ -f "$1" ] && img=$(readlink -f "$1")
 
-# run on a file
-[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc"
+	# if $1 is a directory, pick a random image
+	[ -d "$1" ] && img=$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)
 
-# run on a directory
-[ -d "$1" ] && \
-	ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && \
-	notify-send -i "$bgloc" "Random Wallpaper chosen."
+	# Location of link to wallpaper
+	# name always starts with .bg- followed 
+	# by how to apply the wallpaper.
+	bgdir="${XDG_DATA_HOME:-$HOME/.local/share/}"
 
-# allow user to tile/span chosen wallpaper
-case "$(printf "tile\\nspan" | dm -h 50 -c -i -p "Apply Wallpaper")" in
-	"tile") xwallpaper --zoom "$bgloc" ;;
-	"span") xwallpaper --no-randr --center "$bgloc" ;;
-esac
+	# allow user to tile/span chosen wallpaper
+	# create symlink with appropriate name
+	case "$(printf "tile\\nspan" | dm -i -p "Apply Wallpaper")" in
+		"tile") bgloc="${bgdir}/.bg-tile" ;;
+		"span") bgloc="${bgdir}/.bg-span" ;;
+	esac
 
-# If pywal is installed, use it.
-command -v wal >/dev/null 2>&1 &&
-	wal -q -i "$(readlink -f "$bgloc")" >/dev/null 2>&1
+	# if bgloc is undefined we stop
+	[ -z "$bgloc" ] && exit 1
 
-# update bspwm colorscheme
-# source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null
-source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc"
+	# remove any current symlink
+	rm $bgdir/.bg-* > /dev/null 2>&1
+
+	# create symlink
+	ln -sf "$(readlink -f "$img")" "$bgloc"
+}
+
+applywall() {
+	# get wallpaper symlink
+	bglink="${XDG_DATA_HOME:-$HOME/.local/share/}/.bg-*"
+
+	# get pointer to symlink
+	bgloc=$(readlink -f $bglink)
+
+	# If pywal is installed, use it.
+	command -v wal > /dev/null 2>&1 &&
+		wal -q -i "$bgloc" > /dev/null 2>&1
+
+	# update bspwm colorscheme
+	# source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null
+	source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null 2>&1
+
+	# extract how to apply the wallpaper 
+	# from name of symlink
+	walltype=$(basename $bglink | sed -e "s/\.bg-//g")
+
+	# based on wallpaper type
+	# apply correctly
+	case "$walltype" in
+		"tile") xwallpaper --zoom "$bgloc" ;;
+		"span") xwallpaper --no-randr --center "$bgloc" ;;
+	esac
+}
+
+# if the first argument is not provided, we just apply the current wallpaper
+[ -z "$1" ] && applywall || $(promptwall $1 && applywall)
