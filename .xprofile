@@ -3,9 +3,10 @@
 # load Xresources
 xrdb ~/.config/Xresources
 
-# prevent computer from going to sleep
-xset -dpms
-xset r rate 300 50 & # speed xrate up
+xset s off              # dont activate screensaver
+xset s noblank          # dont blank the video device
+xset -dpms              # disable energystart features
+xset r rate 300 50 &    # speed xrate up
 
 setbg & # set wallpaper on startup
 sleep 1 && polybar-start & # start polybar instance after 1 second timeout to allow setbg to change system colors
