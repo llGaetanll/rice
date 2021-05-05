@@ -34,7 +34,7 @@ super + grave
 
 # Applications
 super + {d,Return,w}
-	{dm_run -h 70 -c -l 5,$TERMINAL,$BROWSER}
+	{dm_run,$TERMINAL,$BROWSER}
 
 # Terminal-based programs
 super + {r,p,t}
