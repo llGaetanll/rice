@@ -11,3 +11,4 @@ alias \
     dcu="docker-compose up" \
     dcd="docker-compose down" \
     synctime="sudo ntpdate pool.ntp.org" \
+    ydl="youtube-dl -o \"$HOME/Videos/downloads/$(date '+%s').%(ext)s\""
