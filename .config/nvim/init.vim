@@ -81,6 +81,13 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" in visual mode, <ctrl> + y copies to the system clipboard
 		vnoremap <C-y> "+y
 
+		" in visual mode, ",',(,{,[ wraps the selection in quotes
+		vnoremap " c""<esc>Pgvll
+		vnoremap ' c''<esc>Pgvll
+		vnoremap ( c()<esc>Pgvll
+		vnoremap { c{}<esc>Pgvll
+		vnoremap [ c[]<esc>Pgvll
+
 		" code folding settings
 		set foldmethod=indent
 		set foldlevelstart=99
