@@ -31,7 +31,7 @@ promptwall() {
 	rm $bgdir/.bg-* > /dev/null 2>&1
 
 	# create symlink
-	ln -sf "$(readlink -f "$img")" "$bgloc"
+	ln -sf "$img" "$bgloc"
 }
 
 applywall() {
@@ -57,9 +57,9 @@ applywall() {
 	# apply correctly
 	case "$walltype" in
 		"tile") xwallpaper --zoom "$bgloc" ;;
-		"span") xwallpaper --no-randr --center "$bgloc" ;;
+		"span") xwallpaper --no-randr --zoom "$bgloc" ;;
 	esac
 }
 
 # if the first argument is not provided, we just apply the current wallpaper
-[ -z "$1" ] && applywall || $(promptwall $1 && applywall)
+[ -z "$1" ] && applywall || $(promptwall "$1" && applywall)
