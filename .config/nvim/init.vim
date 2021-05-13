@@ -198,7 +198,13 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 
 		" Use K to show documentation in preview window.
-		nnoremap K :call <SID>show_documentation()<CR>
+		nnoremap <silent> K :call <SID>show_documentation()<CR>
+	
+		" Remap <C-j> and <C-k> for scroll float windows/popups.
+		if has('nvim-0.4.0') || has('patch-8.2.0750')
+			nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+			nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+		endif
 
 		function! s:show_documentation()
 			if (index(['vim','help'], &filetype) >= 0)
@@ -231,7 +237,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" Formatting selected code.
 		xmap <leader>f  <Plug>(coc-format-selected)
 		nmap <leader>f  <Plug>(coc-format-selected)
-		
+
 		" comment highlighting in json	
 		autocmd FileType json syntax match Comment +\/\/.\+$+
 	" }}}
