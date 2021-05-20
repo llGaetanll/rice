@@ -1,3 +1,11 @@
+"           ██╗███╗   ██╗██╗████████╗██╗   ██╗██╗███╗   ███╗
+"           ██║████╗  ██║██║╚══██╔══╝██║   ██║██║████╗ ████║
+"           ██║██╔██╗ ██║██║   ██║   ██║   ██║██║██╔████╔██║
+"           ██║██║╚██╗██║██║   ██║   ╚██╗ ██╔╝██║██║╚██╔╝██║
+"           ██║██║ ╚████║██║   ██║██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
+"           ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
+"
+
 " install vim plugged if not already on the system
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -22,6 +30,9 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	
 	" Appearance {{{
 		" For more info about any of these `:help set`
+		
+		" dark theme by default
+		set bg=dark
 
 		" relative line numbers on the side	
 		set number
@@ -40,43 +51,23 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		set softtabstop=4
 		set shiftwidth=4
 		set shiftround
+
+		" fix broken colors on certain colorschemes
+		set termguicolors
 	" }}}
 	
-	" Theme {{{
-		Plug 'sainnhe/sonokai' 
-		Plug 'AlessandroYorba/Alduin'
-
-		" powerline bar at the bottom
-		Plug 'vim-airline/vim-airline'
-		Plug 'vim-airline/vim-airline-themes'
-
-		" sets colors to that of 'minimalist'
-		let g:airline_theme='minimalist'
-
-		if !exists('g:airline_symbols')
-			let g:airline_symbols = {}
-		endif
-
-		" powerline symbols
-		let g:airline_left_sep = ''
-		let g:airline_left_alt_sep = ''
-		let g:airline_right_sep = ''
-		let g:airline_right_alt_sep = ''
-		let g:airline_symbols.branch = ''
-		let g:airline_symbols.readonly = ''
-		let g:airline_symbols.linenr = '☰'
-		let g:airline_symbols.maxlinenr = ''
-	" }}}
-
 	" General Mappings {{{
 		" leader key
 		let mapleader = ","
 
 		" remap <esc> to clear highlighting
-		nnoremap <esc> :noh<return><esc>
+		nnoremap <silent> <esc> :noh<return><esc>
 		
 		" in normal mode, Y copies to the end of the line
 		nnoremap Y y$
+
+		" in normal mode, Q breaks up a long line of text
+		nnoremap Q gq
 		
 		" in visual mode, <ctrl> + y copies to the system clipboard
 		vnoremap <C-y> "+y
@@ -99,6 +90,31 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		vmap < <gv
 		vmap > >gv
 	" }}}
+	
+	" Tabs - All prefixed by <Tab> {{{
+		" rotate between tabs: previous and next
+		nnoremap <Tab>n gt
+		nnoremap <Tab>N gT
+
+		" Tab + a to open a new tab
+		nnoremap <silent> <Tab>a :tabnew<CR>
+
+		" Tab + h/l to move a tab left/right
+		nnoremap <silent> <Tab>h :tabmove -<CR>
+		nnoremap <silent> <Tab>l :tabmove +<CR>
+
+		" Tab + t to move the current window to a new tab
+		" note that this can also be done with `ctrl+w T`
+		nnoremap <silent> <Tab>t :tabedit %<CR>
+	" }}}
+	
+	" Windows - All prefixed by ctrl + w {
+		" ctrl + w  ctrl + h/j/k/l to resize windows
+		nnoremap <silent> <C-w><C-h> 5:wincmd <<CR>
+		nnoremap <silent> <C-w><C-j> 5:wincmd -<CR>
+		nnoremap <silent> <C-w><C-k> 5:wincmd +<CR>
+		nnoremap <silent> <C-w><C-l> 5:wincmd ><CR>
+	" }
 
 	" FuzzyFind - Find files from anywhere {{{
 		Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
