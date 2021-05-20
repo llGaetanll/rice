@@ -21,23 +21,16 @@ let g:mkdp_auto_start = 0
 "
 
 " vim themes
-Plug 'sainnhe/sonokai' 
-Plug 'AlessandroYorba/Alduin'
-Plug 'morhetz/gruvbox'
-
 let g:gruvbox_contrast_dark='light'
 let g:gruvbox_contrast_light='medium'
 let g:gruvbox_italic=1
 let g:gruvbox_italicize_strings=1
 
 " vim airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
 let g:airline_theme='gruvbox'
 
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 
 " " powerline symbols

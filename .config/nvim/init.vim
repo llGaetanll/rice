@@ -28,6 +28,13 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'jparise/vim-graphql' " GQL syntax highlighting
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown previewer
 	
+	" Theming - for theme settings see local.vim
+	Plug 'sainnhe/sonokai' 
+	Plug 'AlessandroYorba/Alduin'
+	Plug 'morhetz/gruvbox'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+	
 	" Appearance {{{
 		" For more info about any of these `:help set`
 		
