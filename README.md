@@ -50,29 +50,63 @@ You move around with `h` `j` `k` `l`, or with the arrow keys.
 
 ## nvim
 
+<img width=100% src="https://i.imgur.com/rZUMftx.png" alt="gruvbox-nvim">
+
 A community rewrite of vim. The config file `.config/nvim/init.vim` is well documented if you want to see what features are included.
 
 ### Additions/Keybinds
 
-fzf
+#### Tabs
+
+All Tab keybinds are prefixed by `<Tab>` (obviously).
+
+- `<Tab> + n` move to next tab. Same as `gt`
+- `<Tab> + N` move to previous tab. Same as `gT`
+- `<Tab> + t` move current window to a new tab.
+- `<Tab> + a` create a new tab with an empty window.
+- `<Tab> + h` move current tab left.
+- `<Tab> + l` move current tab right.
+
+#### Windows
+
+- `ctrl + w + ctrl + h/j/k/l` resize current window.
+
+#### fzf
 
 - `ctrl + p` Fuzzy Find Git files in current project directory
 - `ctrl + shift + p` Fuzzy Find any file in current project directory
-  NERDTree
+
+#### NERDTree
+
+In this config, NERDTree also comes with file icons, git icons, and syntax highlighting.
+
 - `ctrl + n` toggle NERDTree (like the side menu in vscode)
-  NERDCommenter
-- `ctrl + /` to toggle commenting on:
-  - in insert/normal mode: current line
-  - in visual mode: selection
-    Conquer of Completion
+
+#### NERDCommenter
+
+- `ctrl + /` toggle commenting. works in `normal`, `insert`, and `visual` mode.
+
+#### Conquer of Completion
+
 - `ctrl + <space>` autocomplete (if available through Conquer of Completion)
 - `F2` rename every instance of a variable in the file
-- `K` show documentation on currently selected item
-  Git Gutter
-  MarkDown Preview
+
+- `K` show documentation on currently selected item.
+  - `ctrl + j/k` can be used to scroll up and down the window if possible.
+
+#### Git Gutter
+
+- `<Leader> + g + n` display next change.
+- `<Leader> + g + p` display previous change.
+- `<Leader> + g + z` fold all code leaving only changes.
+
+#### MarkDown Preview
+
+- `<Leader> + m + p` toggles markdown preview.
 
 ### Themes
 
+- gruvbox (default)
 - sonokai
 - alduin
 

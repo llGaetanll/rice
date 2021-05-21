@@ -144,11 +144,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 		Plug 'ryanoasis/vim-devicons'
 
-		" ctrl + n toggles NERDTree
-		nmap <C-n> :NERDTreeToggle<CR> 
+		" <Leader> + n toggles NERDTree
+		nmap <silent><C-n> :NERDTreeToggle<CR> 
 
-		" shift + n focuses NERDTree from any window
-		" nmap <S-n> :NERDTreeFocus<CR> 
+		" <Leader> + shift + n focuses NERDTree from any window
+		" nmap <silent><C-> :NERDTreeFocus<CR> 
 
 		" ignore node_modules
 		let g:NERDTreeIgnore = ['^node_modules$']
@@ -288,16 +288,19 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		nmap <leader>gz :GitGutterFold<CR>
 
 		" customize gutter symbols
-		let g:gitgutter_sign_added = '>>'
-		let g:gitgutter_sign_modified = '~~'
-		let g:gitgutter_sign_removed = '__'
-		let g:gitgutter_sign_removed_first_line = '^^'
-		let g:gitgutter_sign_modified_removed = 'ww'
+		let g:gitgutter_sign_added = '+'
+		let g:gitgutter_sign_modified = '~'
+		let g:gitgutter_sign_removed = '_'
+		let g:gitgutter_sign_removed_first_line = '⌃'
+		let g:gitgutter_sign_modified_removed = '⌄'
 	" }}}
 	
 	" Markdown Preview {{{
 		" auto start plugin when opening markdown file (default: 0)
 		" see local.vim
+		
+		" <Leader> + m + p toggles markdown preview
+		nmap <leader>mp <Plug>MarkdownPreviewToggle
 
 		" auto close document when switching to another file (default: 1)
 		let g:mkdp_auto_close = 0
