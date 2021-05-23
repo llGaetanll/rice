@@ -31,6 +31,7 @@
 !.config/mimeapps.list
 
 # .config folders
+!.config/fontconfig
 !.config/sxhkd
 !.config/i3
 !.config/bspwm
