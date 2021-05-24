@@ -27,6 +27,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'pangloss/vim-javascript' " JS syntax highlighting
 	Plug 'jparise/vim-graphql' " GQL syntax highlighting
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown previewer
+	" JsDoc generation
+	Plug 'heavenshell/vim-jsdoc', { 
+	\ 'for': ['javascript', 'javascript.jsx','typescript'], 
+	\ 'do': 'make install'
+	\}
 	
 	" Theming - for theme settings see local.vim
 	Plug 'sainnhe/sonokai' 
@@ -61,6 +66,9 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 
 		" fix broken colors on certain colorschemes
 		set termguicolors
+
+		" add JSDoc syntax highlighting
+		let g:javascript_plugin_jsdoc = 1
 	" }}}
 	
 	" General Mappings {{{
