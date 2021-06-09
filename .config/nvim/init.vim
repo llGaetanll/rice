@@ -27,6 +27,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'pangloss/vim-javascript' " JS syntax highlighting
 	Plug 'jparise/vim-graphql' " GQL syntax highlighting
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown previewer
+	Plug 'lervag/vimtex' " LaTeX support. you need `latex-mk` from the AUR
+
 	" JsDoc generation
 	Plug 'heavenshell/vim-jsdoc', { 
 	\ 'for': ['javascript', 'javascript.jsx','typescript'], 
