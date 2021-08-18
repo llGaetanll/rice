@@ -175,12 +175,15 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 			" file, and we're not in vimdiff
 			function! SyncTree()
+				" echo expand('<afile>')
+				" echo "no diff" !&diff "nt open:" IsNERDTreeOpen() "nt not focused: " !exists("b:NERDTree")
+				" if IsNERDTreeOpen() && !exists("b:NERDTree")
 				if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
 					NERDTreeFind
 					wincmd p
 				endif
 			endfunction
-
+			
 			" Highlight currently open buffer in NERDTree
 			" autocmd BufEnter * call SyncTree()
 		" }
@@ -208,6 +211,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		let g:coc_global_extensions = [
 			\ 'coc-snippets', 
 			\ 'coc-pairs',
+			\ 'coc-pyright',
 			\ 'coc-tsserver', 
 			\ 'coc-json',
 			\ 'coc-go',
