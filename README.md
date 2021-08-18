@@ -288,19 +288,35 @@ a difference in scrolling direction.
 
 # TODO
 
-- [x] add docs and list of shortcuts
-- [ ] add more pictures
+- [x] Add docs and list of shortcuts
+- [ ] Add more pictures
 - [ ] Look for pywal alternatives.
 - pywal does not generate enough colors for nvim, which I rather would match system colors
   than a custom theme.
+
+## nvim
+
+- [ ] Sync open file with NERDTree
+- current solution is commented out and does not work
 
 ## lf
 
 - [ ] Add `rsync` keybind
   - See: https://github.com/gokcehan/lf/issues/561
 - [x] Add `encFS` keybind
-- [ ] add image previews
+- [ ] Add image previews
   - See: https://gitlab.com/Provessor/lfp
+
+## zathura
+
+- [ ] Window currently spawns in floating mode
+
+## Polybar
+
+- [ ] Add Mullvad VPN module
+- should prompt user for server through dmenu. server list should be updatable from mullvad.net
+- [ ] Add package update module
+- should auto download packages through crontab and have 1-click update
 
 # Inspiration
 
