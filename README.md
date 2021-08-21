@@ -98,7 +98,7 @@ In this config, NERDTree also comes with file icons, git icons, and syntax highl
 
 - `<Leader> + g + n` display next change.
 - `<Leader> + g + p` display previous change.
-- `<Leader> + g + z` fold all code leaving only changes.
+- `<Leader> + g + z` toggle fold leaving only changes.
 
 #### MarkDown Preview
 
@@ -311,12 +311,20 @@ a difference in scrolling direction.
 
 - [ ] Window currently spawns in floating mode
 
-## Polybar
+## polybar
 
 - [ ] Add Mullvad VPN module
-- should prompt user for server through dmenu. server list should be updatable from mullvad.net
+  - should prompt user for server through dmenu.
+  - server list should be updatable from mullvad.net
 - [ ] Add package update module
-- should auto download packages through crontab and have 1-click update
+  - auto download packages through crontab every hour or so
+  - format: `<pacman packages> <aur-packages>`
+  - left click: refresh update count
+  - right click: 1-click update
+
+## bspwm
+
+- [ ] Add keybind to switch highlighted winder to the current workspace of a monitor
 
 # Inspiration
 
