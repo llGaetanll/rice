@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# a csv file containing: City, Country, Hostname
+HOSTS="${XDG_DATA_HOME}/hosts"
+
+die() {
+	echo "[-] Error: $1" >&2
+	exit 1
+}
+
+upd_hosts() {
+	RES="$(curl -LsS https://api.mullvad.net/public/relays/wireguard/v1/)" || die "Unable to connect to Mullvad API."
+	FIELDS=`echo "$RES" | jq -r 'foreach .countries[] as $country (.; .; foreach
+	$country.cities[] as $city (.; .; foreach $city.relays[] as $relay (.; .; $country.name,
+	$city.name, $relay.hostname)))' || die "Unable to parse response."`
+
+	echo "$FIELDS" | while read -r COUNTRY && read -r CITY && read -r HOSTNAME; do
+		NUM=`echo "$HOSTNAME" | grep -Eo '[0-9]*'`
+		echo "$CITY;$COUNTRY;$HOSTNAME;$NUM"
+	done
+}
+
+# chosen=$(cut -d ';' -f1,2 $HOSTS | dm -i -l 20 -p "Connect" | sed "s/ .*//")
+
+# echo $chosen
+
+# upd_hosts > $HOSTS
+
+prompt() {
+	while IFS=";" read -r city country hostname num; do
+		echo "[$num] $country - $city"
+	done < "$HOSTS" | dm -i -l 20 -p "Connect"
+}
+
+declare -A hosts
+
+while IFS=";" read -r city country hostname num; do
+	hosts["[$num] $country - $city"]="$hostname"
+done < "$HOSTS"
+
+choice=`prompt`
+
+[ -n "$choice" ] && echo ${hosts["$choice"]}
