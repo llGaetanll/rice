@@ -337,3 +337,11 @@ a difference in scrolling direction.
 
 - [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/voidrice) for the base dotfiles (my dots are quite different to these now though)
 - [lukesmithxyz/LARBS](https://github.com/lukesmithxyz/LARBS) for my auto-install script at [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
+
+# See Also
+
+- [llGaetanll/autorice](https://github.com/llGaetanll/autorice/)
+  Installs these dotfiles as well as the required programs on any clean install of arch linux.
+
+- [llGaetanll/suckess](https://github.com/llGaetanll/suckless/)
+  Contains my suckless programs which this repo also uses.
