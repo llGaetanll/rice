@@ -15,9 +15,11 @@ This repo contains all of the configuration files that I use on my main linux ma
 
 # Programs
 
+Below is the list of programs that this repo has configurations for. Each program contains a list of custom documented keybindings.
+
 ## bspwm
 
-The default window manager. Each monitor gets 9 independant workspaces.
+The default window manager. This config should work on single or multi monitor setups. Each monitor gets 9 independant workspaces.
 
 ### Keybinds
 
@@ -56,9 +58,11 @@ A community rewrite of vim. The config file `.config/nvim/init.vim` is well docu
 
 ### Additions/Keybinds
 
+- `,` The leader key.
+
 #### Tabs
 
-All Tab keybinds are prefixed by `<Tab>` (obviously).
+All Tab keybinds are prefixed by `<Tab>`.
 
 - `<Tab> + n` move to next tab. Same as `gt`
 - `<Tab> + N` move to previous tab. Same as `gT`
@@ -88,8 +92,8 @@ In this config, NERDTree also comes with file icons, git icons, and syntax highl
 
 #### Conquer of Completion
 
-- `ctrl + <space>` autocomplete (if available through Conquer of Completion)
-- `F2` rename every instance of a variable in the file
+- `ctrl + <space>` autocomplete (if available through Conquer of Completion).
+- `F2` rename every instance of a variable in the file.
 
 - `K` show documentation on currently selected item.
   - `ctrl + j/k` can be used to scroll up and down the window if possible.
@@ -106,6 +110,8 @@ In this config, NERDTree also comes with file icons, git icons, and syntax highl
 
 ### Themes
 
+These can be changed in `~/.config/nvim/local.nvim`
+
 - gruvbox (default)
 - sonokai
 - alduin
@@ -118,8 +124,8 @@ display.
 
 However to allow users to load different polybars on different screens, this
 script can now be symlinked by the user. It is recommended to define your
-start scripts next to your polybars in `~/.config/polybar/`. By default, the
-`single.sh` script is linked to `polybar-start` which has the same functionality
+`polybar-start` scripts next to your polybars in `~/.config/polybar/`. By default, the
+`polybar-start` is linked to the `single.sh` script which has the same functionality
 as before.
 
 ### Modules
@@ -231,7 +237,7 @@ The zoomer shell of course. Comes with syntax highlighting and a nice prompt.
 
 # Installation
 
-It is highly recommended you install these dotfiles on a clean arch-based system using [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
+It is highly recommended you only install these dotfiles on a clean arch-based system using [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
 since the script performs some automatic post installation cleanups not covered by this repo.
 
 I have successfully installed these dotfiles on both Arch and Artix.
@@ -298,6 +304,7 @@ a difference in scrolling direction.
 
 - [ ] Sync open file with NERDTree
 - current solution is commented out and does not work
+- [ ] Better git diff support
 
 ## lf
 
