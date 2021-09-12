@@ -2,9 +2,6 @@
 # This is to make scripts like `setbg` accessible
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
-# add ruby to path
-export PATH="$PATH:/home/al/.local/share/gem/ruby/3.0.0/bin"
-
 export EDITOR="nvim" # default text editor is neovim
 export TERMINAL="st" # default terminal is suckless' simple terminal
 export BROWSER="firefox" # default browser is firefox
