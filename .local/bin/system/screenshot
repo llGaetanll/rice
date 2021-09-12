@@ -4,10 +4,12 @@
 # choose the kind of screenshot to take, including copying the image or even
 # highlighting an area to copy. scrotcucks on suicidewatch right now.
 
-case "$(printf "selected area\\ncurrent window\\nfull screen\\nselected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | dm -i -p "Screenshot")" in
-	"selected area") maim -s --hidecursor img-selection-"$(date '+%y%m%d-%H%M-%S').png" ;;
-	"current window") maim --hidecursor -i "$(xdotool getactivewindow)" img-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
-	"full screen") maim --hidecursor img-fullscreen-"$(date '+%y%m%d-%H%M-%S').png" ;;
+screenshot_dir="$HOME/Images/screenshots"
+
+case "$(printf "selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)\\nselected area\\ncurrent window\\nfull screen" | dm -i -p "Screenshot")" in
+	"selected area") maim -s --hidecursor "${screenshot_dir}/img-selection-$(date '+%y%m%d-%H%M-%S').png" ;;
+	"current window") maim --hidecursor -i "$(xdotool getactivewindow)" "${screenshot_dir}/img-window-$(date '+%y%m%d-%H%M-%S').png" ;;
+	"full screen") maim --hidecursor "${screenshot_dir}/img-fullscreen-$(date '+%y%m%d-%H%M-%S').png" ;;
 	"selected area (copy)") maim -s --hidecursor | xclip -selection clipboard -t image/png ;;
 	"current window (copy)") maim --hidecursor -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
 	"full screen (copy)") maim --hidecursor | xclip -selection clipboard -t image/png ;;
