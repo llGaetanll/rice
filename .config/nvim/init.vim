@@ -324,7 +324,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 call plug#end()
 
 " the following file contains device-specific vim settings.
-" it should be ignore by git so feel free to change any 
+" it should be ignored by git so feel free to change any 
 " parameters there
 if filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/local.vim"'))
 	source ~/.config/nvim/local.vim
