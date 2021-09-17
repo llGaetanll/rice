@@ -15,7 +15,7 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
-	Plug 'benmills/vimux' " tmux integration
+	" Plug 'benmills/vimux' " tmux integration
 	Plug 'tpope/vim-repeat' " repeat plugins
 	Plug 'tpope/vim-endwise' " adds end, endif automatically
 	Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
