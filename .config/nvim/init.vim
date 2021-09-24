@@ -193,9 +193,8 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		Plug 'scrooloose/nerdcommenter' " Easy commenting in vim
 		filetype plugin on " Changes comments based on filetype
 
-		let g:NERDSpaceDelims			= 1 " Add a space before and after comments
 		let g:NERDCompactSexyComs		= 1 " Use compact syntax for prettified multi-line comments
-		let g:NERDCustomDelimiters		= { 'c': { 'left': '/*','right': '*/' }, 'ml': { 'left': '(* ', 'right': ' *)'} }
+		let g:NERDCustomDelimiters		= { 'c': { 'left': '/* ','right': ' */' }, 'ml': { 'left': '(* ', 'right': ' *)'} }
 		let g:NERDToggleCheckAllLines	= 1
 
 		" Toggle Commenting - ctrl + /
