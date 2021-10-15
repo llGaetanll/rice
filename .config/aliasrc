@@ -13,4 +13,5 @@ alias \
     synctime="sudo ntpdate pool.ntp.org" \
     ydl="youtube-dl -o \"$HOME/Videos/downloads/%(id)s.%(ext)s\"" \
     tmux="tmux -u" \
-	lg="lazygit" \
+    lg="lazygit" \
+    tdl="youtube-dl -o \"$HOME/desktop/%(id)s.%(ext)s\""
