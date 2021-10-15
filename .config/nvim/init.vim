@@ -34,7 +34,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	\ 'for': ['javascript', 'javascript.jsx','typescript'], 
 	\ 'do': 'make install'
 	\}
-	
+
 	" Theming - for theme settings see local.vim
 	Plug 'sainnhe/sonokai' 
 	Plug 'AlessandroYorba/Alduin'
@@ -50,21 +50,34 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 
 		" relative line numbers on the side	
 		set number
+
 		" wrap lines (wrap/nowrap)
-		set wrap
+		"set wrap
+
 		" Number of characters from the right window border where wrapping starts
-		set wrapmargin=8
+		"set wrapmargin=8
+
 		" show matching closing bracket (showmatch/noshowmatch)
 		set showmatch
 
 		" I dont understand this one
 		set smarttab
+
 		" use spaces instead of tabs
 		set expandtab 
 		set tabstop=4
 		set softtabstop=4
 		set shiftwidth=4
 		set shiftround
+		set encoding=utf8
+
+
+		" set the max line length to 80 characters.
+		" this doesn't break already existing lines.
+		set textwidth=80
+
+		"shows a column at character 80, where the text wraps
+		" set cc=80
 
 		" fix broken colors on certain colorschemes
 		set termguicolors
@@ -127,10 +140,10 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	
 	" Windows - All prefixed by ctrl + w {
 		" ctrl + w  ctrl + h/j/k/l to resize windows
-		nnoremap <silent> <C-w><C-h> 5:wincmd <<CR>
-		nnoremap <silent> <C-w><C-j> 5:wincmd -<CR>
-		nnoremap <silent> <C-w><C-k> 5:wincmd +<CR>
-		nnoremap <silent> <C-w><C-l> 5:wincmd ><CR>
+		" nnoremap <silent> <C-w><C-h> 5:wincmd <<CR>
+		" nnoremap <silent> <C-w><C-j> 5:wincmd -<CR>
+		" nnoremap <silent> <C-w><C-k> 5:wincmd +<CR>
+		" nnoremap <silent> <C-w><C-l> 5:wincmd ><CR>
 	" }
 
 	" FuzzyFind - Find files from anywhere {{{
@@ -193,8 +206,13 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		Plug 'scrooloose/nerdcommenter' " Easy commenting in vim
 		filetype plugin on " Changes comments based on filetype
 
+		let g:NERDSpaceDelims			= 1 " Add a space before and after comments
 		let g:NERDCompactSexyComs		= 1 " Use compact syntax for prettified multi-line comments
-		let g:NERDCustomDelimiters		= { 'c': { 'left': '/* ','right': ' */' }, 'ml': { 'left': '(* ', 'right': ' *)'} }
+		let g:NERDCustomDelimiters		= { 
+					\'c': { 'left': '/*','right': '*/' }, 
+					\'ml': { 'left': '(*', 'right': '*)'}, 
+					\'javascript': { 'left': '{/*', 'right': '*/}' }
+		\}
 		let g:NERDToggleCheckAllLines	= 1
 
 		" Toggle Commenting - ctrl + /
@@ -220,6 +238,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			\ 'coc-rls',
 			\ 'coc-solargraph',
 			\ 'coc-clangd',
+			\ 'coc-texlab',
 		\ ]
 
 		set hidden " TextEdit might fail if hidden is not set.
@@ -228,10 +247,16 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" set nowritebackup
 		
 		" prettier command for coc
-		command! -nargs=0 Prettier :CocCommand prettier.formatFile
-		" run on save
-		let g:prettier#autoformat = 1
-		autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+		command! -nargs=0 jrettier :CocCommand prettier.formatFile
+
+		" formatting on save is now done inside of CocConfig. you can change
+		" the files to autoformat on save by editing coc-settings.json using
+		" :CocConfig and adding:
+		"
+		"		coc.preferences.formatOnSaveFiletypes": [<file list here>]
+		
+		" let g:prettier#autoformat = 1
+		" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 		set cmdheight=2 " Give more space for displaying messages.
 		set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.

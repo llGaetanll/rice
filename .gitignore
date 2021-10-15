@@ -49,6 +49,7 @@
 .config/nvim/*
 !.config/nvim/init.vim
 !.config/nvim/local.vim
+!.config/nvim/coc-settings.json
 
 !.config/polybar
 
