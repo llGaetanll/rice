@@ -247,13 +247,13 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" set nowritebackup
 		
 		" prettier command for coc
-		command! -nargs=0 jrettier :CocCommand prettier.formatFile
+		command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 		" formatting on save is now done inside of CocConfig. you can change
 		" the files to autoformat on save by editing coc-settings.json using
 		" :CocConfig and adding:
 		"
-		"		\"coc.preferences.formatOnSaveFiletypes\": [<file list here>]
+		"		coc.preferences.formatOnSaveFiletypes: [<file list here>]
 		
 		" let g:prettier#autoformat = 1
 		" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
