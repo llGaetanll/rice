@@ -96,6 +96,9 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" in normal mode, Y copies to the end of the line
 		nnoremap Y y$
 
+		" write with ZW
+		nnoremap ZW <esc>:w<return>
+
 		" in normal mode, Q breaks up a long line of text
 		nnoremap Q gq
 		
@@ -155,10 +158,16 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" ctrl + shift + p to fuzzy find all files
 		nnoremap <silent> <C-P> :Files<CR>
 
+		" command GGrep fuzzy finds input on all files in current dir 
 		command! -bang -nargs=* GGrep
 			\ call fzf#vim#grep(
 			\   'git grep --line-number -- '.shellescape(<q-args>), 0,
 			\   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+		" remap ctrl + f from moving forward 1 full screen to grepping files
+		" much more useful
+		nnoremap <silent> <C-F> :GGrep<CR>
+
 	" }}}
 		
 	" NERDTree - Side menu like vscode {{{
