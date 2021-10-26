@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# This script opens CMSC216 PDFs with the course password automatically using zathura
-[ $# -eq 0 ] do \
-        echo "Invalid file name." || \
-        zathura -w uuddlrlrBA $1
-done

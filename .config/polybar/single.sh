@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
-## This file is sourced in .xprofile on startup
+# This script loads the polybar defined by the $POLYBAR
+# environment variable. This variable can be modified in
+# your xinitrc
 
 # Terminate already running bar instances
 killall -q polybar
@@ -11,10 +13,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # reload polybar on every monitor
 # see: https://github.com/polybar/polybar/issues/763#issuecomment-392960721
 for m in $(polybar --list-monitors | cut -d":" -f1); do
-    # MONITOR=$m polybar -c $XDG_CONFIG_HOME/polybar/default.ini bar &
-    # MONITOR=$m polybar -c $XDG_CONFIG_HOME/polybar/powerlevel.ini powerlevel &
-
-    # $POLYBAR is the path to the polybar file to be loaded on
-    # startup. You can change it in ~/.zprofile
+    # $POLYBAR is the path to the polybar file to be loaded
     MONITOR=$m polybar -c $POLYBAR bar &
 done
+

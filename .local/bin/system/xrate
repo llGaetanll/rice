@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# little script to reset the x rate
+# not an alias since I want to run
+# this from dmenu
+
+xset r rate 300 50 &

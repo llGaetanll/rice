@@ -15,9 +15,11 @@ This repo contains all of the configuration files that I use on my main linux ma
 
 # Programs
 
+Below is the list of programs that this repo has configurations for. Each program contains a list of custom documented keybindings.
+
 ## bspwm
 
-The default window manager. Each monitor gets 9 independant workspaces.
+The default window manager. This config should work on single or multi monitor setups. Each monitor gets 9 independant workspaces.
 
 ### Keybinds
 
@@ -50,37 +52,81 @@ You move around with `h` `j` `k` `l`, or with the arrow keys.
 
 ## nvim
 
+<img width=100% src="https://i.imgur.com/rZUMftx.png" alt="gruvbox-nvim">
+
 A community rewrite of vim. The config file `.config/nvim/init.vim` is well documented if you want to see what features are included.
 
 ### Additions/Keybinds
 
-fzf
+- `,` The leader key.
+
+#### Tabs
+
+All Tab keybinds are prefixed by `<Tab>`.
+
+- `<Tab> + n` move to next tab. Same as `gt`
+- `<Tab> + N` move to previous tab. Same as `gT`
+- `<Tab> + t` move current window to a new tab.
+- `<Tab> + a` create a new tab with an empty window.
+- `<Tab> + h` move current tab left.
+- `<Tab> + l` move current tab right.
+
+#### Windows
+
+- `ctrl + w + ctrl + h/j/k/l` resize current window.
+
+#### fzf
 
 - `ctrl + p` Fuzzy Find Git files in current project directory
 - `ctrl + shift + p` Fuzzy Find any file in current project directory
-  NERDTree
+
+#### NERDTree
+
+In this config, NERDTree also comes with file icons, git icons, and syntax highlighting.
+
 - `ctrl + n` toggle NERDTree (like the side menu in vscode)
-  NERDCommenter
-- `ctrl + /` to toggle commenting on:
-  - in insert/normal mode: current line
-  - in visual mode: selection
-    Conquer of Completion
-- `ctrl + <space>` autocomplete (if available through Conquer of Completion)
-- `F2` rename every instance of a variable in the file
-- `K` show documentation on currently selected item
-  Git Gutter
-  MarkDown Preview
+
+#### NERDCommenter
+
+- `ctrl + /` toggle commenting. works in `normal`, `insert`, and `visual` mode.
+
+#### Conquer of Completion
+
+- `ctrl + <space>` autocomplete (if available through Conquer of Completion).
+- `F2` rename every instance of a variable in the file.
+
+- `K` show documentation on currently selected item.
+  - `ctrl + j/k` can be used to scroll up and down the window if possible.
+
+#### Git Gutter
+
+- `<Leader> + g + n` display next change.
+- `<Leader> + g + p` display previous change.
+- `<Leader> + g + z` toggle fold leaving only changes.
+
+#### MarkDown Preview
+
+- `<Leader> + m + p` toggles markdown preview.
 
 ### Themes
 
+These can be changed in `~/.config/nvim/local.nvim`
+
+- gruvbox (default)
 - sonokai
 - alduin
 
 ## polybar
 
-The default polybar is `default.ini` and can be changed from `~/.xinitrc`. By default it
-uses pywal-generated theme colors. Note that not all polybar modules are enabled by default, if
-you want to change which modules are visible, you can do so in the bar's `ini` file.
+Changing the polybar depends on your system. At startup in `~/.xprofile`, a script named `polybar-start`
+is ran. In previous versions, this script would launch the polybar defined by `$POLYBAR` on every visible
+display.
+
+However to allow users to load different polybars on different screens, this
+script can now be symlinked by the user. It is recommended to define your
+`polybar-start` scripts next to your polybars in `~/.config/polybar/`. By default, the
+`polybar-start` is linked to the `single.sh` script which has the same functionality
+as before.
 
 ### Modules
 
@@ -191,7 +237,7 @@ The zoomer shell of course. Comes with syntax highlighting and a nice prompt.
 
 # Installation
 
-It is highly recommended you install these dotfiles on a clean arch-based system using [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
+It is highly recommended you only install these dotfiles on a clean arch-based system using [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
 since the script performs some automatic post installation cleanups not covered by this repo.
 
 I have successfully installed these dotfiles on both Arch and Artix.
@@ -248,21 +294,54 @@ a difference in scrolling direction.
 
 # TODO
 
-- [x] add docs and list of shortcuts
-- [ ] add more pictures
+- [x] Add docs and list of shortcuts
+- [ ] Add more pictures
 - [ ] Look for pywal alternatives.
 - pywal does not generate enough colors for nvim, which I rather would match system colors
   than a custom theme.
+
+## nvim
+
+- [ ] Sync open file with NERDTree
+- current solution is commented out and does not work
+- [ ] Better git diff support
 
 ## lf
 
 - [ ] Add `rsync` keybind
   - See: https://github.com/gokcehan/lf/issues/561
 - [x] Add `encFS` keybind
-- [ ] add image previews
+- [ ] Add image previews
   - See: https://gitlab.com/Provessor/lfp
+
+## zathura
+
+- [ ] Window currently spawns in floating mode
+
+## polybar
+
+- [ ] Add Mullvad VPN module
+  - should prompt user for server through dmenu.
+  - server list should be updatable from mullvad.net
+- [ ] Add package update module
+  - auto download packages through crontab every hour or so
+  - format: `<pacman packages> <aur-packages>`
+  - left click: refresh update count
+  - right click: 1-click update
+
+## bspwm
+
+- [ ] Add keybind to switch highlighted winder to the current workspace of a monitor
 
 # Inspiration
 
 - [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/voidrice) for the base dotfiles (my dots are quite different to these now though)
 - [lukesmithxyz/LARBS](https://github.com/lukesmithxyz/LARBS) for my auto-install script at [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
+
+# See Also
+
+- [llGaetanll/autorice](https://github.com/llGaetanll/autorice/)
+  Installs these dotfiles as well as the required programs on any clean install of arch linux.
+
+- [llGaetanll/suckess](https://github.com/llGaetanll/suckless/)
+  Contains my suckless programs which this repo also uses.

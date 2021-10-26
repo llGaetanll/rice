@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# to compress:
+# ffmpeg -i gif-210312-0824-33.gif -c:v libx265 -crf 26 -preset fast out.mp4
+
 recordingsdir=$HOME/Videos/Recordings
 
 # TODO: update polybar ipc recording module
@@ -23,7 +26,7 @@ killrecording() {
 
 # Different ways to record
 promptrecording() {
-	choice=$(printf "video\\nvideo selection\\naudio\\ngif" | dmenu -i -p "Recording Style")
+	choice=$(printf "video\\nvideo selection\\naudio\\ngif" | dm -i -p "Recording Style")
 	case "$choice" in
 		video) video;;
 		"video selection") videoselected;;

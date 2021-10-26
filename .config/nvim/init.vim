@@ -1,3 +1,11 @@
+"           ██╗███╗   ██╗██╗████████╗██╗   ██╗██╗███╗   ███╗
+"           ██║████╗  ██║██║╚══██╔══╝██║   ██║██║████╗ ████║
+"           ██║██╔██╗ ██║██║   ██║   ██║   ██║██║██╔████╔██║
+"           ██║██║╚██╗██║██║   ██║   ╚██╗ ██╔╝██║██║╚██╔╝██║
+"           ██║██║ ╚████║██║   ██║██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
+"           ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
+"
+
 " install vim plugged if not already on the system
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -7,7 +15,7 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
-	Plug 'benmills/vimux' " tmux integration
+	" Plug 'benmills/vimux' " tmux integration
 	Plug 'tpope/vim-repeat' " repeat plugins
 	Plug 'tpope/vim-endwise' " adds end, endif automatically
 	Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
@@ -19,70 +27,90 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'pangloss/vim-javascript' " JS syntax highlighting
 	Plug 'jparise/vim-graphql' " GQL syntax highlighting
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown previewer
+	Plug 'lervag/vimtex' " LaTeX support. you need `latex-mk` from the AUR
+
+	" JsDoc generation
+	Plug 'heavenshell/vim-jsdoc', { 
+	\ 'for': ['javascript', 'javascript.jsx','typescript'], 
+	\ 'do': 'make install'
+	\}
+
+	" Theming - for theme settings see local.vim
+	Plug 'sainnhe/sonokai' 
+	Plug 'AlessandroYorba/Alduin'
+	Plug 'morhetz/gruvbox'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 	
 	" Appearance {{{
 		" For more info about any of these `:help set`
+		
+		" dark theme by default
+		set bg=dark
 
 		" relative line numbers on the side	
 		set number
+
 		" wrap lines (wrap/nowrap)
-		set wrap
+		"set wrap
+
 		" Number of characters from the right window border where wrapping starts
-		set wrapmargin=8
+		"set wrapmargin=8
+
 		" show matching closing bracket (showmatch/noshowmatch)
 		set showmatch
 
 		" I dont understand this one
 		set smarttab
+
 		" use spaces instead of tabs
 		set expandtab 
 		set tabstop=4
 		set softtabstop=4
 		set shiftwidth=4
 		set shiftround
+		set encoding=utf8
+
+
+		" set the max line length to 80 characters.
+		" this doesn't break already existing lines.
+		set textwidth=80
+
+		"shows a column at character 80, where the text wraps
+		" set cc=80
+
+		" fix broken colors on certain colorschemes
+		set termguicolors
+
+		" add JSDoc syntax highlighting
+		let g:javascript_plugin_jsdoc = 1
 	" }}}
 	
-	" Theme {{{
-		Plug 'sainnhe/sonokai' 
-		Plug 'AlessandroYorba/Alduin'
-
-		" commented out bar since it was causing lag after a while, might
-		" switch to a different version
-		
-		" powerline bar at the bottom
-		Plug 'vim-airline/vim-airline'
-		Plug 'vim-airline/vim-airline-themes'
-
-		" sets colors to that of 'minimalist'
-		let g:airline_theme='minimalist'
-
-		if !exists('g:airline_symbols')
-			let g:airline_symbols = {}
-		endif
-
-		" powerline symbols
-		let g:airline_left_sep = ''
-		let g:airline_left_alt_sep = ''
-		let g:airline_right_sep = ''
-		let g:airline_right_alt_sep = ''
-		let g:airline_symbols.branch = ''
-		let g:airline_symbols.readonly = ''
-		let g:airline_symbols.linenr = '☰'
-		let g:airline_symbols.maxlinenr = ''
-	" }}}
-
 	" General Mappings {{{
-		" `jk` will put you into normal mode
-		inoremap jk <esc>
+		" leader key
+		let mapleader = ","
 
 		" remap <esc> to clear highlighting
-		nnoremap <esc> :noh<return><esc>
+		nnoremap <silent> <esc> :noh<return><esc>
 		
 		" in normal mode, Y copies to the end of the line
 		nnoremap Y y$
+
+		" write with ZW
+		nnoremap ZW <esc>:w<return>
+
+		" in normal mode, Q breaks up a long line of text
+		nnoremap Q gq
 		
 		" in visual mode, <ctrl> + y copies to the system clipboard
 		vnoremap <C-y> "+y
+
+		" in visual mode, ",',(,{,[ wraps the selection in quotes
+		vnoremap " c""<esc>Pgvll
+		vnoremap ' c''<esc>Pgvll
+		vnoremap ( c()<esc>Pgvll
+		vnoremap { c{}<esc>Pgvll
+		vnoremap [ c[]<esc>Pgvll
 
 		" code folding settings
 		set foldmethod=indent
@@ -95,6 +123,31 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		vmap < <gv
 		vmap > >gv
 	" }}}
+	
+	" Tabs - All prefixed by <Tab> {{{
+		" rotate between tabs: previous and next
+		nnoremap <Tab>n gt
+		nnoremap <Tab>N gT
+
+		" Tab + a to open a new tab
+		nnoremap <silent> <Tab>a :tabnew<CR>
+
+		" Tab + h/l to move a tab left/right
+		nnoremap <silent> <Tab>h :tabmove -<CR>
+		nnoremap <silent> <Tab>l :tabmove +<CR>
+
+		" Tab + t to move the current window to a new tab
+		" note that this can also be done with `ctrl+w T`
+		nnoremap <silent> <Tab>t :tabedit %<CR>
+	" }}}
+	
+	" Windows - All prefixed by ctrl + w {
+		" ctrl + w  ctrl + h/j/k/l to resize windows
+		" nnoremap <silent> <C-w><C-h> 5:wincmd <<CR>
+		" nnoremap <silent> <C-w><C-j> 5:wincmd -<CR>
+		" nnoremap <silent> <C-w><C-k> 5:wincmd +<CR>
+		" nnoremap <silent> <C-w><C-l> 5:wincmd ><CR>
+	" }
 
 	" FuzzyFind - Find files from anywhere {{{
 		Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -105,10 +158,16 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" ctrl + shift + p to fuzzy find all files
 		nnoremap <silent> <C-P> :Files<CR>
 
+		" command GGrep fuzzy finds input on all files in current dir 
 		command! -bang -nargs=* GGrep
 			\ call fzf#vim#grep(
 			\   'git grep --line-number -- '.shellescape(<q-args>), 0,
 			\   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+		" remap ctrl + f from moving forward 1 full screen to grepping files
+		" much more useful
+		nnoremap <silent> <C-F> :GGrep<CR>
+
 	" }}}
 		
 	" NERDTree - Side menu like vscode {{{
@@ -117,11 +176,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 		Plug 'ryanoasis/vim-devicons'
 
-		" ctrl + n toggles NERDTree
-		nmap <C-n> :NERDTreeToggle<CR> 
+		" <Leader> + n toggles NERDTree
+		nmap <silent><C-n> :NERDTreeToggle<CR> 
 
-		" shift + n focuses NERDTree from any window
-		" nmap <S-n> :NERDTreeFocus<CR> 
+		" <Leader> + shift + n focuses NERDTree from any window
+		" nmap <silent><C-> :NERDTreeFocus<CR> 
 
 		" ignore node_modules
 		let g:NERDTreeIgnore = ['^node_modules$']
@@ -138,31 +197,40 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 			" file, and we're not in vimdiff
 			function! SyncTree()
+				" echo expand('<afile>')
+				" echo "no diff" !&diff "nt open:" IsNERDTreeOpen() "nt not focused: " !exists("b:NERDTree")
+				" if IsNERDTreeOpen() && !exists("b:NERDTree")
 				if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
 					NERDTreeFind
 					wincmd p
 				endif
 			endfunction
-
+			
 			" Highlight currently open buffer in NERDTree
 			" autocmd BufEnter * call SyncTree()
 		" }
 	" }}}
 
 	" NERDCommenter {{{
-		Plug 'scrooloose/nerdcommenter' " easy commenting in vim
-		filetype plugin on " changes comments based on filetype
-		let g:NERDSpaceDelims			= 1
-		let g:NERDCustomDelimiters		= { 'c': { 'left': '/* ','right': ' */' } }
+		Plug 'scrooloose/nerdcommenter' " Easy commenting in vim
+		filetype plugin on " Changes comments based on filetype
+
+		let g:NERDSpaceDelims			= 1 " Add a space before and after comments
+		let g:NERDCompactSexyComs		= 1 " Use compact syntax for prettified multi-line comments
+		let g:NERDCustomDelimiters		= { 
+					\'c': { 'left': '/*','right': '*/' }, 
+					\'ml': { 'left': '(*', 'right': '*)'}, 
+					\'javascript': { 'left': '{/*', 'right': '*/}' }
+		\}
 		let g:NERDToggleCheckAllLines	= 1
 
 		" Toggle Commenting - ctrl + /
 		" Insert: 
-		inoremap <C-_> <ESC>:call NERDComment(0, "toggle")<CR>li
+		inoremap <silent> <C-_> <ESC>:call nerdcommenter#Comment(0, "toggle")<CR>li
 		" Normal: 
-		nnoremap <C-_> :call NERDComment(0, "toggle")<CR>
+		nnoremap <silent> <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
 		" Visual: keeps you in visual mode
-		vnoremap <C-_> :call NERDComment(0, "toggle")<CR>gv
+		vnoremap <silent> <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>gv
 	" }}}
 
 	" Conquer of Completion - Autocomplete everything {{{
@@ -171,12 +239,15 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		let g:coc_global_extensions = [
 			\ 'coc-snippets', 
 			\ 'coc-pairs',
+			\ 'coc-pyright',
 			\ 'coc-tsserver', 
 			\ 'coc-json',
 			\ 'coc-go',
 			\ 'coc-prettier',
 			\ 'coc-rls',
+			\ 'coc-solargraph',
 			\ 'coc-clangd',
+			\ 'coc-texlab',
 		\ ]
 
 		set hidden " TextEdit might fail if hidden is not set.
@@ -186,15 +257,27 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		
 		" prettier command for coc
 		command! -nargs=0 Prettier :CocCommand prettier.formatFile
-		" run on save
-		let g:prettier#autoformat = 1
-		autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+
+		" formatting on save is now done inside of CocConfig. you can change
+		" the files to autoformat on save by editing coc-settings.json using
+		" :CocConfig and adding:
+		"
+		"		coc.preferences.formatOnSaveFiletypes: [<file list here>]
+		
+		" let g:prettier#autoformat = 1
+		" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 		set cmdheight=2 " Give more space for displaying messages.
 		set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 
 		" Use K to show documentation in preview window.
-		nnoremap K :call <SID>show_documentation()<CR>
+		nnoremap <silent> K :call <SID>show_documentation()<CR>
+	
+		" Remap <C-j> and <C-k> for scroll float windows/popups.
+		if has('nvim-0.4.0') || has('patch-8.2.0750')
+			nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+			nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+		endif
 
 		function! s:show_documentation()
 			if (index(['vim','help'], &filetype) >= 0)
@@ -227,7 +310,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" Formatting selected code.
 		xmap <leader>f  <Plug>(coc-format-selected)
 		nmap <leader>f  <Plug>(coc-format-selected)
-		
+
 		" comment highlighting in json	
 		autocmd FileType json syntax match Comment +\/\/.\+$+
 	" }}}
@@ -246,33 +329,39 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" make gutter column invisible
 		highlight! link SignColumn LineNr
 
+		" remap gutter keybinds
+		" <leader> + g + n -> next change
+		nmap <leader>gn <Plug>(GitGutterNextHunk)
+		" <leader> + g + p -> prev change
+		nmap <leader>gp <Plug>(GitGutterPrevHunk)
+		" <leader> + g + z -> fold and leave only changes
+		nmap <leader>gz :GitGutterFold<CR>
+
 		" customize gutter symbols
-		let g:gitgutter_sign_added = '>>'
-		let g:gitgutter_sign_modified = '~~'
-		let g:gitgutter_sign_removed = '__'
-		let g:gitgutter_sign_removed_first_line = '^^'
-		let g:gitgutter_sign_modified_removed = 'ww'
+		let g:gitgutter_sign_added = '+'
+		let g:gitgutter_sign_modified = '~'
+		let g:gitgutter_sign_removed = '_'
+		let g:gitgutter_sign_removed_first_line = '⌃'
+		let g:gitgutter_sign_modified_removed = '⌄'
 	" }}}
 	
 	" Markdown Preview {{{
 		" auto start plugin when opening markdown file (default: 0)
-		let g:mkdp_auto_start = 1
+		" see local.vim
+		
+		" <Leader> + m + p toggles markdown preview
+		nmap <leader>mp <Plug>MarkdownPreviewToggle
 
 		" auto close document when switching to another file (default: 1)
 		let g:mkdp_auto_close = 0
 	" }}}
-	
-	" AutoCMDs {{{
-		" Recompile suckless programs automatically
-		" autocmd BufWritePost config.h,config.def.h !sudo -S make install
-
-		" Recompile CMSC 216 programs on save
-		" autocmd BufWritePost *.c !gcc -std=c90 *c && ./a.out
-	" }}}
 	 
 call plug#end()
 
-" I just like Alduin a bit more rn, 
-" but feel free to change this
-colorscheme sonokai
-" colorscheme alduin
+" the following file contains device-specific vim settings.
+" it should be ignored by git so feel free to change any 
+" parameters there
+if filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/local.vim"'))
+	source ~/.config/nvim/local.vim
+endif
+

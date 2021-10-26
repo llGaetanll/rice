@@ -26,11 +26,12 @@
 
 # .config files
 !.config/Xresources
-!.config/compton.conf
+!.config/picom.conf
 !.config/aliasrc
 !.config/mimeapps.list
 
 # .config folders
+!.config/fontconfig
 !.config/sxhkd
 !.config/i3
 !.config/bspwm
@@ -47,6 +48,8 @@
 !.config/nvim
 .config/nvim/*
 !.config/nvim/init.vim
+!.config/nvim/local.vim
+!.config/nvim/coc-settings.json
 
 !.config/polybar
 
@@ -59,6 +62,7 @@
 !.config/zsh
 .config/zsh/*
 !.config/zsh/.zshrc
+!.config/zsh/prompts
 # this file is my custom prompt profile
 !.config/zsh/.p10k.zsh
 

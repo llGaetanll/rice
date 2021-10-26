@@ -1,14 +1,11 @@
 # !/bin/sh
 
 # set any system-dependent environment variables here
-export POLYBAR="$XDG_CONFIG_HOME/polybar/gradient.ini" # path to the polybar loaded on startup
+export POLYBAR="$XDG_CONFIG_HOME/polybar/default.ini" # path to the polybar loaded on startup
+export BAR_HEIGHT=45 # matched by polybar and dmenu
 
 # source xprofile which launches all the programs 
-# to start the system as well as starting the x server
 . ~/.xprofile
-
-# source zprofile which sets all the required environment variables
-. ~/.profile
 
 # starts bspwm, the default window manager
 exec bspwm
