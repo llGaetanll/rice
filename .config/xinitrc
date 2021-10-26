@@ -1,7 +1,7 @@
 # !/bin/sh
 
 # set any system-dependent environment variables here
-export POLYBAR="$XDG_CONFIG_HOME/polybar/default.ini" # path to the polybar loaded on startup
+export POLYBAR="$XDG_CONFIG_HOME/polybar/gradient.ini" # path to the polybar loaded on startup
 
 # source xprofile which launches all the programs 
 # to start the system as well as starting the x server
