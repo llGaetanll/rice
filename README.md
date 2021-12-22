@@ -118,15 +118,32 @@ These can be changed in `~/.config/nvim/local.nvim`
 
 ## polybar
 
-Changing the polybar depends on your system. At startup in `~/.xprofile`, a script named `polybar-start`
-is ran. In previous versions, this script would launch the polybar defined by `$POLYBAR` on every visible
-display.
+Changing the polybar depends on your system. At startup in `~/.xprofile`, a
+script named `polybar-start` (located at `~/.local/bin/polybar/polybar-start`)
+is ran. In previous versions, this script would launch the polybar defined by
+`$POLYBAR` on every visible display.
 
 However to allow users to load different polybars on different screens, this
-script can now be symlinked by the user. It is recommended to define your
-`polybar-start` scripts next to your polybars in `~/.config/polybar/`. By default, the
-`polybar-start` is linked to the `single.sh` script which has the same functionality
-as before.
+script is now symlinked by the user. It is recommended to define your
+`polybar-start` scripts next to your polybars in `~/.config/polybar/`. By
+default, the `polybar-start` is linked to the `single.sh` script which has the
+same functionality as before.
+
+### Linking a Custom Start Script
+
+Back up the existing start script using
+
+```
+mv "$HOME/.local/bin/polybar/polybar-start" "$HOME/.local/bin/polybar/polybar-start.bak"
+```
+
+You can link a new script with the following command
+
+```
+ln -s "$HOME/.local/bin/polybar/polybar-start" "$XDG_CONFIG_HOME/polybar/<PATH>"
+```
+
+Where `<PATH>` is replaced by the relative path of your custom start script.
 
 ### Modules
 
