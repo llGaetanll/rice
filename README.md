@@ -106,7 +106,16 @@ In this config, NERDTree also comes with file icons, git icons, and syntax highl
 
 #### MarkDown Preview
 
-- `<Leader> + m + p` toggles markdown preview.
+- `<Leader> + m + p` toggles markdown preview in the default browser.
+
+#### VimTeX
+
+- `\ll` toggles compilation of current document
+  - Opens in default pdf viewer
+- `\le` close the quickfix window
+- `\lt` display a table of contents
+- `\lk` stops compilation
+- `\lc` clears auxiliary files
 
 ### Themes
 
@@ -312,15 +321,16 @@ a difference in scrolling direction.
 # TODO
 
 - [x] Add docs and list of shortcuts
-- [ ] Add more pictures
+- [ ] Add more pictures (never enough)
 - [ ] Look for pywal alternatives.
-- pywal does not generate enough colors for nvim, which I rather would match system colors
-  than a custom theme.
+  - pywal does not generate enough colors for nvim, which I rather would match system colors
+    than a custom theme.
 
 ## nvim
 
 - [ ] Sync open file with NERDTree
-- current solution is commented out and does not work
+  - Current solution is commented out and does not work
+  - I cannot get this to work, it is really hard for some reason
 - [ ] Better git diff support
 
 ## lf
@@ -328,6 +338,7 @@ a difference in scrolling direction.
 - [ ] Add `rsync` keybind
   - See: https://github.com/gokcehan/lf/issues/561
 - [x] Add `encFS` keybind
+- [ ] Add symlink keybind
 - [ ] Add image previews
   - See: https://gitlab.com/Provessor/lfp
 
@@ -348,7 +359,14 @@ a difference in scrolling direction.
 
 ## bspwm
 
-- [ ] Add keybind to switch highlighted winder to the current workspace of a monitor
+- [ ] Add keybind to switch highlighted window to the current workspace of a monitor
+- [ ] Add keybind to fullscreen window across all monitors
+- [ ] Hide all other windows behind a currently fullscreen window
+  - Fullscreen transparent windows will show other windows behind it which doesn't look nice
+
+## VimTeX
+
+- [] Close vim if QuickFix is the only window left
 
 # Inspiration
 
