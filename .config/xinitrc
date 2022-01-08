@@ -7,6 +7,10 @@ export BAR_HEIGHT=45 # matched by polybar and dmenu
 # icons sourced by lf at launch
 . "$XDG_CONFIG_HOME/lf/icons.sh"
 
+# source cargo environment at launch.
+# Used for rust
+. "/home/al/.local/share/cargo/env"
+
 # source xprofile which launches all the programs 
 . ~/.xprofile
 
