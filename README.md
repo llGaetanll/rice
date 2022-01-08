@@ -34,21 +34,49 @@ Note: Icons are defined in `.zprofile`. if they don't work for you, simply comme
 
 ### Keybinds
 
-You move around with `h` `j` `k` `l`, or with the arrow keys.
+#### Basics
+
+You can move around with `h` `j` `k` `l`, or with the arrow keys.
+
+- `g` Goto top of dir. listing.
+- `G` Goto bottom of dir. listing.
+
+- `space` Add/Remove file/folder from selection.
+- `v` Invert selection in current dir.
+- `u` Cancel selection.
+
+- `D` Delete file/folder/selection.
+- `y` Copy file/folder/selection.
+- `d` Cut file/folder/selection.
+- `p` Paste file/folde/selection.
+
+- `c` Completely rename file/folder.
+- `A` Rename file/folder (beggining).
+- `I` Rename file/folder (end).
+- `a` Rename file/folder (before extension).
+- `i` Rename file/folder (after extension).
 
 - `ctrl + n` Create a new folder the in current dir.
-- `ctrl + v` Create a new file in the current dir. & open it with the default text editor
-- `shift + v` Open default editor (`nvim`) in current dir
-- `g` goto top of directory listing
-- `G` goto bottom of directory listing
-- `c` Change name of a file/folder
-- `a` Rename file/folder (beggining)
-- `i` Rename file/folder (end)
-- `D` Delete file/folder
-- `d` cut file/folder
-- `y` copy file/folder
-- `p` paste file/folder
-- `e` Encfs encrypt/decrypt secure directory (if it exists)
+- `ctrl + v` Create a new file in the current dir. & open it with the default text editor.
+
+#### Other
+
+- `enter` Opens new terminal window in current dir.
+
+- `ctrl + f` Fuzzy Find from current dir.
+  - Needs `fzf` to be installed
+- `shift + v` Open current dir. in default text editor (`nvim`)
+
+- `~` Goes home.
+
+- `e` Encfs encrypt/decrypt secure directory (if it exists).
+
+- `x` Execute selected file.
+- `X` Execute selected file in the background.
+
+- `b` Set current file as wallpaper (must be an image).
+
+For more info, see [lf tutorial](https://github.com/gokcehan/lf/wiki/Tutorial).
 
 ## nvim
 
