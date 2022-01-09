@@ -71,7 +71,7 @@ lfcd () {
 # bindkey -s '^o' 'lfcd\n'
 
 # ctrl+a -> calculator
-bindkey -s '^a' 'bc -l\n'
+# bindkey -s '^a' 'bc -l\n'
 
 # ctrl+f -> cd into fzfed directory
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'

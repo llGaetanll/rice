@@ -78,6 +78,32 @@ You can move around with `h` `j` `k` `l`, or with the arrow keys.
 
 For more info, see [lf tutorial](https://github.com/gokcehan/lf/wiki/Tutorial).
 
+## tmux
+
+The terminal multiplexer. The tmux theme should match the system theme. Mouse
+mode is enabled. Vi mode is enabled.
+
+### Keybinds
+
+All the following keybinds are preceded by the leader: `ctrl + a`.
+
+You can move between panes with `h` `j` `k` `l`.
+
+- `ctrl + s` Toggle status bar.
+- `ctrl + r` Reload config file.
+
+- `n` Create new window.
+- `q` Kill window.
+
+- `s` Spawn new pane horizontally.
+- `i` Spawn new pane vertically.
+- `x` Kill pane.
+
+- `ctrl` + `h`, `j`, `k`, or `l` Resize panes.
+- `shift` + `j`, or `k` Move panes.
+
+- `ctrl + a` Cycle panes.
+
 ## nvim
 
 <img width=100% src="https://i.imgur.com/rZUMftx.png" alt="gruvbox-nvim">
@@ -353,6 +379,7 @@ a difference in scrolling direction.
 - [ ] Look for pywal alternatives.
   - pywal does not generate enough colors for nvim, which I rather would match system colors
     than a custom theme.
+  - see: https://github.com/warpwm/lule
 
 ## nvim
 
@@ -366,7 +393,7 @@ a difference in scrolling direction.
 - [ ] Add `rsync` keybind
   - See: https://github.com/gokcehan/lf/issues/561
 - [x] Add `encFS` keybind
-- [ ] Add symlink keybind
+- [x] Add symlink keybind
 - [ ] Add image previews
   - See: https://gitlab.com/Provessor/lfp
 
