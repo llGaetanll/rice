@@ -1,11 +1,25 @@
 ## Basic vars {{{
 
-set shell bash
+set shell zsh
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
-# set color256
-# set icons
+
+# enable text file preview
+set preview
+
+# outline columns
+set drawbox
+
+# enable icons
+set icons
+
+# display size and time for all files
+set info size:time
+
+# window ratios now equal
+set ratios 1:1:1
+
 set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 
@@ -13,6 +27,20 @@ set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 
 # }}}
+
+# redefine number of columns dynamically on launch
+# currently not working due to race condition.
+# see: https://github.com/gokcehan/lf/issues/495
+cmd recol &{{
+    w=$(tput cols)
+    if [ $w -le 80 ]; then
+	lf -remote "send $id set ratios 1:1"
+    elif [ $w -le 160 ]; then
+	lf -remote "send $id set ratios 1:1:1"
+    else
+	lf -remote "send $id set ratios 1:1:1:1"
+    fi
+}}
 
 ## Custom Commands {{{
 
@@ -28,6 +56,26 @@ cmd open ${{
 	application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done;;
     esac
+}}
+
+# create symlinks
+# see: https://github.com/gokcehan/lf/wiki/Tips#create-symlinks-soft--hard
+cmd link %{{
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    if [ "$#" -lt 1 ]; then
+        lf -remote "send $id echo no files to link"
+        exit 0
+    fi
+    case "$mode" in
+        # symbolically copy mode is indicating a soft link
+        copy) ln -sr -t . -- "$@";;
+        # while a move mode is indicating a hard link
+        move) ln -t . -- "$@";;
+    esac
+    rm ~/.local/share/lf/files
+    lf -remote "send clear"
 }}
 
 # custom wrapper to mkdir. allows you to enter the name of the directory
@@ -92,5 +140,10 @@ map b $setbg $f
 cmd toggle-crypt
 map e # unmap e
 map e $toggle-crypt # map e to toggle encfs
+
+# paste hard/soft symlinks
+map P :link
+
+map w :recol
 
 # }}}

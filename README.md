@@ -34,21 +34,75 @@ Note: Icons are defined in `.zprofile`. if they don't work for you, simply comme
 
 ### Keybinds
 
-You move around with `h` `j` `k` `l`, or with the arrow keys.
+#### Basics
+
+You can move around with `h` `j` `k` `l`, or with the arrow keys.
+
+- `g` Goto top of dir. listing.
+- `G` Goto bottom of dir. listing.
+
+- `space` Add/Remove file/folder from selection.
+- `v` Invert selection in current dir.
+- `u` Cancel selection.
+
+- `D` Delete file/folder/selection.
+- `y` Copy file/folder/selection.
+- `d` Cut file/folder/selection.
+- `p` Paste file/folde/selection.
+
+- `c` Completely rename file/folder.
+- `A` Rename file/folder (beggining).
+- `I` Rename file/folder (end).
+- `a` Rename file/folder (before extension).
+- `i` Rename file/folder (after extension).
 
 - `ctrl + n` Create a new folder the in current dir.
-- `ctrl + v` Create a new file in the current dir. & open it with the default text editor
-- `shift + v` Open default editor (`nvim`) in current dir
-- `g` goto top of directory listing
-- `G` goto bottom of directory listing
-- `c` Change name of a file/folder
-- `a` Rename file/folder (beggining)
-- `i` Rename file/folder (end)
-- `D` Delete file/folder
-- `d` cut file/folder
-- `y` copy file/folder
-- `p` paste file/folder
-- `e` Encfs encrypt/decrypt secure directory (if it exists)
+- `ctrl + v` Create a new file in the current dir. & open it with the default text editor.
+
+#### Other
+
+- `enter` Opens new terminal window in current dir.
+
+- `ctrl + f` Fuzzy Find from current dir.
+  - Needs `fzf` to be installed
+- `shift + v` Open current dir. in default text editor (`nvim`)
+
+- `~` Goes home.
+
+- `e` Encfs encrypt/decrypt secure directory (if it exists).
+
+- `x` Execute selected file.
+- `X` Execute selected file in the background.
+
+- `b` Set current file as wallpaper (must be an image).
+
+For more info, see [lf tutorial](https://github.com/gokcehan/lf/wiki/Tutorial).
+
+## tmux
+
+The terminal multiplexer. The tmux theme should match the system theme. Mouse
+mode is enabled. Vi mode is enabled.
+
+### Keybinds
+
+All the following keybinds are preceded by the leader: `ctrl + a`.
+
+You can move between panes with `h` `j` `k` `l`.
+
+- `ctrl + s` Toggle status bar.
+- `ctrl + r` Reload config file.
+
+- `n` Create new window.
+- `q` Kill window.
+
+- `s` Spawn new pane horizontally.
+- `i` Spawn new pane vertically.
+- `x` Kill pane.
+
+- `ctrl` + `h`, `j`, `k`, or `l` Resize panes.
+- `shift` + `j`, or `k` Move panes.
+
+- `ctrl + a` Cycle panes.
 
 ## nvim
 
@@ -106,7 +160,16 @@ In this config, NERDTree also comes with file icons, git icons, and syntax highl
 
 #### MarkDown Preview
 
-- `<Leader> + m + p` toggles markdown preview.
+- `<Leader> + m + p` toggles markdown preview in the default browser.
+
+#### VimTeX
+
+- `\ll` toggles compilation of current document
+  - Opens in default pdf viewer
+- `\le` close the quickfix window
+- `\lt` display a table of contents
+- `\lk` stops compilation
+- `\lc` clears auxiliary files
 
 ### Themes
 
@@ -118,15 +181,32 @@ These can be changed in `~/.config/nvim/local.nvim`
 
 ## polybar
 
-Changing the polybar depends on your system. At startup in `~/.xprofile`, a script named `polybar-start`
-is ran. In previous versions, this script would launch the polybar defined by `$POLYBAR` on every visible
-display.
+Changing the polybar depends on your system. At startup in `~/.xprofile`, a
+script named `polybar-start` (located at `~/.local/bin/polybar/polybar-start`)
+is ran. In previous versions, this script would launch the polybar defined by
+`$POLYBAR` on every visible display.
 
 However to allow users to load different polybars on different screens, this
-script can now be symlinked by the user. It is recommended to define your
-`polybar-start` scripts next to your polybars in `~/.config/polybar/`. By default, the
-`polybar-start` is linked to the `single.sh` script which has the same functionality
-as before.
+script is now symlinked by the user. It is recommended to define your
+`polybar-start` scripts next to your polybars in `~/.config/polybar/`. By
+default, the `polybar-start` is linked to the `single.sh` script which has the
+same functionality as before.
+
+### Linking a Custom Start Script
+
+Back up the existing start script using
+
+```
+mv "$HOME/.local/bin/polybar/polybar-start" "$HOME/.local/bin/polybar/polybar-start.bak"
+```
+
+You can link a new script with the following command
+
+```
+ln -s "$HOME/.local/bin/polybar/polybar-start" "$XDG_CONFIG_HOME/polybar/<PATH>"
+```
+
+Where `<PATH>` is replaced by the relative path of your custom start script.
 
 ### Modules
 
@@ -295,15 +375,17 @@ a difference in scrolling direction.
 # TODO
 
 - [x] Add docs and list of shortcuts
-- [ ] Add more pictures
+- [ ] Add more pictures (never enough)
 - [ ] Look for pywal alternatives.
-- pywal does not generate enough colors for nvim, which I rather would match system colors
-  than a custom theme.
+  - pywal does not generate enough colors for nvim, which I rather would match system colors
+    than a custom theme.
+  - see: https://github.com/warpwm/lule
 
 ## nvim
 
 - [ ] Sync open file with NERDTree
-- current solution is commented out and does not work
+  - Current solution is commented out and does not work
+  - I cannot get this to work, it is really hard for some reason
 - [ ] Better git diff support
 
 ## lf
@@ -311,6 +393,7 @@ a difference in scrolling direction.
 - [ ] Add `rsync` keybind
   - See: https://github.com/gokcehan/lf/issues/561
 - [x] Add `encFS` keybind
+- [x] Add symlink keybind
 - [ ] Add image previews
   - See: https://gitlab.com/Provessor/lfp
 
@@ -331,7 +414,14 @@ a difference in scrolling direction.
 
 ## bspwm
 
-- [ ] Add keybind to switch highlighted winder to the current workspace of a monitor
+- [ ] Add keybind to switch highlighted window to the current workspace of a monitor
+- [ ] Add keybind to fullscreen window across all monitors
+- [ ] Hide all other windows behind a currently fullscreen window
+  - Fullscreen transparent windows will show other windows behind it which doesn't look nice
+
+## VimTeX
+
+- [] Close vim if QuickFix is the only window left
 
 # Inspiration
 
