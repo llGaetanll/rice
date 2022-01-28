@@ -421,7 +421,7 @@ a difference in scrolling direction.
 
 ## VimTeX
 
-- [] Close vim if QuickFix is the only window left
+- [ ] Close vim if QuickFix is the only window left
 
 # Inspiration
 
