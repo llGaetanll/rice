@@ -355,6 +355,17 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" auto close document when switching to another file (default: 1)
 		let g:mkdp_auto_close = 0
 	" }}}
+	
+	" VimTeX {{{
+		" This enables Vim's and neovim's syntax-related features. Without this, some
+		" VimTeX features will not work (see ":help vimtex-requirements" for more
+		" info).
+		syntax enable			
+
+		" Most VimTeX mappings rely on localleader and this can be changed with the
+		" following line. The default is usually fine and is the symbol "\".
+		let maplocalleader = "\\"
+	" }}}
 	 
 call plug#end()
 
