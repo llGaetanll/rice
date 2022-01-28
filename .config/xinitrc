@@ -9,7 +9,7 @@ export BAR_HEIGHT=45 # matched by polybar and dmenu
 
 # source cargo environment at launch.
 # Used for rust
-. "/home/al/.local/share/cargo/env"
+. "$HOME/.local/share/cargo/env"
 
 # source xprofile which launches all the programs 
 . ~/.xprofile
