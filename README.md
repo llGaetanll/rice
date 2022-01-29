@@ -396,6 +396,7 @@ a difference in scrolling direction.
 - [x] Add symlink keybind
 - [ ] Add image previews
   - See: https://gitlab.com/Provessor/lfp
+  - See: https://github.com/gokcehan/lf/wiki/Previews
 
 ## zathura
 
@@ -427,6 +428,7 @@ a difference in scrolling direction.
 
 - [lukesmithxyz/voidrice](https://github.com/lukesmithxyz/voidrice) for the base dotfiles (my dots are quite different to these now though)
 - [lukesmithxyz/LARBS](https://github.com/lukesmithxyz/LARBS) for my auto-install script at [llGaetanll/autorice](https://github.com/llGaetanll/autorice)
+- [BrodieRobertson/dotfiles](https://github.com/BrodieRobertson/dotfiles) for more dotfile ideas
 
 # See Also
 
