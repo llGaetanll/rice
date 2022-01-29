@@ -85,7 +85,7 @@ bindkey '^e' edit-command-line
 # Conditionally load syntax highlighting otherwise, clone it; should be last.
 [ -d "$xdg_config/zsh/plugins/fast-syntax-highlighting" ] &&\
     source $xdg_config/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh || \
-    git clone https://github.com/zdharma/fast-syntax-highlighting $xdg_config/zsh/plugins/fast-syntax-highlighting
+    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $xdg_config/zsh/plugins/fast-syntax-highlighting
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
