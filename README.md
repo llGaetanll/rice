@@ -387,11 +387,22 @@ a difference in scrolling direction.
   - Current solution is commented out and does not work
   - I cannot get this to work, it is really hard for some reason
 - [ ] Better git diff support
+- Spell/Grammar check in comments/certain file formats
+  - [ ] Latex
+  - [ ] Markdown
+  - [ ] Any programming language comments
+- More syntax autocomplete
+  - [ ] Latex autoclosing tags
+  - [ ] Markdown
+- [ ] Switch from CoC to Native LSP support?
+  - This looks interesting, but looks like a lot of work.
 
 ## lf
 
+- [ ] tmux integration
 - [ ] Add `rsync` keybind
   - See: https://github.com/gokcehan/lf/issues/561
+  - See: https://github.com/gokcehan/lf/wiki/Tips#show-progress-for-file-copying
 - [x] Add `encFS` keybind
 - [x] Add symlink keybind
 - [ ] Add image previews
