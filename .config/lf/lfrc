@@ -1,7 +1,7 @@
 ## Basic vars {{{
 
-set shell zsh
-set shellopts '-eu'
+# set shell zsh
+# set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
 
@@ -91,7 +91,7 @@ cmd delete ${{
     printf "%s\n\t" "$fx"
     printf "delete?[y/N]"
     read ans
-    [ $ans = "y" ] && rm -rf $fx
+    [ $ans = "y" ] && rm -rf -- $fx
 }}
 
 # }}}
