@@ -1,6 +1,5 @@
 ## Basic vars {{{
 
-set shell zsh
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
