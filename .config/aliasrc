@@ -11,7 +11,7 @@ alias \
     dcu="docker-compose up" \
     dcd="docker-compose down" \
     synctime="sudo ntpdate pool.ntp.org" \
-    ydl="youtube-dl -o \"$HOME/Videos/downloads/%(id)s.%(ext)s\"" \
     tmux="tmux -u" \
     lg="lazygit" \
-    tdl="youtube-dl -o \"$HOME/desktop/%(id)s.%(ext)s\""
+    tdl="yt-dlp -o \"$HOME/desktop/%(id)s.%(ext)s\""
+    ydl="yt-dlp -o \"$HOME/Videos/downloads/%(id)s.%(ext)s\"" \
