@@ -388,9 +388,10 @@ a difference in scrolling direction.
   - I cannot get this to work, it is really hard for some reason
 - [ ] Better git diff support
 - Spell/Grammar check in comments/certain file formats
-  - [ ] Latex
-  - [ ] Markdown
+  - [x] Latex
+  - [x] Markdown
   - [ ] Any programming language comments
+    - I don't know if this is actually possible, maybe with LSP?
 - More syntax autocomplete
   - [ ] Latex autoclosing tags
   - [ ] Markdown
