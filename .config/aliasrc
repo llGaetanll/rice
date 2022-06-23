@@ -3,6 +3,7 @@
 alias \
     nrd="npm run dev" \
     ns="npm start" \
+    py3="python3" \
     gs="git add" \
     gs="git status" \
     gp="git push" \
