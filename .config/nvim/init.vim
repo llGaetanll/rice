@@ -19,6 +19,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'tpope/vim-repeat' " repeat plugins
 	Plug 'tpope/vim-endwise' " adds end, endif automatically
 	Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
+	" Plug 'honza/vim-snippets' " Amazing autocompletion
 
 	" Language Specific plugins
 	Plug 'ap/vim-css-color' " preview colors while editing
@@ -27,7 +28,10 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'pangloss/vim-javascript' " JS syntax highlighting
 	Plug 'jparise/vim-graphql' " GQL syntax highlighting
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown previewer
-	Plug 'lervag/vimtex' " LaTeX support. you need `latex-mk` from the AUR
+
+	" Plug 'vim-latex/vim-latex' " LaTeX language support 
+	Plug 'lervag/vimtex' " LaTeX previewer. you may need `latex-mk` from the AUR
+	" Plug 'mhinz/neovim-remote' " used by vimtex
 
 	" JsDoc generation
 	Plug 'heavenshell/vim-jsdoc', { 
@@ -41,8 +45,9 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'morhetz/gruvbox'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
+	Plug 'mhinz/vim-startify' " A better start screen for vim
 	
-	" Appearance {{{
+	" Appearance: {{{
 		" For more info about any of these `:help set`
 		
 		" dark theme by default
@@ -60,8 +65,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" show matching closing bracket (showmatch/noshowmatch)
 		set showmatch
 
-		" I dont understand this one
+		" Makes tabbing smarter will realize you have 2 vs 4
 		set smarttab
+
+		" Good autoindent
+		set autoindent
 
 		" use spaces instead of tabs
 		set expandtab 
@@ -70,7 +78,6 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		set shiftwidth=4
 		set shiftround
 		set encoding=utf8
-
 
 		" set the max line length to 80 characters.
 		" this doesn't break already existing lines.
@@ -82,11 +89,17 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" fix broken colors on certain colorschemes
 		set termguicolors
 
+		" set spell spell lang=en_US
+		set complete+=kspell
+
+		" tex and markdown files open with spellcheck
+		autocmd BufRead,BufNewFile *.md,*.tex setlocal spell spelllang=en_us
+
 		" add JSDoc syntax highlighting
 		let g:javascript_plugin_jsdoc = 1
 	" }}}
 	
-	" General Mappings {{{
+	" Mappings: {{{
 		" leader key
 		let mapleader = ","
 
@@ -124,7 +137,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		vmap > >gv
 	" }}}
 	
-	" Tabs - All prefixed by <Tab> {{{
+	" Tabs: All prefixed by <Tab> {{{
 		" rotate between tabs: previous and next
 		nnoremap <Tab>n gt
 		nnoremap <Tab>N gT
@@ -141,7 +154,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		nnoremap <silent> <Tab>t :tabedit %<CR>
 	" }}}
 	
-	" Windows - All prefixed by ctrl + w {
+	" Windows: All prefixed by ctrl + w {
 		" ctrl + w  ctrl + h/j/k/l to resize windows
 		" nnoremap <silent> <C-w><C-h> 5:wincmd <<CR>
 		" nnoremap <silent> <C-w><C-j> 5:wincmd -<CR>
@@ -149,14 +162,14 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" nnoremap <silent> <C-w><C-l> 5:wincmd ><CR>
 	" }
 
-	" FuzzyFind - Find files from anywhere {{{
+	" FuzzyFind: Find files from anywhere {{{
 		Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 		Plug 'junegunn/fzf.vim'
 
 		" ctrl + p to fuzzy find git files
-		nnoremap <silent> <C-p> :GFiles<CR>
+		nnoremap <silent> <leader>fg :GFiles<CR>
 		" ctrl + shift + p to fuzzy find all files
-		nnoremap <silent> <C-P> :Files<CR>
+		nnoremap <silent> <leader>ff :Files<CR>
 
 		" command GGrep fuzzy finds input on all files in current dir 
 		command! -bang -nargs=* GGrep
@@ -164,13 +177,20 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			\   'git grep --line-number -- '.shellescape(<q-args>), 0,
 			\   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
+		command! -bang -nargs=* Rg
+			\ call fzf#vim#grep(
+			\   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+			\   fzf#vim#with_preview(), <bang>0)
+
 		" remap ctrl + f from moving forward 1 full screen to grepping files
 		" much more useful
-		nnoremap <silent> <C-F> :GGrep<CR>
+		nnoremap <silent> <leader>ftg <C-F> :GGrep<CR>
+
+		nnoremap <silent> <leader>ftf :Rg<CR>
 
 	" }}}
 		
-	" NERDTree - Side menu like vscode {{{
+	" NERDTree: Side menu like vscode {{{
 		Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 		Plug 'Xuyuanp/nerdtree-git-plugin'
 		Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -197,7 +217,9 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 			" file, and we're not in vimdiff
 			function! SyncTree()
-				" echo expand('<afile>')
+				" expand('<afile>')
+				echo "updating NERDTree" 
+				
 				" echo "no diff" !&diff "nt open:" IsNERDTreeOpen() "nt not focused: " !exists("b:NERDTree")
 				" if IsNERDTreeOpen() && !exists("b:NERDTree")
 				if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
@@ -211,7 +233,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" }
 	" }}}
 
-	" NERDCommenter {{{
+	" NERDCommenter: {{{
 		Plug 'scrooloose/nerdcommenter' " Easy commenting in vim
 		filetype plugin on " Changes comments based on filetype
 
@@ -233,7 +255,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		vnoremap <silent> <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>gv
 	" }}}
 
-	" Conquer of Completion - Autocomplete everything {{{
+	" ConquerOfCompletion: Autocomplete everything {{{
 		Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocompletion
 
 		let g:coc_global_extensions = [
@@ -247,7 +269,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			\ 'coc-rls',
 			\ 'coc-solargraph',
 			\ 'coc-clangd',
-			\ 'coc-texlab',
+			\ 'coc-vimtex',
 		\ ]
 
 		set hidden " TextEdit might fail if hidden is not set.
@@ -269,9 +291,6 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 
 		set cmdheight=2 " Give more space for displaying messages.
 		set updatetime=300 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
-
-		" Use K to show documentation in preview window.
-		nnoremap <silent> K :call <SID>show_documentation()<CR>
 	
 		" Remap <C-j> and <C-k> for scroll float windows/popups.
 		if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -279,6 +298,10 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
 		endif
 
+		" Use K to show documentation in preview window.
+		nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+		" Display hover for an element that the LSP can recognize
 		function! s:show_documentation()
 			if (index(['vim','help'], &filetype) >= 0)
 				execute 'h '.expand('<cword>')
@@ -287,19 +310,30 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 			endif
 		endfunction
 		
-		" use <tab> for trigger completion and navigate to the next complete item
 		function! s:check_back_space() abort
 		    let col = col('.') - 1
 		    return !col || getline('.')[col - 1]  =~ '\s'
 		endfunction
 
-		inoremap <silent><expr> <Tab>
-		    \ pumvisible() ? "\<C-n>" :
-		    \ <SID>check_back_space() ? "\<Tab>" :
-		    \ coc#refresh()
+		" ctrl + j - scroll down autocomplete options
+		inoremap <silent><expr> <C-j>
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<C-j>" :
+			\ coc#refresh()
 
-		" ctrl + <space> triggers autocompletion
-		inoremap <silent><expr> <c-space> coc#refresh()
+		" ctrl + k - scroll up autocomplete options
+		inoremap <silent><expr> <C-k>
+			\ pumvisible() ? "\<C-p>" :
+			\ <SID>check_back_space() ? "\<C-k>" :
+			\ coc#refresh()
+
+		" ctrl + <space> - triggers autocompletion
+		inoremap <silent><expr> <c-space>
+			\ pumvisible() ? "\<c-space>" : coc#refresh()
+
+		" <Tab> - autocomplete to selected option
+		inoremap <silent><expr> <Tab>
+			\ pumvisible() ? coc#refresh() : "\<Tab>"
 
 		" Highlight the symbol and its references when holding the cursor.
 		autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -307,15 +341,17 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" Rename all instances with F2
 		nmap <F2> <Plug>(coc-rename)
 
-		" Formatting selected code.
-		xmap <leader>f  <Plug>(coc-format-selected)
-		nmap <leader>f  <Plug>(coc-format-selected)
+		" <leader> + b - Beautify selected code.
+		xmap <leader>b  <Plug>(coc-format-selected)
+		nmap <leader>b  <Plug>(coc-format-selected)
 
 		" comment highlighting in json	
 		autocmd FileType json syntax match Comment +\/\/.\+$+
+
+		let g:UltiSnipsSnippetDirectories=["snips"]
 	" }}}
 	
-	" Git Gutter - Displays changes in git-tracked files {{{
+	" Git Gutter: Displays changes in git-tracked files {{{
 		Plug 'airblade/vim-gitgutter' " add git to file to show diffs
 	
 		" update gutters faster
@@ -345,7 +381,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		let g:gitgutter_sign_modified_removed = '⌄'
 	" }}}
 	
-	" Markdown Preview {{{
+	" Markdown Preview: {{{
 		" auto start plugin when opening markdown file (default: 0)
 		" see local.vim
 		
@@ -356,15 +392,32 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		let g:mkdp_auto_close = 0
 	" }}}
 	
-	" VimTeX {{{
+	" VimTeX: {{{
+		" PDF Viewer:
+		" http://manpages.ubuntu.com/manpages/trusty/man5/zathurarc.5.html
+		" let g:vimtex_view_method = 'zathura'
+		" let g:vimtex_quickfix_mode=0
+
 		" This enables Vim's and neovim's syntax-related features. Without this, some
 		" VimTeX features will not work (see ":help vimtex-requirements" for more
 		" info).
-		syntax enable			
+		syntax enable
 
 		" Most VimTeX mappings rely on localleader and this can be changed with the
 		" following line. The default is usually fine and is the symbol "\".
 		let maplocalleader = "\\"
+
+		" Ignore mappings
+		" let g:vimtex_mappings_enabled = 0
+
+		" Error Suppression:
+		" https://github.com/lervag/vimtex/blob/master/doc/vimtex.txt
+		let g:vimtex_log_ignore = [
+			\ 'Underfull',
+			\ 'Overfull',
+			\ 'specifier changed to',
+			\ 'Token not allowed in a PDF string',
+		\ ]
 	" }}}
 	 
 call plug#end()
