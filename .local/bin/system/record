@@ -35,6 +35,21 @@ promptrecording() {
 	esac
 }
 
+gif_old() {
+	slop -f "%x %y %w %h" > /tmp/slop
+	read -r X Y W H < /tmp/slop
+	rm /tmp/slop
+
+	ffmpeg \
+	-f x11grab \
+	-framerate 10 \
+	-video_size "$W"x"$H" \
+	-i :0.0+"$X,$Y" \
+	"$recordingsdir/gif-$(date '+%y%m%d-%H%M-%S').gif" &
+	echo $! > /tmp/recordingpid
+	updateicon "⏺️"
+}
+
 gif() {
 	slop -f "%x %y %w %h" > /tmp/slop
 	read -r X Y W H < /tmp/slop
@@ -42,7 +57,7 @@ gif() {
 
 	ffmpeg \
 	-f x11grab \
-	-framerate 15 \
+	-framerate 10 \
 	-video_size "$W"x"$H" \
 	-i :0.0+"$X,$Y" \
 	"$recordingsdir/gif-$(date '+%y%m%d-%H%M-%S').gif" &
