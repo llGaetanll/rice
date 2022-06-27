@@ -28,10 +28,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'pangloss/vim-javascript' " JS syntax highlighting
 	Plug 'jparise/vim-graphql' " GQL syntax highlighting
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown previewer
-
-	" Plug 'vim-latex/vim-latex' " LaTeX language support 
 	Plug 'lervag/vimtex' " LaTeX previewer. you may need `latex-mk` from the AUR
-	" Plug 'mhinz/neovim-remote' " used by vimtex
 
 	" JsDoc generation
 	Plug 'heavenshell/vim-jsdoc', { 
@@ -153,14 +150,6 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		" note that this can also be done with `ctrl+w T`
 		nnoremap <silent> <Tab>t :tabedit %<CR>
 	" }}}
-	
-	" Windows: All prefixed by ctrl + w {
-		" ctrl + w  ctrl + h/j/k/l to resize windows
-		" nnoremap <silent> <C-w><C-h> 5:wincmd <<CR>
-		" nnoremap <silent> <C-w><C-j> 5:wincmd -<CR>
-		" nnoremap <silent> <C-w><C-k> 5:wincmd +<CR>
-		" nnoremap <silent> <C-w><C-l> 5:wincmd ><CR>
-	" }
 
 	" FuzzyFind: Find files from anywhere {{{
 		Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
