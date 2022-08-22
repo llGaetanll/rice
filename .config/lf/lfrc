@@ -125,6 +125,9 @@ map X &$f # in the background (X)
 # Rename keybinds
 map c push A<c-u> # new rename (c)
 
+# Shift c clears any copied/cut files
+map C clear
+
 map A rename # at the very end (A)
 map I push A<c-a> # at the very beginning (I)
 
