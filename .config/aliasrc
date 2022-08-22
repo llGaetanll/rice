@@ -14,5 +14,6 @@ alias \
     synctime="sudo ntpdate pool.ntp.org" \
     tmux="tmux -u" \
     lg="lazygit" \
-    tdl="yt-dlp -o \"$HOME/desktop/%(id)s.%(ext)s\""
+    tdl="yt-dlp -f mp4 -o \"$HOME/desktop/%(id)s.%(ext)s\"" \
     ydl="yt-dlp -o \"$HOME/Videos/downloads/%(id)s.%(ext)s\"" \
+    ytthumbnail="yt-dlp --write-thumbnail --convert-thumbnails jpg --skip-download" \
