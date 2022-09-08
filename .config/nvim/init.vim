@@ -30,6 +30,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown previewer
 	Plug 'lervag/vimtex' " LaTeX previewer. you may need `latex-mk` from the AUR
 
+	" Natural Language
+	" Grammar check within vim using LanguageTool, supports
+	" various different languages (English, French, German...)
+	Plug 'rhysd/vim-grammarous' 
+
 	" JsDoc generation
 	Plug 'heavenshell/vim-jsdoc', { 
 	\ 'for': ['javascript', 'javascript.jsx','typescript'], 
@@ -69,7 +74,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 		set autoindent
 
 		" use spaces instead of tabs
-		set expandtab 
+		" set expandtab 
 		set tabstop=4
 		set softtabstop=4
 		set shiftwidth=4
@@ -298,31 +303,25 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 				call CocAction('doHover')
 			endif
 		endfunction
-		
+
 		function! s:check_back_space() abort
-		    let col = col('.') - 1
-		    return !col || getline('.')[col - 1]  =~ '\s'
+			let col = col('.') - 1
+			return !col || getline('.')[col - 1]  =~ '\s'
 		endfunction
 
-		" ctrl + j - scroll down autocomplete options
-		inoremap <silent><expr> <C-j>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<C-j>" :
+		" Insert <tab> when previous text is space, refresh completion if not.
+		inoremap <silent><expr> <TAB>
+			\ coc#pum#visible() ? coc#pum#next(1):
+			\ <SID>check_back_space() ? "\<Tab>" :
 			\ coc#refresh()
+		inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-		" ctrl + k - scroll up autocomplete options
-		inoremap <silent><expr> <C-k>
-			\ pumvisible() ? "\<C-p>" :
-			\ <SID>check_back_space() ? "\<C-k>" :
-			\ coc#refresh()
-
-		" ctrl + <space> - triggers autocompletion
-		inoremap <silent><expr> <c-space>
-			\ pumvisible() ? "\<c-space>" : coc#refresh()
+		" Use <CR> to confirm completion
+		inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
 		" <Tab> - autocomplete to selected option
-		inoremap <silent><expr> <Tab>
-			\ pumvisible() ? coc#refresh() : "\<Tab>"
+		" inoremap <silent><expr> <Tab>
+		"	\ pumvisible() ? coc#refresh() : "\<Tab>"
 
 		" Highlight the symbol and its references when holding the cursor.
 		autocmd CursorHold * silent call CocActionAsync('highlight')
