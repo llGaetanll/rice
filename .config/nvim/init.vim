@@ -242,11 +242,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 
 		" Toggle Commenting - ctrl + /
 		" Insert: 
-		inoremap <silent> <C-_> <ESC>:call nerdcommenter#Comment(0, "toggle")<CR>li
+		inoremap <silent> <C-/> <ESC>:call nerdcommenter#Comment(0, "toggle")<CR>li
 		" Normal: 
-		nnoremap <silent> <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>
+		nnoremap <silent> <C-/> :call nerdcommenter#Comment(0, "toggle")<CR>
 		" Visual: keeps you in visual mode
-		vnoremap <silent> <C-_> :call nerdcommenter#Comment(0, "toggle")<CR>gv
+		vnoremap <silent> <C-/> :call nerdcommenter#Comment(0, "toggle")<CR>gv
 	" }}}
 
 	" ConquerOfCompletion: Autocomplete everything {{{
