@@ -42,8 +42,10 @@ applywall() {
 	bgloc=$(readlink -f $bglink)
 
 	# If pywal is installed, use it.
+	# Note: pywal shouldn't set the wallpaper, this is done by xwallpaper,
+	# it should only update the colorschemes
 	command -v wal > /dev/null 2>&1 &&
-		wal -q -i "$bgloc" > /dev/null 2>&1
+		wal -q -n -i "$bgloc" > /dev/null 2>&1
 
 	# update bspwm colorscheme
 	# source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null
