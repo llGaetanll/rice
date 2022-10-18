@@ -13,6 +13,11 @@
 !.local/bin/
 !.local/share/
 
+# not pulsemixer though
+.local/bin/pulsemixer
+
+
+
 .local/share/*
 !.local/share/fonts/
 .local/share/fonts/.uuid
