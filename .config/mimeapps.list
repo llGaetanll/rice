@@ -13,3 +13,4 @@ image/png=img.desktop;
 image/jpeg=img.desktop;
 image/gif=img.desktop;
 inode/directory=file.desktop
+x-scheme-handler/notion=notion-app.desktop
