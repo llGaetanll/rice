@@ -6,6 +6,9 @@
 # load Xresources
 xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/Xresources
 
+# tmeporary solution to adjust file permissions for display backlight at startup
+chmod 666 /sys/class/backlight/intel_backlight/brightness
+
 xset s off              # dont activate screensaver
 xset s noblank          # dont blank the video device
 xset -dpms              # disable energystart features
