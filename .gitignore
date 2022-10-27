@@ -52,9 +52,12 @@
 # So this only keeps init.vim
 !.config/nvim
 .config/nvim/*
-!.config/nvim/init.vim
-!.config/nvim/local.vim
-!.config/nvim/coc-settings.json
+!.config/nvim/init.lua
+!.config/nvim/lua/
+
+# !.config/nvim/init.vim
+# !.config/nvim/local.vim
+# !.config/nvim/coc-settings.json
 
 !.config/polybar
 
@@ -76,3 +79,4 @@
 !.zprofile
 !.xinitrc
 !.xprofile
+.Rproj.user
