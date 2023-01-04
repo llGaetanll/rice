@@ -11,6 +11,8 @@ local options = {
   pumheight = 10,                          -- pop up menu height
   -- showmode = false,                     -- whether to display the current mode (INSERT, VISUAL, ...)
 
+  laststatus = 3,                          -- remove status lines on upper windows if windows are stacked vertically
+
   -- TABS
   showtabline = 1,                         -- only show tabs if available
   smartcase = true,                        -- smart case
@@ -29,18 +31,18 @@ local options = {
   updatetime = 300,                        -- faster completion (4000ms default)
   -- writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
-  cursorline = false,                       -- highlight the current line
+  cursorline = false,                      -- highlight the current line
   number = true,                           -- set numbered lines
   relativenumber = false,                  -- set relative numbered lines
   numberwidth = 4,                         -- set number column width to 2 {default 4}
 
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time the LSP complains
-  wrap = false,                             -- whether to wrap lines
+  wrap = false,                            -- whether to wrap lines
   linebreak = false,                       -- companion to wrap, don't split words
   tw = 80,                                 -- wrap lines at 80 characters
 
-  scrolloff = 8,                           -- minimal number of screen lines to keep above and below the cursor
-  sidescrolloff = 8,                       -- minimal number of screen columns either side of cursor if wrap is `false`
+  scrolloff = 2,                           -- minimal number of screen lines to keep above and below the cursor
+  sidescrolloff = 2,                       -- minimal number of screen columns either side of cursor if wrap is `false`
 
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
 }

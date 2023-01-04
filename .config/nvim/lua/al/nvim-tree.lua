@@ -4,6 +4,9 @@ if not status_ok then
 end
 
 local nvim_tree_icons = {
+  show = {
+    folder_arrow = false
+  },
   glyphs = {
     default = "",
     symlink = "",
@@ -30,12 +33,13 @@ local nvim_tree_icons = {
 
 nvim_tree.setup {
   -- Note: for a full list of options, see `:h nvim-tree-setup`
-
+  disable_netrw = true,
+  hijack_cursor = true, -- no need to move left and right within tree
+  update_cwd = true,
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_cwd = false,
   },
-  hijack_cursor = true, -- no need to move left and right within tree
   open_on_tab = true, -- NvimTree stays open in new tabs
   renderer = {
     root_folder_modifier = ":t",
