@@ -8,7 +8,7 @@ set scrolloff 10
 set preview
 
 # outline columns
-set drawbox
+# set drawbox
 
 # enable icons
 set icons
@@ -32,12 +32,12 @@ $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 # see: https://github.com/gokcehan/lf/issues/495
 cmd recol &{{
     w=$(tput cols)
-    if [ $w -le 80 ]; then
-	lf -remote "send $id set ratios 1:1"
-    elif [ $w -le 160 ]; then
-	lf -remote "send $id set ratios 1:1:1"
+    if [ $w -le 160 ]; then
+	    lf -remote "send $id set ratios 1:1:1"
+    elif [ $w -le 80 ]; then
+	    lf -remote "send $id set ratios 1:1"
     else
-	lf -remote "send $id set ratios 1:1:1:1"
+	    lf -remote "send $id set ratios 1:1:1:1"
     fi
 }}
 
@@ -90,7 +90,8 @@ cmd delete ${{
     printf "%s\n\t" "$fx"
     printf "delete?[y/N]"
     read ans
-    [ $ans = "y" ] && rm -rf -- $fx
+#   [ $ans = "y" ] && rm -rf -- $fx
+    [ $ans = "y" ] && trash-put $fx
 }}
 
 # }}}
