@@ -25,4 +25,4 @@ unclutter & # hide mouse if inactive
 setxkbmap -option caps:escape
 
 # WM Compositors. Only use one
-sleep 1 && picom --experimental-backends & # allows you to use blur on the main picom repo
+sleep 1 && picom & # allows you to use blur on the main picom repo
