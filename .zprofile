@@ -12,6 +12,10 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 
+# pixel scrolling in firefox
+# see: https://askubuntu.com/questions/1148934/precise-scrolling-in-firefox
+export MOZ_USE_XINPUT2=1
+
 # stop firefox from crashing when opening multiple links in signal or discord
 # see: https://www.reddit.com/r/archlinux/comments/n7cu62/comment/hzof4cc/?utm_source=share&utm_medium=web2x&context=3
 export DBUS_SESSION_BUS_ADDRESS="autolaunch:"
