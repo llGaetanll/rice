@@ -17,6 +17,7 @@ super + {_,alt + } BackSpace
 # volume up
 super + {equal,plus}
 	pulsemixer --change-volume {+5,+15}
+  
 # volume down
 super + {_,shift + } minus
 	pulsemixer --change-volume {-5,-15}
@@ -47,6 +48,10 @@ super + {r,p,t}
 # window state - default is tiled
 super + alt + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# toggle gaps
+super + alt + g
+  gaptoggle
 
 # focus/move given window
 super + {_,shift + }{h,j,k,l}

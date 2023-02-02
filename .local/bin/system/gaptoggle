@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# This script toggles the window gap between the default window gap and 0. This
+# is useful for situtations in which you want to turn off gaps to work on
+# certain tasks.
+
+WIN_GAP=`bspc config window_gap`
+
+if [ "$WIN_GAP" -eq "0" ]; then
+  bspc config window_gap $DEF_WIN_GAP
+else
+  bspc config window_gap 0
+fi
