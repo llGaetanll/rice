@@ -97,6 +97,7 @@ return packer.startup(function(use)
   use 'williamboman/mason.nvim'                     -- simple to use language server installer
   use 'williamboman/mason-lspconfig.nvim'           -- allows interop between mason and lsconfig
   use 'neovim/nvim-lspconfig'                       -- enable lsp
+  use 'github/copilot.vim'                          -- github copilot in nvim
 
 
 
