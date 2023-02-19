@@ -33,5 +33,8 @@ require "al.lsp"
 -- Snippets
 require "al.snippets"
 
+-- Color highlighting
+require "al.colors"
+
 -- VimTeX
 require "al.vimtex"

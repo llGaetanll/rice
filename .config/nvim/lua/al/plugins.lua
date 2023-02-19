@@ -112,6 +112,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-tree.lua"                    -- filesystem tree 
   use "kyazdani42/nvim-web-devicons"                -- icons for nvim tree
   use "lewis6991/gitsigns.nvim"                     -- git indicators
+  use "norcalli/nvim-colorizer.lua"                 -- colorize CSS color codes
 
 
 
