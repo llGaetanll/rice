@@ -57,3 +57,8 @@ end
 -- vim.cmd [[set iskeyword+=-]]
 -- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 
+-- enable spellcheck inside of .tex or .md files
+vim.cmd([[
+  autocmd FileType tex,md setlocal spell spelllang=en_us
+]])
+
