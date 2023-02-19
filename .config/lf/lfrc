@@ -77,6 +77,24 @@ cmd link %{{
     lf -remote "send clear"
 }}
 
+# cmd paste &{{
+#     set -- $(cat ~/.local/share/lf/files)
+#     mode="$1"
+#     shift
+#     case "$mode" in
+#         copy)
+#             rsync -av --ignore-existing --progress -- "$@" . |
+#             stdbuf -i0 -o0 -e0 tr '\r' '\n' |
+#             while IFS= read -r line; do
+#                 lf -remote "send $id echo $line"
+#             done
+#             ;;
+#         move) mv -n -- "$@" .;;
+#     esac
+#     rm ~/.local/share/lf/files
+#     lf -remote "send clear"
+# }}
+
 # custom wrapper to mkdir. allows you to enter the name of the directory
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
@@ -143,6 +161,9 @@ map b $setbg $f
 cmd toggle-crypt
 map e # unmap e
 map e $toggle-crypt # map e to toggle encfs
+
+# paste with rsync
+# map p paste
 
 # paste hard/soft symlinks
 map P :link
