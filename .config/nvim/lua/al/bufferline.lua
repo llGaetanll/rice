@@ -23,13 +23,15 @@ bufferline.setup {
       -- icon = "▎"
     },
 
-    buffer_close_icon = "",
-    -- buffer_close_icon = "",
+    -- buffer_close_icon = "",
+    buffer_close_icon = "",
+    show_buffer_close_icons = false,
 
     -- buffer_close_icon = '',
     modified_icon = "●",
-    close_icon = "",
-    -- close_icon = "",
+    -- close_icon = "",
+    close_icon = "",
+    show_close_icon = false,
     -- close_icon = '',
 
     left_trunc_marker = "<",
@@ -65,7 +67,14 @@ bufferline.setup {
       end
     end,
 
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "NvimTree",
+        -- highlight = "Directory",
+        padding = 0
+      }
+    },
     show_buffer_icons = true,
     show_buffer_close_icons = true,
     show_close_icon = true,
