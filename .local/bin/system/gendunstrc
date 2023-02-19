@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# This script is used to generate a dunst config file to match the color
+# theme created by pywal.
+
+RC_DIR="${XDG_CONFIG_HOME}/dunst"
+
+# this is the base rc file to be added to the generated one with the theme
+# colors
+RC_BASE="${RC_DIR}/base"
+
+# this is the generated file
+RC_FILE="${RC_DIR}/dunstrc"
+
+. "${HOME}/.cache/wal/colors.sh"
+
+# write dunstrc
+cat <<CONF > $RC_FILE
+`cat $RC_BASE`
+[global]
+    offset = `echo $DEF_WIN_GAP`x`echo $DEF_WIN_GAP`
+
+[urgency_low]
+    background = "$background"
+    foreground = "$foreground"
+    frame_color = "$color2"
+    timeout = 10
+
+[urgency_normal]
+    background = "$color7"
+    foreground = "$color0"
+    frame_color = "$color2"
+    timeout = 10
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffeeee"
+    frame_color = "#aa0000"
+    timeout = 0
+CONF
+

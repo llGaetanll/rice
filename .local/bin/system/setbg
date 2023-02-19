@@ -53,6 +53,12 @@ applywall() {
   # update zathura colorscheme
   genzathurarc
 
+  # update dunst colorscheme
+  gendunstrc
+
+  # restart dunst
+  pkill dunst && dunst > /dev/null 2>&1 &
+
 	# extract how to apply the wallpaper 
 	# from name of symlink
 	walltype=$(basename $bglink | sed -e "s/\.bg-//g")
