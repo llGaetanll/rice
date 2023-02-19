@@ -65,7 +65,13 @@
 !.config/tmux
 # TODO: whitelist transmission once set up with blocklist
 !.config/xinitrc
+
+
 !.config/zathura
+.config/zathura/*
+# only whitelist the base file (which is used for generating zathurarc)
+!config/zathura/base
+
 
 !.config/zsh
 .config/zsh/*

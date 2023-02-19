@@ -48,8 +48,10 @@ applywall() {
 		wal -q -n -i "$bgloc" > /dev/null 2>&1
 
 	# update bspwm colorscheme
-	# source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null
 	source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null 2>&1
+
+  # update zathura colorscheme
+  genzathurarc
 
 	# extract how to apply the wallpaper 
 	# from name of symlink
