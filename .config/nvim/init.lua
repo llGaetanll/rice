@@ -29,3 +29,9 @@ require "al.autopairs"   -- auto complete any parentheses, brackets, etc...
 
 -- LSP
 require "al.lsp"
+
+-- Snippets
+require "al.snippets"
+
+-- VimTeX
+require "al.vimtex"
