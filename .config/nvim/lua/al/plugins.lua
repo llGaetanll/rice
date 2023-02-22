@@ -90,7 +90,10 @@ return packer.startup(function(use)
   -- autopairs
   use "windwp/nvim-autopairs"                       -- autocomplete parentheses, brackets, etc...
 
-
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }                                                 -- Telescope fuzzy-finding
 
 
   --- LSP - Language Server Protocol

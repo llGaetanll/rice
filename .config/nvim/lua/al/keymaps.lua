@@ -38,6 +38,16 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
+-- Telescope Keybinds
+local telescope_ok, telescope_builtin = pcall(require, 'telescope.builtin')
+if telescope_ok then
+  vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
+  vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, {})
+  vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
+  vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, {})
+end
+
+
 -- Navigate tabs
 keymap("n", "<c-l>", "gT", opts)
 keymap("n", "<c-h>", "gt", opts)
@@ -66,8 +76,8 @@ keymap("v", "<c-y>", '"+y', opts) -- visual mode
 keymap("x", "<c-y>", '"+y', opts) -- visual block
 
 -- Move text up and down in visual block
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+-- keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
+-- keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 
 -- NvimTree
 keymap("n", "<leader>t", ":NvimTreeToggle<CR>", opts)
