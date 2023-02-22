@@ -30,6 +30,9 @@ require "al.autopairs"   -- auto complete any parentheses, brackets, etc...
 -- LSP
 require "al.lsp"
 
+-- Fuzzy Finding files
+require "al.telescope"
+
 -- Snippets
 require "al.snippets"
 
