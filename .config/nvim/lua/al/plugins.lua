@@ -54,8 +54,7 @@ return packer.startup(function(use)
   use "kyazdani42/blue-moon"
   use "sainnhe/everforest"
   use "martinsione/darkplus.nvim"
-
-  -- use "morhetz/gruvbox"
+  use "ellisonleao/gruvbox.nvim"
 
 
 
@@ -97,9 +96,13 @@ return packer.startup(function(use)
 
 
   --- LSP - Language Server Protocol
-  use 'williamboman/mason.nvim'                     -- simple to use language server installer
-  use 'williamboman/mason-lspconfig.nvim'           -- allows interop between mason and lsconfig
-  use 'neovim/nvim-lspconfig'                       -- enable lsp
+  use {
+    'williamboman/mason.nvim',                      -- simple to use language server installer
+    'williamboman/mason-lspconfig.nvim',            -- allows interop between mason and lsconfig
+    'neovim/nvim-lspconfig'                         -- enable lsp
+  }
+
+  -- GPT autocompletion
   use 'github/copilot.vim'                          -- github copilot in nvim
 
 

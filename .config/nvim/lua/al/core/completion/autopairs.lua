@@ -1,9 +1,9 @@
-local status_ok, npairs = pcall(require, "nvim-autopairs")
+local status_ok, autopairs = pcall(require, "nvim-autopairs")
 if not status_ok then
   return
 end
 
-npairs.setup {
+local autopairs_config = {
   -- ts is treesitter, not typescript
   check_ts = true,
   ts_config = {
@@ -25,6 +25,9 @@ npairs.setup {
   },
 }
 
+autopairs.setup(autopairs_config)
+
+
 
 -- integration with CMP
 -- if you autocomplete a function, it automatically adds parathenses
@@ -33,6 +36,8 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   return
 end
+
+
 
 -- for latex
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })

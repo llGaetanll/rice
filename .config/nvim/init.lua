@@ -1,43 +1,7 @@
-require "al.plugins" 		  -- load all the plugins
-require "al.colorscheme" 	-- load the default colorscheme
+require "al.plugins" 		      -- load all the plugins
 
--- GENERAL KEY MAPPINGS
-require "al.keymaps" 		
+require "al.ui"               -- load ui components
 
--- TREESITTER
-require "al.treesitter" 		
+require "al.core"             -- load core components
 
--- COMMENTS
-require "al.options" 		
-require "al.comment" 		
-
--- Tabs
-require "al.bufferline" 		
-
--- NvimTree - Side window
-require "al.nvim-tree"
-
--- Git configuration
-require "al.gitsigns"
-
--- Lualine - Bottom line
-require "al.lualine"
-
--- Autocomplete
-require "al.cmp"         -- cmp.nvim configuration
-require "al.autopairs"   -- auto complete any parentheses, brackets, etc...
-
--- LSP
-require "al.lsp"
-
--- Fuzzy Finding files
-require "al.telescope"
-
--- Snippets
-require "al.snippets"
-
--- Color highlighting
-require "al.colors"
-
--- VimTeX
-require "al.vimtex"
+require "al.extra" 	          -- load extra plugins (vimtex, etc...)

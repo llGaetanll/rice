@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 local nvim_tree_icons = {
+  git_placement = "after", -- put the git icon after the filename
   show = {
     folder_arrow = false
   },
@@ -21,13 +22,14 @@ local nvim_tree_icons = {
       symlink_open = "",
     },
     git = {
-      unstaged = "",
+      unstaged = "M",
       staged = "S",
       unmerged = "",
-      renamed = "➜",
+      renamed = "R",
       untracked = "U",
-      deleted = "",
-      ignored = "◌", },
+      deleted = "D",
+      ignored = ""
+    },
   },
 }
 
@@ -36,15 +38,30 @@ nvim_tree.setup {
   disable_netrw = true,
   hijack_cursor = true, -- no need to move left and right within tree
   update_cwd = true,
-  update_focused_file = {
-    enable = true,
-    update_cwd = false,
+
+  -- NvimTree tab settings
+  tab = {
+    sync = {
+      -- NvimTree stays open in all tabs
+      open = true,
+
+      -- NvimTree closes if closed in one tab
+      close = true,
+    }
   },
-  open_on_tab = true, -- NvimTree stays open in new tabs
+
+  -- NvimTree appearance settings
   renderer = {
-    root_folder_modifier = ":t",
+    root_folder_label = ":t",
     icons = nvim_tree_icons,
-    highlight_opened_files = "none",
+
+    -- opened files are highlighted
+    highlight_opened_files = "all",
+
+    -- file color matches git file status
+    highlight_git = true,
+    highlight_modified = "name",
+
     indent_markers = {
       enable = true,
       inline_arrows = true,

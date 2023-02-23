@@ -3,5 +3,5 @@ if not status_ok then
   return
 end
 
-require "al.lsp.mason"
-require("al.lsp.handlers").setup()
+require "al.completion.mason"
+require("al.completion.handlers").setup()
