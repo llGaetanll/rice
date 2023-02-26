@@ -67,6 +67,107 @@ local required_servers = {
 }
 
 
+
+-- TODO: move into WhichKey
+local lsp_keymaps = {
+  -- goto declaration of variable
+  {
+    mode = "n",
+    keymap = "gD",
+    action = "<cmd>lua vim.lsp.buf.declaration()<CR>",
+    desc = "[G]oto [D]eclaration"
+  },
+
+  -- goto definition of variable
+  {
+    mode = "n",
+    keymap = "gd",
+    action = "<cmd>lua vim.lsp.buf.definition()<CR>",
+    desc = "[G]et [d]efinition"
+  },
+
+  -- get info about object
+  {
+    mode = "n",
+    keymap = "gI",
+    action = "<cmd>lua vim.lsp.buf.hover()<CR>",
+    desc = "[G]et [I]nfo"
+  },
+
+  -- get signature of fn
+  {
+    mode = "n",
+    keymap = "gS",
+    action = "<cmd>lua vim.lsp.buf.signature_help()<CR>",
+    desc = "[G]et [S]ignature"
+  },
+
+  -- get implementation info
+  {
+    mode = "n",
+    keymap = "gi",
+    action = "<cmd>lua vim.lsp.buf.implementation()<CR>",
+    desc = "[G]et [i]mplementation"
+  },
+
+  -- rename an object
+  {
+    mode = "n",
+    keymap = "<leader>rn",
+    action = "<cmd>lua vim.lsp.buf.rename()<CR>",
+    desc = "[r]e[n]ame"
+  },
+
+  -- list all references of object
+  {
+    mode = "n",
+    keymap = "gr",
+    action = "<cmd>lua vim.lsp.buf.references()<CR>",
+    desc = "[g]et [r]eferences"
+  },
+
+  -- get code actions
+  {
+    mode = "n",
+    keymap = "<leader>ca",
+    action = "<cmd>lua vim.lsp.buf.code_action()<CR>",
+    desc = "[C]ode [A]ctions"
+  },
+
+  -- display info about errors
+  {
+    mode = "n",
+    keymap = "<leader>f",
+    action = "<cmd>lua vim.diagnostic.open_float()<CR>",
+    desc = "Display info about errors"
+  },
+
+  -- goto previous error
+  {
+    mode = "n",
+    keymap = "[d",
+    action = '<cmd>lua vim.diagnostic.goto_prev {}<CR>',
+    desc = "Prev Def"
+  },
+
+  -- goto next error
+	{
+    mode = "n",
+    keymap = "]d",
+    action = '<cmd>lua vim.diagnostic.goto_next {}<CR>',
+    desc = "Next Def"
+  },
+
+  -- set loc list
+  {
+    mode = "n",
+    keymap = "<leader>q",
+    action = "<cmd>lua vim.diagnostic.setloclist()<CR>",
+    desc = "Set Loc List"
+  },
+}
+
+
 -- This is the function that is attached to a language server when it is attached to a buffer
 local function on_attach(client, bufnr)
 	-- TODO: refactor this into a method that checks if string in list
@@ -74,29 +175,14 @@ local function on_attach(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = false
 	end
 
-
-
   -- load keymaps
   local keymap = vim.api.nvim_buf_set_keymap
 	local opts = { noremap = true, silent = true }
 
   -- key bindings for LSP
-  -- TODO: move into WhichKey
-	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)          -- goto declaration of variable
-	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)           -- goto definition of variable
-	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)                 -- get info about object
-	keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)    -- get signature of fn
-	keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)       -- get implementation info
-	keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)           -- list all references of object
-	keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev {}<CR>', opts)        -- goto previous error
-	keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next {}<CR>', opts)        -- goto next error
-	keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float {}<CR>', opts)       -- display info about errors
-	keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-
-
+  for _, km in ipairs(lsp_keymaps) do
+    keymap(bufnr, km.mode, km.keymap, km.action, opts)
+  end
 
 	-- highlight document
 	local status_ok, illuminate = pcall(require, "illuminate")

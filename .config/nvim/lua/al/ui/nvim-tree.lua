@@ -3,6 +3,30 @@ if not status_ok then
   return
 end
 
+-- This function is almost identical to the `tabnew` action provided
+-- by nvim-tree but, when a file is selected, the cursor is brought
+-- back to the previous pane before switch into the new buffer. 
+local function open(node)
+  -- mode up dir
+  if node.name == ".." then
+    require("nvim-tree.actions.root.change-dir").fn ".."
+
+    -- expand or collapse dir
+  elseif node.nodes then
+    require("nvim-tree.lib").expand_or_collapse(node)
+
+    -- open node in new tab
+  else
+    -- switch focus back from tree to file
+    vim.api.nvim_command [[ wincmd p ]]
+
+    local path = vim.fn.fnameescape(node.absolute_path)
+    vim.api.nvim_command("tabnew " .. path)
+  end
+end
+
+
+
 local nvim_tree_icons = {
   git_placement = "after", -- put the git icon after the filename
   show = {
@@ -32,6 +56,35 @@ local nvim_tree_icons = {
     },
   },
 }
+
+
+
+local mappings = {
+  -- Note: for a list of actions, see `:h nvim-tree-default-mappings`
+  list = {
+
+    -- `l` or `enter` opens a file/dir in a new tab
+    {
+      key = {"l", "<CR>"},
+
+      action = "New Tab",
+
+      -- open the file in a new tab
+      action_cb = open
+    },
+
+    -- `h` or `enter` closes a dir
+    { key = {"h", "<CR>"}, action = "close_node" },
+
+    -- `shift + l` opens file in horizontal split
+    { key = "L", action = "vsplit" },
+
+    -- `ctrl + l` opens file in vertical split
+    { key = "<C-l>", action = "split" },
+  },
+}
+
+
 
 nvim_tree.setup {
   -- Note: for a full list of options, see `:h nvim-tree-setup`
@@ -74,14 +127,16 @@ nvim_tree.setup {
       },
     },
   },
+
   update_focused_file = {
     enable = true,
     update_root = true,
     ignore_list = {}
   },
+
   diagnostics = {
     enable = true,
-    show_on_dirs = true,
+    show_on_dirs = false,
     icons = {
       hint = "",
       info = "",
@@ -89,29 +144,22 @@ nvim_tree.setup {
       error = "",
     },
   },
+
   actions = {
     open_file = {
       -- NvimTree won't close after opening a file
-      quit_on_open = false, 
+      quit_on_open = false,
 
       -- if `nvim .` is ran, NvimTree will launch to let you pick a file to open
-      window_picker = { enable = true }, 
+      window_picker = { enable = true },
     },
   },
+
   view = {
     width = 30, -- width of the tree buffer
     side = "left", -- tree spawns on the left side of the screen
     -- hide_root_folder = true, -- don't display the root folder
-    mappings = {
-      -- Note: for a list of actions, see `:h nvim-tree-default-mappings`
-      list = {
-        { key = {"l", "<CR>"}, action = "tabnew" },      -- `l` or `enter` opens a file/dir in a new tab
-        { key = {"h", "<CR>"}, action = "close_node" },  -- `h` or `enter` closes a dir
-
-        { key = "L", action = "vsplit" },                 -- `shift + l` opens file in horizontal split
-        { key = "<C-l>", action = "split" },            -- `ctrl + l` opens file in vertical split
-      },
-    },
+    mappings = mappings,
     float = {
       open_win_config = {
         relative = "editor",
@@ -133,7 +181,7 @@ nvim_tree.setup {
 -- nvim-tree is also there in modified buffers so this function filter it out
 local modifiedBufs = function(bufs)
     local t = 0
-    for k,v in pairs(bufs) do
+    for _,v in pairs(bufs) do
         if v.name:match("NvimTree_") == nil then
             t = t + 1
         end
