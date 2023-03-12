@@ -106,7 +106,7 @@ end
 
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
+-- local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -136,43 +136,238 @@ vim.g.maplocalleader = "\\" -- needed for VimTeX
 -- keymap("n", "<C-g>", "zl", opts)
 
 -- Resize windows with arrow keys
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+-- keymap("n", "<C-Up>", ":resize -2<CR>", opts)
+-- keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+-- keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+-- keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+--
+-- -- Telescope Keybinds
+-- local telescope_ok, telescope_builtin = pcall(require, 'telescope.builtin')
+-- if telescope_ok then
+--   vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
+--   vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, {})
+--   vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
+--   vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, {})
+-- end
+
+
+local telescope_keybinds = {
+  {
+    mode = "n",
+    keymap = "<leader>ff",
+    action = require("telescope.builtin").find_files,
+    desc = "[f]ind [f]iles"
+  },
+  {
+    mode = "n",
+    keymap = "<leader>fg",
+    action = require("telescope.builtin").live_grep,
+    desc = "[f]ile [g]rep"
+  },
+  {
+    mode = "n",
+    keymap = "<leader>fb",
+    action = require("telescope.builtin").buffers,
+    desc = "[f]ind [b]uffers"
+  },
+  {
+    mode = "n",
+    keymap = "<leader>fh",
+    action = require("telescope.builtin").help_tags,
+    desc = "[f]ind [h]elp"
+  }
+}
 
 -- Telescope Keybinds
-local telescope_ok, telescope_builtin = pcall(require, 'telescope.builtin')
-if telescope_ok then
-  vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
-  vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, {})
-  vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
-  vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, {})
+for _, km in ipairs(telescope_keybinds) do
+  vim.keymap.set(km.mode, km.keymap, km.action, { desc = km.desc })
+end
+
+
+local keybinds = {
+  {
+    mode = "n",
+    keymap = "<leader><Space>",
+    action = "<cmd>WhichKey<CR>",
+    desc = "List all keybinds"
+  },
+
+  -- resize panes
+  {
+    mode = "n",
+    keymap = "<C-Up>",
+    action = "<cmd>resize -2<CR>",
+    desc = "Resize windows"
+  },
+  {
+    mode = "n",
+    keymap = "<C-Down>",
+    action = "<cmd>resize +2<CR>",
+    desc = "Resize windows"
+  },
+  {
+    mode = "n",
+    keymap = "<C-Left>",
+    action = "<cmd>vertical resize -2<CR>",
+    desc = "Resize windows"
+  },
+  {
+    mode = "n",
+    keymap = "<C-Right>",
+    action = "<cmd>vertical resize +2<CR>",
+    desc = "Resize windows"
+  },
+
+  -- Navigate Panes
+  {
+    mode = "n",
+    keymap = "<Up>",
+    action = "<C-w>k",
+    desc = "Navigate to window above"
+  },
+  {
+    mode = "n",
+    keymap = "<Down>",
+    action = "<C-w>j",
+    desc = "Navigate to window below"
+  },
+  {
+    mode = "n",
+    keymap = "<Left>",
+    action = "<C-w>h",
+    desc = "Navigate to left window"
+  },
+  {
+    mode = "n",
+    keymap = "<Right>",
+    action = "<C-w>l",
+    desc = "Navigate to right window"
+  },
+
+  -- Move Panes
+  {
+    mode = "n",
+    keymap = "<S-Up>",
+    action = "<C-w>K",
+    desc = "Move window above"
+  },
+  {
+    mode = "n",
+    keymap = "<S-Down>",
+    action = "<C-w>J",
+    desc = "Move window below"
+  },
+  {
+    mode = "n",
+    keymap = "<S-Left>",
+    action = "<C-w>H",
+    desc = "Move window left"
+  },
+  {
+    mode = "n",
+    keymap = "<S-Right>",
+    action = "<C-w>L",
+    desc = "Move window right"
+  },
+
+  -- Navigate Tabs
+  {
+    mode = "n",
+    keymap = "<c-l>",
+    action = "gt",
+    desc = "next tab"
+  },
+  {
+    mode = "n",
+    keymap = "<c-h>",
+    action = "gT",
+    desc = "prev tab"
+  },
+
+  -- Clear search highlighting
+  {
+    mode = "n",
+    keymap = "<Esc>",
+    action = ":noh<CR>",
+    desc = "clear search highlight"
+  },
+
+  -- Stay in visual mode after indenting
+  {
+    mode = "v",
+    keymap = "<",
+    action = "<gv",
+    desc = "indent less"
+  },
+  {
+    mode = "v",
+    keymap = ">",
+    action = ">gv",
+    desc = "indent more"
+  },
+
+  {
+    mode = "v", -- visual mode
+    keymap = "<c-y>",
+    action = '"+y',
+    desc = "copy to system clipboard"
+  },
+  {
+    mode = "x", -- visual block
+    keymap = "<c-y>",
+    action = '"+y',
+    desc = "copy to system clipboard"
+  },
+
+  {
+    mode = "n",
+    keymap = "<leader>t",
+    action = '<cmd>NvimTreeToggle<CR>',
+    desc = "[t]oggle NvimTree"
+  },
+  {
+    mode = "n",
+    keymap = "<leader>T",
+    action = '<cmd>NvimTreeFocus<CR>',
+    desc = "Focus NvimTree"
+  },
+
+  {
+    mode = "n",
+    keymap = "<leader>d",
+    action = '<C-w>q',
+    desc = "Close window"
+  },
+}
+
+-- set keymaps
+for _, km in ipairs(keybinds) do
+  keymap(km.mode, km.keymap, km.action, { noremap = true, silent = true, desc = km.desc })
 end
 
 
 -- Navigate tabs
-keymap("n", "<c-l>", "gT", opts)
-keymap("n", "<c-h>", "gt", opts)
+-- keymap("n", "<c-l>", "gT", opts)
+-- keymap("n", "<c-h>", "gt", opts)
 
 -- pressing escape clears highlightings
-keymap("n", "<Esc>", ":noh<CR>", opts)
+-- keymap("n", "<Esc>", ":noh<CR>", opts)
 
 -- Stay in visual mode after indenting
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+-- keymap("v", "<", "<gv", opts)
+-- keymap("v", ">", ">gv", opts)
 
 -- Move text up and down
 -- keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 -- keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 
 -- TODO: what is this
-keymap("v", "p", '"_dP', opts)
+-- keymap("v", "p", '"_dP', opts)
 
 -- ctrl + y to copy selection to system clipboard
-keymap("v", "<c-y>", '"+y', opts) -- visual mode
-keymap("x", "<c-y>", '"+y', opts) -- visual block
+-- keymap("v", "<c-y>", '"+y', opts) -- visual mode
+-- keymap("x", "<c-y>", '"+y', opts) -- visual block
 
 -- NvimTree
-keymap("n", "<leader>t", ":NvimTreeToggle<CR>", opts)
-keymap("n", "<leader>T", ":NvimTreeFocus<CR>", opts)
+-- keymap("n", "<leader>t", ":NvimTreeToggle<CR>", opts)
+-- keymap("n", "<leader>T", ":NvimTreeFocus<CR>", opts)

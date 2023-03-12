@@ -54,6 +54,8 @@ bufferline.setup {
       {
         filetype = "NvimTree",
         text = "NvimTree",
+        highlight = "NvimTreeHeader", -- created in colorscheme.lua
+        text_align = "left",
         padding = 0,
       }
     },
@@ -67,39 +69,49 @@ bufferline.setup {
   },
 
   highlights = {
-    -- whole bufferline highlights
-    fill = {
-      fg = { attribute = "fg", highlight = "#ff0000" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    background = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    -- tab highlights
-    tab_selected = {
-      fg = { attribute = "fg", highlight = "Normal" },
-      bg = { attribute = "bg", highlight = "Normal" },
-      bold = true,
-      italic = false
-    },
-    tab = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    -- buffer highlights
     buffer_selected = {
-      fg = { attribute = "fg", highlight = "Normal" },
-      bg = { attribute = "bg", highlight = "Normal" },
       bold = true,
       italic = false
     },
-    buffer_visible = {
-      fg = { attribute = "fg", highlight = "TabLine" },
-      bg = { attribute = "bg", highlight = "TabLine" },
-    },
-  },
+    tab_selected = {
+      bold = true,
+      italic = false
+    }
+  }
+  -- highlights = {
+  --   -- whole bufferline highlights
+  --   fill = {
+  --     fg = { attribute = "fg", highlight = "#ff0000" },
+  --     bg = { attribute = "bg", highlight = "TabLine" },
+  --   },
+  --
+  --   background = {
+  --     fg = { attribute = "fg", highlight = "TabLine" },
+  --     bg = { attribute = "bg", highlight = "TabLine" },
+  --   },
+  --
+  --   -- tab highlights
+  --   tab_selected = {
+  --     fg = { attribute = "fg", highlight = "Normal" },
+  --     bg = { attribute = "bg", highlight = "Normal" },
+  --     bold = true,
+  --     italic = false
+  --   },
+  --   tab = {
+  --     fg = { attribute = "fg", highlight = "String" },
+  --     bg = { attribute = "bg", highlight = "String" },
+  --   },
+  --
+  --   -- buffer highlights
+  --   buffer_selected = {
+  --     fg = { attribute = "fg", highlight = "Normal" },
+  --     bg = { attribute = "bg", highlight = "Normal" },
+  --     bold = true,
+  --     italic = false
+  --   },
+  --   buffer_visible = {
+  --     fg = { attribute = "fg", highlight = "String" },
+  --     bg = { attribute = "bg", highlight = "String" },
+  --   },
+  -- },
 }

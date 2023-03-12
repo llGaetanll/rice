@@ -75,10 +75,3 @@ gitsigns.setup {
     enable = false,
   },
 }
-
-
--- gsd = vim.api.nvim_get_hl_by_name('GitSignsDelete', true)
--- vim.api.nvim_set_hl(0, 'GitSignsDelete', {
---   bg = gsd.foreground,
---   fg = gsd.background
--- })

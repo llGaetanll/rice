@@ -20,8 +20,8 @@ local function open(node)
     -- switch focus back from tree to file
     vim.api.nvim_command [[ wincmd p ]]
 
-    local path = vim.fn.fnameescape(node.absolute_path)
-    vim.api.nvim_command("tabnew " .. path)
+    -- call nvim-tree tabnew on the node
+    require("nvim-tree.api").node.open.tab(node)
   end
 end
 
@@ -73,14 +73,19 @@ local mappings = {
       action_cb = open
     },
 
+    -- `L` recursively opens a directory
+    {
+      key = "L", action = "expand_all"
+    },
+
     -- `h` or `enter` closes a dir
     { key = {"h", "<CR>"}, action = "close_node" },
 
-    -- `shift + l` opens file in horizontal split
-    { key = "L", action = "vsplit" },
+    -- `i` opens file left of current file
+    { key = "i", action = "vsplit" },
 
-    -- `ctrl + l` opens file in vertical split
-    { key = "<C-l>", action = "split" },
+    -- `o` opens file below current file
+    { key = "o", action = "split" },
   },
 }
 
@@ -138,10 +143,10 @@ nvim_tree.setup {
     enable = true,
     show_on_dirs = false,
     icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
+      error = "",
+      warning = "",
+      hint = "",
+      info = "?"
     },
   },
 
@@ -173,6 +178,17 @@ nvim_tree.setup {
   },
 }
 
+
+-- open nvim tree on startup
+-- see: https://github.com/nvim-tree/nvim-tree.lua/wiki/Open-At-Startup
+local function open_nvim_tree()
+  require("nvim-tree.api").tree.open()
+
+  -- switch focus back from tree to file
+  vim.api.nvim_command [[ wincmd p ]]
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter "}, { callback = open_nvim_tree })
 
 
 -- auto close nvim tree if it is the last buffer

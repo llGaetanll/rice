@@ -62,6 +62,7 @@ return packer.startup(function(use)
   -- parses the file much more accurately to provide better commenting / syntax-highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use "p00f/nvim-ts-rainbow"                        -- color match parentheses
+  use 'nvim-treesitter/playground'
 
   -- Commenting
   use {
@@ -84,15 +85,23 @@ return packer.startup(function(use)
 
   -- snippets
   use "L3MON4D3/LuaSnip"                            -- snippets used in autocompletion
+  use "saadparwaiz1/cmp_luasnip"                    -- luasnip completion source for nvim-cmp
   use "rafamadriz/friendly-snippets"                -- massive repo of popular snippets for autocompletion
 
   -- autopairs
   use "windwp/nvim-autopairs"                       -- autocomplete parentheses, brackets, etc...
 
+  -- Telescope fuzzy-finding
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     requires = { {'nvim-lua/plenary.nvim'} }
-  }                                                 -- Telescope fuzzy-finding
+  }
+
+  -- Telescope for Snippets
+  use {
+      "benfowler/telescope-luasnip.nvim",
+      module = "telescope._extensions.luasnip",  -- if you wish to lazy-load
+  }
 
 
   --- LSP - Language Server Protocol

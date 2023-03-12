@@ -36,6 +36,10 @@ local options = {
   relativenumber = false,                  -- set relative numbered lines
   numberwidth = 4,                         -- set number column width to 2 {default 4}
 
+  -- Folding
+  foldmethod = 'manual',                   -- folds based on indent
+  foldlevel = 0,                           -- folds off by default
+
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time the LSP complains
   wrap = false,                            -- whether to wrap lines
   linebreak = false,                       -- companion to wrap, don't split words

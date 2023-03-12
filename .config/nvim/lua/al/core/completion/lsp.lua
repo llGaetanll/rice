@@ -21,9 +21,9 @@ end
 
 -- sign icons used by nvim lsp
 local signs = {
-  { name = "DiagnosticSignError", text = "x" },
-  { name = "DiagnosticSignWarn", text = "!" },
-  { name = "DiagnosticSignHint", text = "i" },
+  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
   { name = "DiagnosticSignInfo", text = "?" },
 }
 
@@ -32,7 +32,7 @@ local signs = {
 -- this is how lsp looks
 local lsp_params = {
   -- disable virtual text
-  virtual_text = true,
+  virtual_text = false,
 
   -- show signs
   signs = {
@@ -68,7 +68,6 @@ local required_servers = {
 
 
 
--- TODO: move into WhichKey
 local lsp_keymaps = {
   -- goto declaration of variable
   {
@@ -177,11 +176,10 @@ local function on_attach(client, bufnr)
 
   -- load keymaps
   local keymap = vim.api.nvim_buf_set_keymap
-	local opts = { noremap = true, silent = true }
 
   -- key bindings for LSP
   for _, km in ipairs(lsp_keymaps) do
-    keymap(bufnr, km.mode, km.keymap, km.action, opts)
+    keymap(bufnr, km.mode, km.keymap, km.action, { noremap = true, silent = true, desc = km.desc })
   end
 
 	-- highlight document
