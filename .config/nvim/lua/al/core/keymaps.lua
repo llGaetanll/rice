@@ -175,6 +175,12 @@ local telescope_keybinds = {
     keymap = "<leader>fh",
     action = require("telescope.builtin").help_tags,
     desc = "[f]ind [h]elp"
+  },
+  {
+    mode = "n",
+    keymap = "<leader>gh",
+    action = require("telescope.builtin").highlights,
+    desc = "[g]et [h]ighlights"
   }
 }
 
@@ -330,6 +336,14 @@ local keybinds = {
     keymap = "<leader>T",
     action = '<cmd>NvimTreeFocus<CR>',
     desc = "Focus NvimTree"
+  },
+
+  -- Markdown
+  {
+    mode = "n",
+    keymap = "<leader>mp",
+    action = '<cmd>MarkdownPreview<CR>',
+    desc = "Toggle Markdown Preview"
   },
 
   {
