@@ -21,7 +21,18 @@
 .local/share/*
 !.local/share/fonts/
 .local/share/fonts/.uuid
+
 !.local/share/applications/
+.local/share/applications/*
+!.local/share/applications/file.desktop
+!.local/share/applications/img.desktop
+!.local/share/applications/mail.desktop
+!.local/share/applications/pdf.desktop
+!.local/share/applications/rss.desktop
+!.local/share/applications/spreadsheet.desktop
+!.local/share/applications/text.desktop
+!.local/share/applications/torrent.desktop
+
 # add default wallpaper
 !.local/share/default.png
 
