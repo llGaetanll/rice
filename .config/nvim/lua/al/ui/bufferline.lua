@@ -55,7 +55,7 @@ bufferline.setup {
         filetype = "NvimTree",
         text = "NvimTree",
         highlight = "NvimTreeHeader", -- created in colorscheme.lua
-        text_align = "left",
+        text_align = "center",
         padding = 0,
       }
     },
