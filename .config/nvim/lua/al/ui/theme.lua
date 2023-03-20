@@ -143,6 +143,7 @@ local highlights = {
   TelescopePromptNormal = { fg = accent1, bg = lighter, bold = true },
   TelescopePromptPrefix = { fg = accent1, bg = lighter },
   TelescopePromptTitle = { fg = darker, bg = accent1, bold = true },
+  TelescopePromptCounter = { fg = darker, bg = lighter },
 
   -- bottom left
   TelescopeResultsTitle = { fg = dark , bg = accent3, bold = true },
@@ -175,7 +176,7 @@ local highlights = {
 -- this icons are used across nvim for lsp, nvim-tree, bufferline, etc...
 local lsp_icons = {
   error = "",
-  warn = "",
+  warn = "",
   hint = "",
   info = "?"
 }

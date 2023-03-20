@@ -62,7 +62,6 @@ local nvim_tree_icons = {
 local mappings = {
   -- Note: for a list of actions, see `:h nvim-tree-default-mappings`
   list = {
-
     -- `l` or `enter` opens a file/dir in a new tab
     {
       key = {"l", "<CR>"},
@@ -114,7 +113,7 @@ nvim_tree.setup {
     icons = nvim_tree_icons,
 
     -- opened files are highlighted
-    highlight_opened_files = "all",
+    highlight_opened_files = "name",
 
     -- file color matches git file status
     highlight_git = true,
@@ -144,9 +143,9 @@ nvim_tree.setup {
     show_on_dirs = false,
     icons = {
       error = "",
-      warning = "",
+      warning = "",
       hint = "",
-      info = "?"
+      info = ""
     },
   },
 
