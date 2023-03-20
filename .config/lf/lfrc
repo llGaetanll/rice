@@ -8,7 +8,7 @@ set scrolloff 10
 set preview
 
 # outline columns
-# set drawbox
+set drawbox
 
 # enable icons
 set icons
