@@ -106,63 +106,152 @@ You can move between panes with `h` `j` `k` `l`.
 
 ## nvim
 
-<img width=100% src="https://i.imgur.com/rZUMftx.png" alt="gruvbox-nvim">
+<img width=100% src="https://i.imgur.com/ONIpqjU.png" alt="Neovim">
 
-A community rewrite of vim. The config file `.config/nvim/init.vim` is well documented if you want to see what features are included.
+<details>
+  <summary><b>More Pictures</b></summary>
+
+  ### Telescope
+
+  Fuzzy Find files, text, etc...
+
+  <img width=100% src="https://i.imgur.com/zmiZ83z.png" alt="Nvim Telescope">
+
+
+
+  ### LSP
+
+  Built-in Language Servers
+
+  <img width=100% src="https://i.imgur.com/OaP1uy8.png" alt="Nvim LSP">
+
+</details>
+
+<!-- <img width=100% src="https://i.imgur.com/rZUMftx.png" alt="gruvbox-nvim"> -->
+
+Neovim is a community rewrite of vim. The config file `.config/nvim/init.lua` is well
+documented if you want to see what features are included.
+
+This is arguably the most interesting part of this configuration. If you want to
+use my vim config without having to install the rest of the system, you can
+simply copy the files inside of the `.config/nvim/` directory to your local
+neovim config directory.
+
+If you don't know how to find your local neovim config directory, you can open
+neovim and use the following command
+
+```
+:echo stdpath('config')
+```
+
+**Note**: The config should mostly work out of the box, except for `Telescope`
+which may require ripgrep to be installed. See [Searching](#searching) for more info.
 
 ### Additions/Keybinds
 
-- `,` The leader key.
+All keybinds are accessible through [WhichKey](https://github.com/folke/which-key.nvim) by pressing `<Space><Space>`. Below are some important ones.
+
+- ` ` (*space*) The leader key.
 
 #### Tabs
 
-All Tab keybinds are prefixed by `<Tab>`.
+Tabs are styled using [bufferline](https://github.com/akinsho/bufferline.nvim).
 
-- `<Tab> + n` move to next tab. Same as `gt`
-- `<Tab> + N` move to previous tab. Same as `gT`
-- `<Tab> + t` move current window to a new tab.
-- `<Tab> + a` create a new tab with an empty window.
-- `<Tab> + h` move current tab left.
-- `<Tab> + l` move current tab right.
+- `<ctrl> + l` move to next tab. Same as `gt`
+- `<ctrl> + h` move to previous tab. Same as `gT`
+<!-- - `<Tab> + t` move current window to a new tab. -->
+<!-- - `<Tab> + a` create a new tab with an empty window. -->
+<!-- - `<Tab> + h` move current tab left. -->
+<!-- - `<Tab> + l` move current tab right. -->
 
 #### Windows
 
-- `ctrl + w + ctrl + h/j/k/l` resize current window.
+Window keybinds are handled through use of the arrow keys.
 
-#### fzf
+- `up/down/left/right` Move to different window.
+- `ctrl + up/down/left/right` Resize current window.
 
-- `ctrl + p` Fuzzy Find Git files in current project directory
-- `ctrl + shift + p` Fuzzy Find any file in current project directory
+#### Searching
+Custom search is handled through [Telescope](https://github.com/nvim-telescope/telescope.nvim).
 
-#### NERDTree
+Note that telescope might require [ripgrep](https://github.com/BurntSushi/ripgrep) to be installed. You can run
+`:checkhealth Telescope` to see if you need it.
 
-In this config, NERDTree also comes with file icons, git icons, and syntax highlighting.
+- `<leader> + ff` Find files: Fuzzy find file names in the current
+  directory.
 
-- `ctrl + n` toggle NERDTree (like the side menu in vscode)
+- `<leader> + fg` Live Grep **(requires `ripgrep`)**: Fuzzy find text content of any
+  file in the current working directory.
 
-#### NERDCommenter
+- `<leader> + fb` Find Buffers: Fuzzy find currently openned buffers.
 
-- `ctrl + /` toggle commenting. works in `normal`, `insert`, and `visual` mode.
+- `<leader> + fh` Find Help
 
-#### Conquer of Completion
+#### File Tree
 
-- `ctrl + <space>` autocomplete (if available through Conquer of Completion).
+The file tree is [NvimTree](https://github.com/nvim-tree/nvim-tree.lua).
+
+- `<leader> + t` Toggle NvimTree
+- `<leader> + T` Focus NvimTree
+
+#### Commenting
+
+When visually selecting lines, the following commenting keybinds are available.
+
+- `gcc` Toggle line commenting on current selection
+- `gb` Toggle block commenting on current selection
+
+Commenting is also context aware thanks to TreeSitter, and will work in JSX
+files.
+
+#### LSP
+
+This is what gives neovim the amazing autocompletion settings.
+
+- `gD` Goto declaration of token
+- `gd` Get definition of token
+- `gI` Get info
+- `gS` Get Signature
+- `gi` Get implementation
+- `<leader> + rn` Rename token
+- `gr` Get references
+- `<leader> + ca` Get code actions
+- `<leader> + f` Get info about errors
+- `[d` Goto previous error
+- `]d` Goto next error
+- `<leader> + q` Set loc list
+
+<!-- - `ctrl + <space>` autocomplete (if available through Conquer of Completion).
 - `F2` rename every instance of a variable in the file.
 
 - `K` show documentation on currently selected item.
-  - `ctrl + j/k` can be used to scroll up and down the window if possible.
+  - `ctrl + j/k` can be used to scroll up and down the window if possible. -->
 
-#### Git Gutter
+#### Git
 
-- `<Leader> + g + n` display next change.
-- `<Leader> + g + p` display previous change.
-- `<Leader> + g + z` toggle fold leaving only changes.
+Git signs are handled by [gitsigns](https://github.com/lewis6991/gitsigns.nvim).
+
+**TODO**: Assign mappings
+
+<!-- - `<Leader> + g + n` display next change. -->
+<!-- - `<Leader> + g + p` display previous change. -->
+<!-- - `<Leader> + g + z` toggle fold leaving only changes. -->
 
 #### MarkDown Preview
 
-- `<Leader> + m + p` toggles markdown preview in the default browser.
+Neovim can automatically display markdown documents and live changes. To do
+this, use the following command
+
+```
+:MarkdownPreview
+```
+
+- `<leader> + m + p` Enables `MarkdownPreview` in the default browser.
 
 #### VimTeX
+
+[VimTeX](https://github.com/lervag/vimtex/) handles the compilation of LaTeX
+documents through neovim.
 
 - `\ll` toggles compilation of current document
   - Opens in default pdf viewer
@@ -171,13 +260,25 @@ In this config, NERDTree also comes with file icons, git icons, and syntax highl
 - `\lk` stops compilation
 - `\lc` clears auxiliary files
 
+For more commands available through VimteX, see [Motion Commands](https://github.com/lervag/vimtex/blob/master/VISUALS.md#motion-commands).
+
 ### Themes
 
-These can be changed in `~/.config/nvim/local.nvim`
+These can be changed in `~/.config/nvim/lua/al/ui/theme.nvim` by changing the
+variable
 
-- gruvbox (default)
-- sonokai
-- alduin
+```lua
+local colorscheme = "gruvbox"
+```
+
+Other included colorschemes are
+
+- gruvbox **(default)**
+- melange
+- oceanic-next
+- blue-moon
+- everforest
+- darkplus
 
 ## polybar
 
@@ -383,20 +484,10 @@ a difference in scrolling direction.
 
 ## nvim
 
-- [ ] Sync open file with NERDTree
-  - Current solution is commented out and does not work
-  - I cannot get this to work, it is really hard for some reason
-- [ ] Better git diff support
-- Spell/Grammar check in comments/certain file formats
-  - [x] Latex
-  - [x] Markdown
-  - [ ] Any programming language comments
-    - I don't know if this is actually possible, maybe with LSP?
-- More syntax autocomplete
-  - [ ] Latex autoclosing tags
-  - [ ] Markdown
-- [ ] Switch from CoC to Native LSP support?
-  - This looks interesting, but looks like a lot of work.
+- [ ] Git diff support?
+- More autocomplete
+  - [ ] Latex/Markdown keybinds for italicizing, bolding, underlining...
+    - Not sure if this is possible?
 
 ## lf
 
@@ -412,7 +503,7 @@ a difference in scrolling direction.
 
 ## zathura
 
-- [ ] Window currently spawns in floating mode
+- [x] Make window spawn in tiling mode.
 
 ## polybar
 
@@ -424,6 +515,7 @@ a difference in scrolling direction.
   - format: `<pacman packages> <aur-packages>`
   - left click: refresh update count
   - right click: 1-click update
+- [ ] Add bluetooth module
 
 ## bspwm
 
