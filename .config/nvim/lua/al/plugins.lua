@@ -73,6 +73,8 @@ return packer.startup(function(use)
   }
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- for native jsx context-aware commenting
 
+  use "lukas-reineke/indent-blankline.nvim"         -- display indents
+
 
 
   -- CMP - Autocomplete
@@ -90,6 +92,9 @@ return packer.startup(function(use)
 
   -- autopairs
   use "windwp/nvim-autopairs"                       -- autocomplete parentheses, brackets, etc...
+
+  -- file formatting
+  use "mhartington/formatter.nvim"                  -- automatically format files on save
 
   -- Telescope fuzzy-finding
   use {
