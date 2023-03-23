@@ -473,6 +473,26 @@ In my case, swapping `4` and `5` reversed vertical scrolling, and switching `6` 
 If like me you got multiple slave pointer devices, simply try switching these numbers around on each of them, and undo your changes if you don't notice
 a difference in scrolling direction.
 
+## Changing the DPI
+
+The system DPI can be controlled in 3 different places across the system.
+- In `~/.config/Xresources` for web browser and other system apps
+- In `~/.config/polybar/modules.ini` for polybar scaling
+- In `config.h`, in `st`'s configuration files for the terminal
+
+## Getting WiFi
+
+Network Manager is installed so you have access to `nmtui`. It's not the best
+terminal user interface, but for easily connecting to wifi quickly, it does the
+trick.
+
+## Monitor Backlight doesn't Change
+
+If your keyboard backlight doesn't change when you perform the system shortcut,
+it might be because of file permissions.
+
+For more information, check the script in `.local/bin/system/setbacklight`.
+
 # TODO
 
 - [x] Add docs and list of shortcuts
