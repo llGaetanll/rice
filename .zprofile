@@ -3,7 +3,7 @@
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
 export EDITOR="nvim" # default text editor is neovim
-export TERMINAL="st" # default terminal is suckless' simple terminal
+export TERMINAL="alacritty" # default terminal is alacritty
 export BROWSER="firefox" # default browser is firefox
 export READER="zathura" # default pdf reader is zathura
 
