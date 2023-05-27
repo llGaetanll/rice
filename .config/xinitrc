@@ -3,9 +3,7 @@
 # set any system-dependent environment variables here
 export POLYBAR="$XDG_CONFIG_HOME/polybar/default.ini" # path to the polybar loaded on startup
 export BAR_HEIGHT=45 # matched by polybar and dmenu
-
-# icons sourced by lf at launch
-. "$XDG_CONFIG_HOME/lf/icons.sh"
+export DEF_WIN_GAP=30
 
 # source cargo environment at launch.
 # Used for rust
