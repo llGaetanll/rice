@@ -29,10 +29,8 @@ if ts_ok then
 	configs.setup(ts_config)
 end
 
-colorizer_config = {}
-
 -- config colorizer if installed
 local colorizer_ok, colorizer = pcall(require, "colorizer")
 if colorizer_ok then
-	colorizer.setup(colorizer_config)
+	colorizer.setup()
 end
