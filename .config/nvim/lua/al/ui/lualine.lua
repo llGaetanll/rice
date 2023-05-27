@@ -3,9 +3,26 @@ if not status_ok then
   return
 end
 
+
+-- load the lsp icons from the theme
+local lsp_icons = require('al.ui.theme').lsp_icons
+
+local spaced_icons = {}
+for key, value in pairs(lsp_icons) do
+  spaced_icons[key] = value .. " "
+end
+
+
 local sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_b = {
+      'branch',
+      'diff',
+      {
+      'diagnostics',
+        symbols = spaced_icons,
+      }
+    },
     lualine_c = {'filename'},
     lualine_x = {'encoding'},
     lualine_y = {'progress'},

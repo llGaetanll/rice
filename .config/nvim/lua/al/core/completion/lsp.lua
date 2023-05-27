@@ -19,12 +19,16 @@ if not cmp_nvim_ok then
 end
 
 
+-- load the lsp icons from the theme
+local lsp_icons = require('al.ui.theme').lsp_icons
+
+
 -- sign icons used by nvim lsp
 local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "?" },
+  { name = "DiagnosticSignError", text = lsp_icons.error },
+  { name = "DiagnosticSignWarn", text = lsp_icons.warn },
+  { name = "DiagnosticSignHint", text = lsp_icons.hint },
+  { name = "DiagnosticSignInfo", text = lsp_icons.info },
 }
 
 
@@ -32,7 +36,7 @@ local signs = {
 -- this is how lsp looks
 local lsp_params = {
   -- disable virtual text
-  virtual_text = false,
+  virtual_text = true,
 
   -- show signs
   signs = {
@@ -60,9 +64,6 @@ local required_servers = {
   "pyright",        -- Python
   "tsserver",       -- TypeScript
   "texlab",         -- LaTeX
-  "gopls",          -- GoLang
-  "clangd",         -- C/C++
-  "jdtls",          -- Java
   "lua_ls"          -- Lua (sumneko_lua now deprecated)
 }
 
@@ -88,9 +89,9 @@ local lsp_keymaps = {
   -- get info about object
   {
     mode = "n",
-    keymap = "gI",
+    keymap = "K",
     action = "<cmd>lua vim.lsp.buf.hover()<CR>",
-    desc = "[G]et [I]nfo"
+    desc = "Get Info"
   },
 
   -- get signature of fn
@@ -174,7 +175,7 @@ local function on_attach(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = false
 	end
 
-  -- load keymaps
+  -- load keymap setting function
   local keymap = vim.api.nvim_buf_set_keymap
 
   -- key bindings for LSP
@@ -203,19 +204,23 @@ mason.setup {
 mason_lsp.setup {}
 
 
+-- settings directory for language server parameters
+local servers_dir = "al.core.completion.servers"
 
 -- for each language server we setup any potential custom settings
 for _, server in pairs(required_servers) do
-
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 	local opts = {
 		on_attach = on_attach,
 		capabilities = cmp_nvim_lsp.default_capabilities(capabilities),
 	}
 
+  -- directory of the current language server setting (if it exists)
+  local server_dir = servers_dir .. "." .. server
+
   -- check for any language server specific settings
   -- if any are found, update the lsp options for that server
-	local has_custom_opts, server_custom_opts = pcall(require, "al.core.completion.lsp.servers." .. server)
+	local has_custom_opts, server_custom_opts = pcall(require, server_dir)
 	if has_custom_opts then
 		opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
 	end

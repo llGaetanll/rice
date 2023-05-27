@@ -72,6 +72,7 @@ end
 -- TODO: define proper color scheme. This is a temp solution
 local hl_normal = get_hl("Normal") -- dark
 local hl_normal_float = get_hl("NormalFloat") -- lighter
+local hl_conceal = get_hl("Conceal") -- light gray text
 
 local darker = "#1e1e1e"
 local dark = get_hl("TabLine").background
@@ -140,10 +141,10 @@ local highlights = {
 
   -- top left
   TelescopePromptBorder = { fg = lighter, bg = lighter },
-  TelescopePromptNormal = { fg = accent1, bg = lighter, bold = true },
-  TelescopePromptPrefix = { fg = accent1, bg = lighter },
+  TelescopePromptNormal = { fg = accent1, bg = lighter },
+  TelescopePromptPrefix = { fg = accent1, bg = lighter, bold = true },
   TelescopePromptTitle = { fg = darker, bg = accent1, bold = true },
-  TelescopePromptCounter = { fg = darker, bg = lighter },
+  TelescopePromptCounter = { fg = hl_conceal.foreground, bg = lighter },
 
   -- bottom left
   TelescopeResultsTitle = { fg = dark , bg = accent3, bold = true },
@@ -172,16 +173,17 @@ local highlights = {
 -- bg("TelescopeSelection", black2)
 
 
+local M = {}
 
 -- this icons are used across nvim for lsp, nvim-tree, bufferline, etc...
-local lsp_icons = {
-  error = "",
+M.lsp_icons = {
+  error = "󰅙",
   warn = "",
-  hint = "",
-  info = "?"
+  hint = "󰌵",
+  info = ""
 }
-
-
 
 -- apply highlight groups
 set_highlights(highlights)
+
+return M
