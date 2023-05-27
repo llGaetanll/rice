@@ -7,7 +7,13 @@
 WIN_GAP=`bspc config window_gap`
 
 if [ "$WIN_GAP" -eq "0" ]; then
+  # gap mode
   bspc config window_gap $DEF_WIN_GAP
+
+  # TODO: make environment variable
+  # bspc config border_radius 10
 else
+  # fullscreen mode
   bspc config window_gap 0
+  # bspc config border_radius 0
 fi
