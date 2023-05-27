@@ -51,6 +51,7 @@
 !.config/sxhkd
 !.config/i3
 !.config/bspwm
+!.config/alacritty
 !.config/lf
 !.config/mpv
 !.config/neofetch
