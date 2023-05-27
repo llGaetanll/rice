@@ -497,6 +497,9 @@ For more information, check the script in `.local/bin/system/setbacklight`.
 
 - [x] Add docs and list of shortcuts
 - [ ] Add more pictures (never enough)
+- Remap Caps Lock to Esc at a udev level
+  - programs outside of xorg won't respond to it. vscode and minecraft have
+    already stopped
 - [ ] Look for pywal alternatives.
   - pywal does not generate enough colors for nvim, which I rather would match system colors
     than a custom theme.
