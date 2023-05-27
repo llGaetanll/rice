@@ -16,12 +16,12 @@ fi
 bspc config 
 
 bspc config top_padding        0
-bspc config bottom_padding     0
+bspc config bottom_padding     "$BAR_HEIGHT"
 bspc config left_padding       0
 bspc config right_padding      0
 
 bspc config border_width            0
-bspc config window_gap              12
+bspc config window_gap              "$DEF_WIN_GAP"
 
 bspc config split_ratio             0.5 # 0.52
 bspc config focus_follows_pointer   true # Focus the window under the pointer.
@@ -29,6 +29,10 @@ bspc config focus_follows_pointer   true # Focus the window under the pointer.
 
 # spawn zathura in tiling mode
 bspc rule -a Zathura state=tiled
+
+# rounded corners
+# TODO: check if bspwm-rounded-corners is installed
+# bspc config border_radius 10
 
 # source the colors.
 # see: https://github.com/dylanaraps/pywal/wiki/Customization#bspwm
