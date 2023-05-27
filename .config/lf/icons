@@ -125,6 +125,7 @@ fi             # FILE
 *.pm            
 *.t             
 *.rss           
+'*.f#'          
 *.fsscript      
 *.fsx           
 *.fs            
@@ -147,7 +148,7 @@ fi             # FILE
 *.tsx           
 *.jl            
 *.pp            
-*.vue           ﵂
+*.vue           
 *.elm           
 *.swift         
 *.xcplayground  

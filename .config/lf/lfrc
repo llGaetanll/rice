@@ -30,14 +30,17 @@ $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 # redefine number of columns dynamically on launch
 # currently not working due to race condition.
 # see: https://github.com/gokcehan/lf/issues/495
-cmd recol &{{
+cmd recol ${{
     w=$(tput cols)
-    if [ $w -le 160 ]; then
-	    lf -remote "send $id set ratios 1:1:1"
-    elif [ $w -le 80 ]; then
-	    lf -remote "send $id set ratios 1:1"
+   
+    if [ $w -ge 120 ]; then
+      lf -remote "send $id :set ratios 1:1:1:1; set preview true"
+    elif [ $w -ge 80 ]; then
+      lf -remote "send $id :set ratios 1:1:1; set preview true"
+    elif [ $w -ge 50]; then
+      lf -remote "send $id :set ratios 1:1; set preview true"
     else
-	    lf -remote "send $id set ratios 1:1:1:1"
+      lf -remote "send $id :set preview false; set ratios 1"
     fi
 }}
 
@@ -168,6 +171,6 @@ map e $toggle-crypt # map e to toggle encfs
 # paste hard/soft symlinks
 map P :link
 
-map w :recol
+map w recol
 
 # }}}
