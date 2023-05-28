@@ -31,12 +31,12 @@ local function custom_open()
 		local num_wins = #vim.api.nvim_tabpage_list_wins(0)
 
 		-- if we only have one window open, and it's nvim tree, don't create a new tab
-    -- instead, open the file in the current window directly
+		-- instead, open the file in the current window directly
 		if num_wins == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
 			-- open the file in place
 			require("nvim-tree.api").node.open.edit(node)
 
-    -- if we have more than one window open
+		-- if we have more than one window open
 		else
 			-- switch focus back from tree to file
 			vim.api.nvim_command([[ wincmd p ]])
@@ -276,44 +276,26 @@ nvim_tree.setup({
 	},
 })
 
--- -- open nvim tree on startup
--- -- see: https://github.com/nvim-tree/nvim-tree.lua/wiki/Open-At-Startup
--- local function open_nvim_tree()
---   -- open the tree
---   require("nvim-tree.api").tree.open()
---
---   -- switch focus back from tree to file
---   vim.api.nvim_command [[ wincmd p ]]
--- end
---
--- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+-- auto close nvim tree if it is the last window in a tab, and there is more
+-- than one tab
+vim.api.nvim_create_autocmd("BufEnter", {
+	nested = true,
+	callback = function()
+		-- get number of windows in current tab page
+		local num_wins = #vim.api.nvim_tabpage_list_wins(0)
 
--- vim.api.nvim_create_autocmd({ "VimEnter "}, { callback = open_nvim_tree })
--- nvim-tree is also there in modified buffers so this function filter it out
--- local modifiedBufs = function(bufs)
--- 	local t = 0
--- 	for _, v in pairs(bufs) do
--- 		if v.name:match("NvimTree_") == nil then
--- 			t = t + 1
--- 		end
--- 	end
--- 	return t
--- end
---
--- -- auto close nvim tree if it is the last buffer
--- -- see: https://github.com/nvim-tree/nvim-tree.lua/issues/1005#issuecomment-1183468091
--- vim.api.nvim_create_autocmd("BufEnter", {
--- 	nested = true,
--- 	callback = function()
--- 		-- get number of windows in current tab page
--- 		local num_wins = #vim.api.nvim_tabpage_list_wins(0)
---
--- 		if
--- 			num_wins == 1
--- 			and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil
--- 			and modifiedBufs(vim.fn.getbufinfo({ bufmodified = 1 })) == 0
--- 		then
--- 			vim.cmd("quit")
--- 		end
--- 	end,
--- })
+    -- get number of tabpages
+    local num_tabs = #vim.api.nvim_list_tabpages()
+
+		-- current buffer name
+		local bufname = vim.api.nvim_buf_get_name(0)
+
+		if
+			num_wins == 1 and num_tabs > 1
+			and bufname:match("NvimTree_") ~= nil
+			-- and modifiedBufs(vim.fn.getbufinfo({ bufmodified = 1 })) == 0
+		then
+			vim.cmd("quit")
+		end
+	end,
+})
