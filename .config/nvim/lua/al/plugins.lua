@@ -57,7 +57,7 @@ return packer.startup(function(use)
 	-- TreeSitter
 	-- parses the file much more accurately to provide better commenting / syntax-highlighting
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("p00f/nvim-ts-rainbow") -- color match parentheses
+	use("HiPhish/nvim-ts-rainbow2") -- color match parentheses
 	use("nvim-treesitter/playground")
 
 	-- Commenting

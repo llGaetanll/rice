@@ -18,8 +18,17 @@ local ts_config = {
 	},
   rainbow = {
     enable = true,
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+
+    -- Which query to use for finding delimiters
+    query = {
+      'rainbow-parens',
+      html = 'rainbow-tags',
+      latex = 'rainbow-blocks', -- doesn't work. maybe vimtex overrides?
+      javascript = 'rainbow-tags-react',
+    },
+
+    -- Highlight the entire buffer all at once
+    strategy = require('ts-rainbow').strategy.global,
   }
 }
 
