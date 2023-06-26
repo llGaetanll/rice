@@ -5,10 +5,10 @@ end
 
 -- format on save
 vim.cmd([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePre * Format
-augroup END
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost * FormatWrite
+  augroup END
 ]])
 
 -- formatters are opt-in
