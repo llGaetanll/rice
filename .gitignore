@@ -45,6 +45,7 @@
 !.config/picom.conf
 !.config/aliasrc
 !.config/mimeapps.list
+!.config/langinit
 
 # .config folders
 !.config/fontconfig

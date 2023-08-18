@@ -5,11 +5,10 @@ export POLYBAR="$XDG_CONFIG_HOME/polybar/default.ini" # path to the polybar load
 export BAR_HEIGHT=45 # matched by polybar and dmenu
 export DEF_WIN_GAP=30
 
-# source cargo environment at launch.
-# Used for rust
-# . "$HOME/.local/share/cargo/env"
+# source any files required by any programming languages
+. ./langinit
 
-# source xprofile which launches all the programs 
+# source xprofile which launches all the programs
 . ~/.xprofile
 
 # starts bspwm, the default window manager
