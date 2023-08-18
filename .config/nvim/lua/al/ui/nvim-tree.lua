@@ -48,7 +48,7 @@ local function custom_open()
 end
 
 -- load the lsp icons from the theme
-local lsp_icons = require("al.ui.theme").lsp_icons
+local lsp_icons = require("al.ui.theme.util").lsp_icons
 
 local nvim_tree_icons = {
 	git_placement = "after", -- put the git icon after the filename
@@ -284,14 +284,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		-- get number of windows in current tab page
 		local num_wins = #vim.api.nvim_tabpage_list_wins(0)
 
-    -- get number of tabpages
-    local num_tabs = #vim.api.nvim_list_tabpages()
+		-- get number of tabpages
+		local num_tabs = #vim.api.nvim_list_tabpages()
 
 		-- current buffer name
 		local bufname = vim.api.nvim_buf_get_name(0)
 
 		if
-			num_wins == 1 and num_tabs > 1
+			num_wins == 1
+			and num_tabs > 1
 			and bufname:match("NvimTree_") ~= nil
 			-- and modifiedBufs(vim.fn.getbufinfo({ bufmodified = 1 })) == 0
 		then

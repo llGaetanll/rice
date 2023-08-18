@@ -24,7 +24,6 @@ formatter.setup({
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},
-
 		javascript = {
 			require("formatter.filetypes.javascript").prettier,
 		},

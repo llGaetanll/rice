@@ -44,7 +44,7 @@ return packer.startup(function(use)
 	-- 	this is the package manager
 	use("wbthomason/packer.nvim")
 
-	-- Colorschemes
+	--[[ 	Colorschemes ]]
 	-- for more TreeSitter colorschemes
 	-- see: https://github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
 	use("savq/melange")
@@ -54,13 +54,13 @@ return packer.startup(function(use)
 	use("martinsione/darkplus.nvim")
 	use("ellisonleao/gruvbox.nvim")
 
-	-- TreeSitter
+	--[[ 	TreeSitter ]]
 	-- parses the file much more accurately to provide better commenting / syntax-highlighting
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("HiPhish/nvim-ts-rainbow2") -- color match parentheses
 	use("nvim-treesitter/playground")
 
-	-- Commenting
+	--[[ Commenting ]]
 	use({
 		"numToStr/Comment.nvim",
 		config = function()
@@ -71,7 +71,7 @@ return packer.startup(function(use)
 
 	use("lukas-reineke/indent-blankline.nvim") -- display indents
 
-	-- CMP - Autocomplete
+	--[[ CMP - Autocomplete ]]
 	-- This is actually necessary for lsp to work
 	use("hrsh7th/nvim-cmp") -- base
 	use("hrsh7th/cmp-nvim-lsp") -- autocompletion from nvim lsp
@@ -79,43 +79,47 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path") -- autocompletion for paths
 	use("hrsh7th/cmp-cmdline") -- autocompletion for nvim commands
 
-	-- snippets
+	--[[ Snippets ]]
 	use("L3MON4D3/LuaSnip") -- snippets used in autocompletion
 	use("saadparwaiz1/cmp_luasnip") -- luasnip completion source for nvim-cmp
 	use("rafamadriz/friendly-snippets") -- massive repo of popular snippets for autocompletion
 
-	-- autopairs
+	--[[ Autopairs ]]
 	use("windwp/nvim-autopairs") -- autocomplete parentheses, brackets, etc...
 
-	-- file formatting
+	--[[ File Formatting ]]
 	use("mhartington/formatter.nvim") -- automatically format files on save
 
-	-- Telescope fuzzy-finding
+	--[[ Telescope ]]
+	-- fuzzy-finding
 	use({
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
-	-- Telescope for Snippets
+	-- telescope for snippets
 	use({
 		"benfowler/telescope-luasnip.nvim",
 		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
 	})
 
-	--- LSP - Language Server Protocol
+	--[[ LSP - Language Server Protocol ]]
 	use({
 		"williamboman/mason.nvim", -- simple to use language server installer
 		"williamboman/mason-lspconfig.nvim", -- allows interop between mason and lsconfig
 		"neovim/nvim-lspconfig", -- enable lsp
 	})
 
-	-- GPT autocompletion
+	--[[ GIT ]]
+	use("lewis6991/gitsigns.nvim") -- git indicators
+	use("sindrets/diffview.nvim") -- git diff integration
+
+	--[[ GPT autocompletion ]]
 	use("github/copilot.vim") -- github copilot in nvim
 
-	-- OTHER
+	--[[ OTHER ]]
 	use("folke/which-key.nvim") -- tells you all your keybinds
-
 	use("akinsho/bufferline.nvim") -- pseudo "tabs" to work with nvim tree
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -123,19 +127,19 @@ return packer.startup(function(use)
 	}) -- airline for lua
 	use("kyazdani42/nvim-tree.lua") -- filesystem tree
 	use("kyazdani42/nvim-web-devicons") -- icons for nvim tree
-	use("lewis6991/gitsigns.nvim") -- git indicators
 	use("norcalli/nvim-colorizer.lua") -- colorize CSS color codes
+	use("onsails/lspkind.nvim") -- nvim cmp icons
+	use("stevearc/dressing.nvim") -- improved UI interfaces
 
-	-- language specific plugins
+	--[[ Language Specific ]]
 	use("lervag/vimtex") -- latex support
 
-	-- markdown preview
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	})
+	}) -- markdown preview
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
