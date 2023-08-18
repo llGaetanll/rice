@@ -1,0 +1,97 @@
+live_config_reload = true
+
+[colors.cursor]
+cursor = "#ffffff"
+text = "#000000"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[font.normal]
+family = "Victor Mono"
+style = "Bold"
+
+[font.italic]
+family = "Victor Mono"
+style = "Bold Italic"
+
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Control|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "J"
+mods = "Shift|Alt"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "K"
+mods = "Shift|Alt"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "G"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollHalfPageUp"
+key = "U"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "G"
+mods = "Shift|Alt"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollHalfPageDown"
+key = "D"
+mods = "Alt"
+
+[scrolling]
+history = 10000
+
+[window]
+decorations = "none"
+decorations_theme_variant = "None"
+dynamic_padding = false
+opacity = 1.0
