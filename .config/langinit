@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # source rust cargo environment at launch
-[ -f "$HOME/.local/share/cargo/env" ] && source "$xdg_config/langinit"
+# [ -f "$HOME/.local/share/cargo/env" ] && source "$xdg_config/langinit"
 
 # source conda environment
-[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+# [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 
 # source ocaml environment
-command -v opam &> /dev/null && eval $(opam env)
+# command -v opam &> /dev/null && eval $(opam env)

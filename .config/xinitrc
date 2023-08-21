@@ -6,7 +6,7 @@ export BAR_HEIGHT=45 # matched by polybar and dmenu
 export DEF_WIN_GAP=30
 
 # source any files required by any programming languages
-. ./langinit
+. "$XDG_CONFIG_HOME/langinit"
 
 # source xprofile which launches all the programs
 . ~/.xprofile
