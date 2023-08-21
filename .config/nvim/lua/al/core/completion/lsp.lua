@@ -82,16 +82,16 @@ end
 
 local lsp_gotos = {
 	prev_error = custom_goto_prev(vim.diagnostic.severity.ERROR),
-	next_error = custom_goto_prev(vim.diagnostic.severity.ERROR),
+	next_error = custom_goto_next(vim.diagnostic.severity.ERROR),
 
 	prev_warn = custom_goto_prev(vim.diagnostic.severity.WARN),
-	next_warn = custom_goto_prev(vim.diagnostic.severity.WARN),
+	next_warn = custom_goto_next(vim.diagnostic.severity.WARN),
 
 	prev_info = custom_goto_prev(vim.diagnostic.severity.INFO),
-	next_info = custom_goto_prev(vim.diagnostic.severity.INFO),
+	next_info = custom_goto_next(vim.diagnostic.severity.INFO),
 
 	next_hint = custom_goto_prev(vim.diagnostic.severity.HINT),
-	prev_hint = custom_goto_prev(vim.diagnostic.severity.HINT),
+	prev_hint = custom_goto_next(vim.diagnostic.severity.HINT),
 }
 
 local lsp_keymaps = {
