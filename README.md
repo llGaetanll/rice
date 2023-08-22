@@ -183,7 +183,7 @@ Note that telescope might require [ripgrep](https://github.com/BurntSushi/ripgre
 - `<leader> + fg` Live Grep **(requires `ripgrep`)**: Fuzzy find text content of any
   file in the current working directory.
 
-- `<leader> + fb` Find Buffers: Fuzzy find currently openned buffers.
+- `<leader> + fb` Find Buffers: Fuzzy find currently opened buffers.
 
 - `<leader> + fh` Find Help
 
