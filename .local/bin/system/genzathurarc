@@ -9,13 +9,17 @@ RC_DIR="${XDG_CONFIG_HOME}/zathura"
 # colors
 RC_BASE="${RC_DIR}/base"
 
+THEMES_DIR="${RC_DIR}/themes"
+SYSTEM_FILE="${THEMES_DIR}/system"
+
 # this is the generated file
 RC_FILE="${RC_DIR}/zathurarc"
 
+# source paywal colors
 . "${HOME}/.cache/wal/colors.sh"
 
-# write zsthurarc
-cat <<CONF > $RC_FILE
+# generate the current theme's color file
+cat <<CONF > $SYSTEM_FILE
 # colors
 # params come mostly from: https://github.com/GideonWolfe/Zathura-Pywal
 set recolor "true"
@@ -51,10 +55,16 @@ set render-loading-fg "$foreground"
 set window-title-home-tilde true
 set statusbar-basename true
 set selection-clipboard clipboard
-
-# base config
-# comes after colors to overwrite any parameters
-`cat $RC_BASE`
 CONF
 
-# echo "$RC_BASE"
+# ask the user which file they want
+THEME=$(echo "$(ls $THEMES_DIR | dm -i -p "Zathura Theme")")
+FILE="$THEMES_DIR/$THEME"
+
+echo "$FILE"
+
+# write zsthurarc
+cat <<CONF > $RC_FILE
+`cat $FILE`
+`cat $RC_BASE`
+CONF
