@@ -12,6 +12,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 
+export SCREENSHOT_DIR="$HOME/images/screenshots" # used by the screenshot script
+
 # pixel scrolling in firefox
 # see: https://askubuntu.com/questions/1148934/precise-scrolling-in-firefox
 export MOZ_USE_XINPUT2=1
