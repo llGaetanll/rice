@@ -8,3 +8,7 @@
 
 # source ocaml environment
 command -v opam &> /dev/null && eval $(opam env)
+
+# add haskell to the path
+[ -d "$HOME/.ghcup/bin/" ] && export PATH="$PATH:$HOME/.ghcup/bin/"
+alias ghc="ghc-9.2"
