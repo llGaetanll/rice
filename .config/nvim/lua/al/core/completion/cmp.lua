@@ -27,7 +27,7 @@ require("luasnip/loaders/from_vscode").lazy_load()
 -- require("luasnip/loaders/from_vscode").lazy_load()
 
 -- used for supertab
--- This function checks the position of the caret, and which column it is for
+-- This function checks the position of the caret, and which column it is in for
 -- the current line. It returns true if the caret is at the beginning of the
 -- line, of if the character at the current position is whitespace.
 local check_backspace = function()
@@ -82,7 +82,9 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
+			elseif luasnip.expandable() then
+				luasnip.expand()
+			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
 			else
 				fallback()
