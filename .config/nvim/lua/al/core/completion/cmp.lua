@@ -10,8 +10,21 @@ if not snip_status_ok then
 	return
 end
 
--- load vscode snippets
+-- luasnip.snippets = {
+--   html = {}
+-- }
+-- luasnip.snippets.javascript = luasnip.snippets.html
+-- luasnip.snippets.javascriptreact = luasnip.snippets.html
+
+luasnip.filetype_extend("javascript", { "html" })
+luasnip.filetype_extend("javascriptreact", { "html" })
+luasnip.filetype_extend("typescriptreact", { "html" })
+
+require("luasnip/loaders/from_vscode").load({ include = { "html" } })
 require("luasnip/loaders/from_vscode").lazy_load()
+
+-- load vscode snippets
+-- require("luasnip/loaders/from_vscode").lazy_load()
 
 -- used for supertab
 -- This function checks the position of the caret, and which column it is for
@@ -69,12 +82,8 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expandable() then
-				luasnip.expand()
-			elseif luasnip.expand_or_jumpable() then
+			elseif luasnip.expand_or_locally_jumpable() then
 				luasnip.expand_or_jump()
-			elseif check_backspace() then
-				fallback()
 			else
 				fallback()
 			end
@@ -85,7 +94,7 @@ cmp.setup({
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
+			elseif luasnip.locally_jumpable(-1) then
 				luasnip.jump(-1)
 			else
 				fallback()
@@ -100,8 +109,8 @@ cmp.setup({
 		format = function(entry, vim_item)
 			local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
 			local strings = vim.split(kind.kind, "%s", { trimempty = true })
-			kind.kind = " " .. (strings[1] or "") .. " "
-			kind.menu = "    (" .. (strings[2] or "") .. ")"
+			kind.kind = " " .. (strings[1] or "") .. "  "
+			kind.menu = "    " .. (strings[2] or "")
 
 			return kind
 		end,

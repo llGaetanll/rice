@@ -10,11 +10,12 @@ local options = {
 	mouse = "", -- disable the mouse
 	pumheight = 10, -- pop up menu height
 	-- showmode = false,                     -- whether to display the current mode (INSERT, VISUAL, ...)
+	shortmess = "I", -- don't show nvim splash screen
 
 	laststatus = 3, -- remove status lines on upper windows if windows are stacked vertically
 
 	-- TABS
-	showtabline = 1, -- only show tabs if available
+	showtabline = 2, -- always show tabs
 	smartcase = true, -- smart case
 	smartindent = true, -- make indenting smarter again
 	expandtab = true, -- convert tabs to spaces

@@ -57,16 +57,11 @@ local window_styles = {
 	width = 50,
 }
 
+-- settings directory for language server parameters
+local servers_dir = "al.core.completion.servers"
+
 -- the list of language servers to set up
-local required_servers = {
-	"rust_analyzer", -- Rust
-	"pyright", -- Python
-	"tsserver", -- TypeScript
-	"texlab", -- LaTeX
-	"lua_ls", -- Lua (sumneko_lua now deprecated)
-	"ocamllsp",
-	"ccls",
-}
+local servers = { "lua_ls" }
 
 local function custom_goto_prev(severity)
 	return function()
@@ -82,16 +77,16 @@ end
 
 local lsp_gotos = {
 	prev_error = custom_goto_prev(vim.diagnostic.severity.ERROR),
-	next_error = custom_goto_prev(vim.diagnostic.severity.ERROR),
+	next_error = custom_goto_next(vim.diagnostic.severity.ERROR),
 
 	prev_warn = custom_goto_prev(vim.diagnostic.severity.WARN),
-	next_warn = custom_goto_prev(vim.diagnostic.severity.WARN),
+	next_warn = custom_goto_next(vim.diagnostic.severity.WARN),
 
 	prev_info = custom_goto_prev(vim.diagnostic.severity.INFO),
-	next_info = custom_goto_prev(vim.diagnostic.severity.INFO),
+	next_info = custom_goto_next(vim.diagnostic.severity.INFO),
 
 	next_hint = custom_goto_prev(vim.diagnostic.severity.HINT),
-	prev_hint = custom_goto_prev(vim.diagnostic.severity.HINT),
+	prev_hint = custom_goto_next(vim.diagnostic.severity.HINT),
 }
 
 local lsp_keymaps = {
@@ -157,63 +152,48 @@ local lsp_keymaps = {
 }
 
 -- This is the function that is attached to a language server when it is attached to a buffer
-local function on_attach(client, bufnr)
-	-- TODO: refactor this into a method that checks if string in list
-	if client.name == "tsserver" then
-		client.server_capabilities.documentFormattingProvider = false
-	end
-
-	-- load keymap setting function
-	local keymap = vim.api.nvim_buf_set_keymap
-
+local function on_attach(_, bufnr)
 	-- key bindings for LSP
 	for _, km in ipairs(lsp_keymaps) do
 		-- keymap(bufnr, km.mode, km.keymap, km.action, { noremap = true, silent = true, desc = km.desc })
-		vim.keymap.set(km.mode, km.keymap, km.action, { buffer = bufnr, noremap = true, silent = true, desc = km.desc })
+		vim.keymap.set(
+			km.mode,
+			km.keymap,
+			km.action,
+			{ buffer = bufnr, noremap = true, silent = true, desc = "[LSP]: " .. km.desc }
+		)
 	end
 
-	-- highlight document
-	local status_ok, illuminate = pcall(require, "illuminate")
-	if not status_ok then
-		return
-	end
-
-	illuminate.on_attach(client)
+	-- Create a command `:Format` local to the LSP buffer
+	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+		vim.lsp.buf.format()
+	end, { desc = "Format current buffer with LSP" })
 end
 
--- setup mason
-mason.setup({
-	-- tell mason which servers to install
-	ensure_installed = required_servers,
-})
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
--- setup mason-lspconfig
+mason.setup({ ensure_installed = servers })
 mason_lsp.setup({})
 
--- settings directory for language server parameters
-local servers_dir = "al.core.completion.servers"
+mason_lsp.setup_handlers({
+	function(server_name)
+		-- directory of the current language server setting (if it exists)
+		local server_dir = servers_dir .. "." .. server_name
 
--- for each language server we setup any potential custom settings
-for _, server in pairs(required_servers) do
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	local opts = {
-		on_attach = on_attach,
-		capabilities = cmp_nvim_lsp.default_capabilities(capabilities),
-	}
+		-- check for any language server specific settings
+		-- if not, this will just be nil
+		local conf_ok, conf = pcall(require, server_dir)
 
-	-- directory of the current language server setting (if it exists)
-	local server_dir = servers_dir .. "." .. server
-
-	-- check for any language server specific settings
-	-- if any are found, update the lsp options for that server
-	local has_custom_opts, server_custom_opts = pcall(require, server_dir)
-	if has_custom_opts then
-		opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
-	end
-
-	-- spin up the language server
-	lsp[server].setup(opts)
-end
+		lsp[server_name].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = conf_ok and conf.settings or nil,
+			filetypes = (conf or {}).filetypes,
+		})
+	end,
+})
 
 -- setup the diagnostics
 for _, sign in ipairs(signs) do

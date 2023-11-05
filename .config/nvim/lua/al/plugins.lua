@@ -54,11 +54,13 @@ return packer.startup(function(use)
 	use("martinsione/darkplus.nvim")
 	use("ellisonleao/gruvbox.nvim")
 
+	use({ "llGaetanll/prisma.nvim", branch = "dev" })
+
 	--[[ 	TreeSitter ]]
 	-- parses the file much more accurately to provide better commenting / syntax-highlighting
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("HiPhish/nvim-ts-rainbow2") -- color match parentheses
-	use("nvim-treesitter/playground")
+	use("hiphish/rainbow-delimiters.nvim")
+	-- use("nvim-treesitter/playground")
 
 	--[[ Commenting ]]
 	use({
@@ -94,7 +96,7 @@ return packer.startup(function(use)
 	-- fuzzy-finding
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.1",
+		tag = "0.1.4",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
