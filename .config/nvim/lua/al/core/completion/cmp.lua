@@ -56,12 +56,12 @@ cmp.setup({
 	},
 	mapping = {
 		-- move through the autocomplete options with `ctrl + j/k`
-		["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
+		-- ["<C-k>"] = cmp.mapping.select_prev_item(),
+		-- ["<C-j>"] = cmp.mapping.select_next_item(),
 
 		-- scroll through the subwindow provided by cmp with `ctrl + b/f`
-		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+		["<C-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+		["<C-j>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 
 		-- pulls up autocompletion menu without needing to type
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
