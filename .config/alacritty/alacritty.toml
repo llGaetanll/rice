@@ -93,5 +93,5 @@ history = 10000
 [window]
 decorations = "none"
 decorations_theme_variant = "None"
-dynamic_padding = false
+dynamic_padding = true
 opacity = 1.0
