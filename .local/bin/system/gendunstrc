@@ -5,6 +5,12 @@
 
 RC_DIR="${XDG_CONFIG_HOME}/dunst"
 
+# if the directory does not exist
+[ ! -d RC_DIR ] && exit 1
+
+# if dunst is not installed
+! command -v dunst > /dev/null 2>&1 && exit 1
+
 # this is the base rc file to be added to the generated one with the theme
 # colors
 RC_BASE="${RC_DIR}/base"
@@ -39,3 +45,5 @@ cat <<CONF > $RC_FILE
     timeout = 0
 CONF
 
+# restart dunst
+pkill dunst && dunst > /dev/null 2>&1 &

@@ -51,13 +51,10 @@ applywall() {
 	source "${XDG_CONFIG_HOME:-$HOME/.config}/bspwm/bspwmrc" > /dev/null 2>&1
 
   # update zathura colorscheme
-  # genzathurarc
+  genzathurarc
 
   # update dunst colorscheme
   gendunstrc
-
-  # restart dunst
-  pkill dunst && dunst > /dev/null 2>&1 &
 
 	# extract how to apply the wallpaper
 	# from name of symlink
@@ -72,4 +69,8 @@ applywall() {
 }
 
 # if the first argument is not provided, we just apply the current wallpaper
-[ -z "$1" ] && applywall || $(promptwall "$1" && applywall)
+if [ -z "$1" ]; then 
+  applywall
+else 
+  promptwall "$1" && applywall
+fi
