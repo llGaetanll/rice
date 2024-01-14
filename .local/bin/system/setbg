@@ -38,6 +38,9 @@ applywall() {
 	# get wallpaper symlink
 	bglink="${XDG_DATA_HOME:-$HOME/.local/share/}/.bg-*"
 
+  # check that the symlink exists
+  [ -d "$bglink" ] || exit 1
+
 	# get pointer to symlink
 	bgloc=$(readlink -f $bglink)
 
