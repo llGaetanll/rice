@@ -10,7 +10,7 @@ local options = {
 	mouse = "", -- disable the mouse
 	pumheight = 10, -- pop up menu height
 	-- showmode = false,                     -- whether to display the current mode (INSERT, VISUAL, ...)
-	shortmess = "I", -- don't show nvim splash screen
+	shortmess = "IfilnxtToOF", -- don't show nvim splash screen
 
 	laststatus = 3, -- remove status lines on upper windows if windows are stacked vertically
 
