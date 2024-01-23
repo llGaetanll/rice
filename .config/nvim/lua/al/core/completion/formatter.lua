@@ -3,13 +3,13 @@ if not status_ok then
 	return
 end
 
--- -- format on save
--- vim.cmd([[
---   augroup FormatAutogroup
---     autocmd!
---     autocmd BufWritePost * FormatWrite
---   augroup END
--- ]])
+-- format on save
+vim.cmd([[
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost * FormatWrite
+  augroup END
+]])
 
 -- formatters are opt-in
 -- so you need to define them for the languages that you like
