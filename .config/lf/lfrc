@@ -27,19 +27,6 @@ $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 
 # }}}
 
-# redefine number of columns dynamically
-cmd on-redraw ${{
-    if [ $lf_width -ge 120 ]; then
-      lf -remote "send $id :set ratios 1:1:1:1; set preview true"
-    elif [ $lf_width -ge 80 ]; then
-      lf -remote "send $id :set ratios 1:1:1; set preview true"
-    elif [ $lf_width -ge 50 ]; then
-      lf -remote "send $id :set ratios 1:1; set preview true"
-    else
-      lf -remote "send $id :set preview false; set ratios 1"
-    fi
-}}
-
 ## Custom Commands {{{
 
 # This command is ran before opening a file. It determines which program should be used to read the file
