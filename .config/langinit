@@ -12,3 +12,6 @@ command -v opam &> /dev/null && eval $(opam env)
 # add haskell to the path
 [ -d "$HOME/.ghcup/bin/" ] && export PATH="$PATH:$HOME/.ghcup/bin/"
 alias ghc="ghc-9.2"
+
+# add cargo installed packages to the PATH
+[ -e "$XDG_DATA_HOME/cargo" ] && export PATH="$PATH:$XDG_DATA_HOME/cargo/bin"
