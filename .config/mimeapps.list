@@ -12,5 +12,6 @@ application/pdf=pdf.desktop;
 image/png=img.desktop;
 image/jpeg=img.desktop;
 image/gif=img.desktop;
-inode/directory=file.desktop
+inode/directory=file.desktop;
+inode/symlink=text.desktop;
 x-scheme-handler/notion=notion-app.desktop
