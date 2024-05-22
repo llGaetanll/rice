@@ -39,7 +39,7 @@ applywall() {
 	bglink="${XDG_DATA_HOME:-$HOME/.local/share/}/.bg-*"
 
   # check that the symlink exists
-  [ -d "$bglink" ] || exit 1
+  # [ ! -d bglink ] || [ ! -e bglink ] && exit 1
 
 	# get pointer to symlink
 	bgloc=$(readlink -f $bglink)
@@ -72,8 +72,8 @@ applywall() {
 }
 
 # if the first argument is not provided, we just apply the current wallpaper
-if [ -z "$1" ]; then 
+if [ -z "$1" ]; then
   applywall
-else 
+else
   promptwall "$1" && applywall
 fi
