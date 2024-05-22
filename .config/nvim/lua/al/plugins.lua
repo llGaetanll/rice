@@ -71,7 +71,7 @@ return packer.startup(function(use)
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- for native jsx context-aware commenting
 
-	use("lukas-reineke/indent-blankline.nvim") -- display indents
+	-- use("lukas-reineke/indent-blankline.nvim") -- display indents
 
 	--[[ CMP - Autocomplete ]]
 	-- This is actually necessary for lsp to work
