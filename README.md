@@ -504,6 +504,7 @@ For more information, check the script in `.local/bin/system/setbacklight`.
   - pywal does not generate enough colors for nvim, which I rather would match system colors
     than a custom theme.
   - see: https://github.com/warpwm/lule
+- [ ] Battery Notification Module
 
 ## nvim
 
@@ -539,6 +540,8 @@ For more information, check the script in `.local/bin/system/setbacklight`.
   - left click: refresh update count
   - right click: 1-click update
 - [ ] Add bluetooth module
+- [ ] Recording Module
+- [ ] Disk Space Module
 
 ## bspwm
 
