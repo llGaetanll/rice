@@ -121,7 +121,7 @@ return packer.startup(function(use)
 	use("github/copilot.vim") -- github copilot in nvim
 
 	--[[ OTHER ]]
-	use("folke/which-key.nvim") -- tells you all your keybinds
+	-- use("folke/which-key.nvim") -- tells you all your keybinds
 	use("akinsho/bufferline.nvim") -- pseudo "tabs" to work with nvim tree
 	use({
 		"nvim-lualine/lualine.nvim",
