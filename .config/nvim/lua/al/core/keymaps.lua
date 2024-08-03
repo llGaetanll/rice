@@ -2,6 +2,7 @@
 -- for LSP keymaps, see lsp/mason.lua
 
 -- setup whichkey, if installed
+--[[
 local status_ok, whichkey = pcall(require, "which-key")
 if status_ok then
   -- whichkey config params
@@ -95,6 +96,7 @@ if status_ok then
 
   whichkey.setup(which_key_config)
 end
+--]]
 
 local opts = { noremap = true, silent = true }
 

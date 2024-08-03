@@ -95,7 +95,12 @@ lazy.setup({
     "github/copilot.vim", -- github copilot in nvim
 
     --[[ OTHER ]]
-    -- use("folke/which-key.nvim") -- tells you all your keybinds
+    { -- tells you all your keybinds
+      "folke/which-key.nvim",
+      event = "VeryLazy",
+      opts = {}
+    },
+
     "akinsho/bufferline.nvim", -- pseudo "tabs" to work with nvim tree
     {
       "nvim-lualine/lualine.nvim",
