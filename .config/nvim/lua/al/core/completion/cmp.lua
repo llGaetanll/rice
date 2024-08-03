@@ -4,6 +4,7 @@ if not cmp_status_ok then
 	return
 end
 
+--[[
 -- need luasnip
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
@@ -132,3 +133,4 @@ cmp.setup({
 		native_menu = false,
 	},
 })
+--]]

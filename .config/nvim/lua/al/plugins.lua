@@ -53,14 +53,16 @@ lazy.setup({
 
     --[[ Snippets ]]
     -- snippets used in autocompletion
-    -- {
-    --   "L3MON4D3/LuaSnip",
-    --   -- follow latest release.
-    --   version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    --   dependencies = { "rafamadriz/friendly-snippets" }
-    -- },
-    -- "saadparwaiz1/cmp_luasnip", -- luasnip completion source for nvim-cmp
-    -- "rafamadriz/friendly-snippets", -- massive repo of popular snippets for autocompletion
+    {
+      "L3MON4D3/LuaSnip",
+
+      -- follow latest release.
+      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+
+      -- massive repo of popular snippets for autocompletion
+      dependencies = { "rafamadriz/friendly-snippets" }
+    },
+    "saadparwaiz1/cmp_luasnip", -- luasnip completion source for nvim-cmp
 
     --[[ Autopairs ]]
     "windwp/nvim-autopairs", -- autocomplete parentheses, brackets, etc...
