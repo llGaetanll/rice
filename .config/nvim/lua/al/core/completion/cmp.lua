@@ -4,37 +4,19 @@ if not cmp_status_ok then
 	return
 end
 
---[[
 -- need luasnip
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
 	return
 end
 
--- luasnip.snippets = {
---   html = {}
--- }
--- luasnip.snippets.javascript = luasnip.snippets.html
--- luasnip.snippets.javascriptreact = luasnip.snippets.html
-
+-- add html snippets to all these filetypes
 luasnip.filetype_extend("javascript", { "html" })
 luasnip.filetype_extend("javascriptreact", { "html" })
 luasnip.filetype_extend("typescriptreact", { "html" })
 
--- require("luasnip/loaders/from_vscode").load({ include = { "html" } })
--- require("luasnip/loaders/from_vscode").lazy_load()
-
 -- load vscode snippets
--- require("luasnip/loaders/from_vscode").lazy_load()
-
--- used for supertab
--- This function checks the position of the caret, and which column it is in for
--- the current line. It returns true if the caret is at the beginning of the
--- line, of if the character at the current position is whitespace.
-local check_backspace = function()
-	local col = vim.fn.col(".") - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
+require("luasnip/loaders/from_vscode").lazy_load()
 
 cmp.setup({
 	-- cmp needs a snippet engine, in our case this is luasnip
@@ -133,4 +115,3 @@ cmp.setup({
 		native_menu = false,
 	},
 })
---]]
