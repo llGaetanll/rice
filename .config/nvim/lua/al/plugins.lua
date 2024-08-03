@@ -29,9 +29,9 @@ lazy.setup({
 
     --[[ TreeSitter ]]
     -- parses the file much more accurately to provide better commenting / syntax-highlighting
-    -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    -- "hiphish/rainbow-delimiters.nvim",
-    -- "nvim-treesitter/playground",
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    "hiphish/rainbow-delimiters.nvim",
+    "nvim-treesitter/playground",
 
     --[[ Commenting ]]
     {
@@ -87,7 +87,7 @@ lazy.setup({
     "williamboman/mason-lspconfig.nvim", -- allows interop between mason and lsconfig
     "neovim/nvim-lspconfig", -- enable lsp
 
-    -- --[[ GIT ]]
+    --[[ GIT ]]
     "lewis6991/gitsigns.nvim", -- git indicators
     "sindrets/diffview.nvim", -- git diff integration
 
