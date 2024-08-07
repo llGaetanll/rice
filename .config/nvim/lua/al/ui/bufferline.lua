@@ -65,7 +65,7 @@ bufferline.setup({
 		separator_style = { "", "" },
 
 		enforce_regular_tabs = true,
-		always_show_bufferline = false,
+		always_show_bufferline = true,
 	},
 
 	highlights = {
