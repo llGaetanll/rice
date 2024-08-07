@@ -133,6 +133,7 @@ return {
 		desc = "copy to system clipboard",
 	},
 
+  -- NvimTree
 	{
 		mode = "n",
 		keymap = "<leader>t",

@@ -20,6 +20,9 @@ return function(colors)
 		NvimTreeNormal = {
 			bg = nvim_tree_bg,
 		},
+		NvimTreeNormalFloat = {
+			bg = nvim_tree_bg,
+		},
 		NvimTreeEndOfBuffer = {
 			bg = nvim_tree_bg,
 		},

@@ -62,9 +62,9 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "l", custom_open, opts("New Tab"))
 
   vim.keymap.set("n", "L", api.tree.expand_all, opts("Expand Node Recursively"))
+  vim.keymap.set("n", "H", api.tree.collapse_all, opts("Collapse Node Recursively"))
 
-  vim.keymap.set("n", "h", api.tree.close, opts("Close Node"))
-  vim.keymap.set("n", "<CR>", api.tree.close, opts("Close Node"))
+  vim.keymap.set("n", "<ESC>", api.tree.close, opts("Close Node"))
 
   vim.keymap.set("n", "i", api.node.open.vertical, opts("Vertical Split"))
   vim.keymap.set("n", "o", api.node.open.horizontal, opts("Horizontal Split"))
@@ -94,6 +94,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+-- width and height ratio of the nvim-tree floating window (with respect to
+-- screen width and height)
+local HEIGHT_RATIO = 0.8
+local WIDTH_RATIO = 0.4
 
 return {
   -- Note: for a full list of options, see `:h nvim-tree-setup`
@@ -187,8 +192,8 @@ return {
 
   actions = {
     open_file = {
-      -- NvimTree won't close after opening a file
-      quit_on_open = false,
+      -- NvimTree will close after opening a file
+      quit_on_open = true,
 
       -- if `nvim .` is ran, NvimTree will launch to let you pick a file to open
       window_picker = { enable = true },
@@ -201,14 +206,26 @@ return {
     -- hide_root_folder = true, -- don't display the root folder
     -- mappings = mappings,
     float = {
-      open_win_config = {
-        relative = "editor",
-        border = "rounded",
-        width = 30,
-        height = 30,
-        row = 1,
-        col = 1,
-      },
+      enable = true,
+      open_win_config = function()
+        local screen_w = vim.opt.columns:get()
+        local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+        local window_w = screen_w * WIDTH_RATIO
+        local window_h = screen_h * HEIGHT_RATIO
+        local window_w_int = math.floor(window_w)
+        local window_h_int = math.floor(window_h)
+        local center_x = (screen_w - window_w) / 2
+        local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
+
+        return {
+          border = "none",
+          relative = "editor",
+          row = center_y,
+          col = center_x,
+          width = window_w_int,
+          height = window_h_int,
+        }
+      end,
     },
   },
 }
