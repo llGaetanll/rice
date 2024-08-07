@@ -25,7 +25,14 @@ lazy.setup({
   spec = {
     { "llGaetanll/prisma.nvim", branch = "dev" },
 
-    { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = {} },
+    {
+	    "ellisonleao/gruvbox.nvim",
+	    priority = 1000 ,
+	    opts = {},
+	    config = function()
+	      vim.cmd([[colorscheme gruvbox]])
+	    end
+    },
 
     --[[ TreeSitter ]]
     -- parses the file much more accurately to provide better commenting / syntax-highlighting
@@ -50,6 +57,7 @@ lazy.setup({
     "hrsh7th/cmp-buffer", -- autocompletion from buffers
     "hrsh7th/cmp-path", -- autocompletion for paths
     "hrsh7th/cmp-cmdline", -- autocompletion for nvim commands
+    "onsails/lspkind.nvim", -- nvim cmp icons
 
     --[[ Snippets ]]
     -- snippets used in autocompletion
@@ -76,6 +84,7 @@ lazy.setup({
       "nvim-telescope/telescope.nvim",
       tag = "0.1.4",
       dependencies = { "nvim-lua/plenary.nvim" },
+      opts = require("al.core.search")
     },
 
     -- telescope for snippets
@@ -100,30 +109,47 @@ lazy.setup({
     { -- tells you all your keybinds
       "folke/which-key.nvim",
       event = "VeryLazy",
-      opts = {}
+      opts = require("al.core.keymaps.whichkey")
     },
 
-    "akinsho/bufferline.nvim", -- pseudo "tabs" to work with nvim tree
+    -- pseudo "tabs" to work with nvim tree
+    "akinsho/bufferline.nvim",
+
+    -- airline for lua
     {
       "nvim-lualine/lualine.nvim",
       dependencies = { "kyazdani42/nvim-web-devicons" },
-    }, -- airline for lua
-    "kyazdani42/nvim-tree.lua", -- filesystem tree
+    },
+
+    -- filesystem tree
+    {
+      "kyazdani42/nvim-tree.lua",
+      opts = require("al.ui.nvim-tree")
+    },
     "kyazdani42/nvim-web-devicons", -- icons for nvim tree
-    "norcalli/nvim-colorizer.lua", -- colorize CSS color codes
-    "onsails/lspkind.nvim", -- nvim cmp icons
+
+    -- colorize CSS color codes
+    {
+      "norcalli/nvim-colorizer.lua",
+      opts = {
+        '*'
+      }
+    },
+
     "stevearc/dressing.nvim", -- improved UI interfaces
 
     --[[ Language Specific ]]
     "lervag/vimtex", -- latex support
 
+    -- markdown preview
     {
       "iamcco/markdown-preview.nvim",
       run = function()
         vim.fn["mkdp#util#install"]()
       end,
-    }  -- markdown preview
+    }
   },
+
   install = { colorscheme = { "gruvbox" } },
 
   -- automatically check for plugin updates

@@ -1,11 +1,5 @@
 -- search is handled by telescope
-
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-	return
-end
-
-telescope.setup({
+return {
 	defaults = {
 		selection_caret = " ",
 		entry_prefix = " ",
@@ -31,7 +25,6 @@ telescope.setup({
 
 			preview_cutoff = 120,
 		},
-		file_sorter = require("telescope.sorters").get_fuzzy_file,
 		file_ignore_patterns = { "node_modules" },
 	},
-})
+}
