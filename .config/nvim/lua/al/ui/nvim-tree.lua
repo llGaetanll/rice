@@ -70,31 +70,6 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "o", api.node.open.horizontal, opts("Horizontal Split"))
 end
 
--- auto close nvim tree if it is the last window in a tab, and there is more
--- than one tab
-vim.api.nvim_create_autocmd("BufEnter", {
-  nested = true,
-  callback = function()
-    -- get number of windows in current tab page
-    local num_wins = #vim.api.nvim_tabpage_list_wins(0)
-
-    -- get number of tabpages
-    local num_tabs = #vim.api.nvim_list_tabpages()
-
-    -- current buffer name
-    local bufname = vim.api.nvim_buf_get_name(0)
-
-    if
-        num_wins == 1
-        and num_tabs > 1
-        and bufname:match("NvimTree_") ~= nil
-    -- and modifiedBufs(vim.fn.getbufinfo({ bufmodified = 1 })) == 0
-    then
-      vim.cmd("quit")
-    end
-  end,
-})
-
 -- width and height ratio of the nvim-tree floating window (with respect to
 -- screen width and height)
 local HEIGHT_RATIO = 0.8
