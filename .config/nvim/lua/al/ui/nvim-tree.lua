@@ -168,7 +168,7 @@ return {
   actions = {
     open_file = {
       -- NvimTree will close after opening a file
-      quit_on_open = true,
+      quit_on_open = false,
 
       -- if `nvim .` is ran, NvimTree will launch to let you pick a file to open
       window_picker = { enable = true },
