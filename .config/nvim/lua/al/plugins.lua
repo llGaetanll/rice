@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(install_path) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -17,21 +17,21 @@ vim.opt.rtp:prepend(install_path)
 
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
-	return
+  return
 end
 
 lazy.setup({
   -- plugins here
   spec = {
-    { "llGaetanll/prisma.nvim", branch = "dev" },
+    { "llGaetanll/prisma.nvim",          branch = "dev" },
 
     {
-	    "ellisonleao/gruvbox.nvim",
-	    priority = 1000 ,
-	    opts = {},
-	    config = function()
-	      vim.cmd([[colorscheme gruvbox]])
-	    end
+      "ellisonleao/gruvbox.nvim",
+      priority = 1000,
+      opts = {},
+      config = function()
+        vim.cmd([[colorscheme gruvbox]])
+      end
     },
 
     --[[ TreeSitter ]]
@@ -52,11 +52,11 @@ lazy.setup({
 
     --[[ CMP - Autocomplete ]]
     -- This is actually necessary for lsp to work
-    "hrsh7th/nvim-cmp", -- base
+    "hrsh7th/nvim-cmp",     -- base
     "hrsh7th/cmp-nvim-lsp", -- autocompletion from nvim lsp
-    "hrsh7th/cmp-buffer", -- autocompletion from buffers
-    "hrsh7th/cmp-path", -- autocompletion for paths
-    "hrsh7th/cmp-cmdline", -- autocompletion for nvim commands
+    "hrsh7th/cmp-buffer",   -- autocompletion from buffers
+    "hrsh7th/cmp-path",     -- autocompletion for paths
+    "hrsh7th/cmp-cmdline",  -- autocompletion for nvim commands
     "onsails/lspkind.nvim", -- nvim cmp icons
 
     --[[ Snippets ]]
@@ -94,13 +94,13 @@ lazy.setup({
     },
 
     --[[ LSP - Language Server Protocol ]]
-    "williamboman/mason.nvim", -- simple to use language server installer
+    "williamboman/mason.nvim",           -- simple to use language server installer
     "williamboman/mason-lspconfig.nvim", -- allows interop between mason and lsconfig
-    "neovim/nvim-lspconfig", -- enable lsp
+    "neovim/nvim-lspconfig",             -- enable lsp
 
     --[[ GIT ]]
     "lewis6991/gitsigns.nvim", -- git indicators
-    "sindrets/diffview.nvim", -- git diff integration
+    "sindrets/diffview.nvim",  -- git diff integration
 
     --[[ GPT autocompletion ]]
     "github/copilot.vim", -- github copilot in nvim
@@ -135,8 +135,19 @@ lazy.setup({
         '*'
       }
     },
-
-    "stevearc/dressing.nvim", -- improved UI interfaces
+    -- improved UI interfaces
+    {
+      "stevearc/dressing.nvim",
+      opts = {
+        input = {
+          win_options = {
+            -- create new highlight groups that we can use to style dressing
+            -- without bleeding over to other plugins
+            winhighlight = 'FloatBorder:DressingFloatBorder,FloatTitle:DressingFloatTitle,Normal:DressingInputText'
+          },
+        }
+      }
+    },
 
     --[[ Language Specific ]]
     "lervag/vimtex", -- latex support

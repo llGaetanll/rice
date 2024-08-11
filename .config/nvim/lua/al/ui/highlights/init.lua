@@ -57,7 +57,7 @@ local colors = {
 	yellow = get_hl("GruvboxYellow").foreground,
 }
 
-local fixes = { "cmp", "nvim-tree", "telescope" }
+local fixes = { "cmp", "nvim-tree", "telescope", "dressing" }
 local groups = util.merge_groups(fixes, colors)
 
 -- add miscelanious
