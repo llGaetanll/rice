@@ -61,6 +61,9 @@ local function on_attach(bufnr)
 
   vim.keymap.set("n", "<ESC>", api.tree.close, opts("Close Node"))
 
+  vim.keymap.set('n', 'H', api.tree.toggle_hidden_filter, opts('Toggle Filter: Dotfiles'))
+  vim.keymap.set('n', 'I', api.tree.toggle_gitignore_filter, opts('Toggle Filter: Git Ignore'))
+
   vim.keymap.set("n", "i", api.node.open.vertical, opts("Vertical Split"))
   vim.keymap.set("n", "o", api.node.open.horizontal, opts("Horizontal Split"))
 
@@ -70,6 +73,7 @@ local function on_attach(bufnr)
 
   vim.keymap.set("n", "r", api.fs.rename, opts("Rename file"))
   vim.keymap.set("n", "a", api.fs.create, opts("New file"))
+  vim.keymap.set("n", "D", api.fs.remove, opts("Delete file"))
 end
 
 -- width and height ratio of the nvim-tree floating window (with respect to
