@@ -53,7 +53,7 @@ local function on_attach(bufnr)
   end
 
   -- default mappings
-  api.config.mappings.default_on_attach(bufnr)
+  -- api.config.mappings.default_on_attach(bufnr)
 
   -- custom nvim tree keybinds
   -- `custom_open` is a function that behaves like tabnew, but brings your
@@ -68,6 +68,10 @@ local function on_attach(bufnr)
 
   vim.keymap.set("n", "i", api.node.open.vertical, opts("Vertical Split"))
   vim.keymap.set("n", "o", api.node.open.horizontal, opts("Horizontal Split"))
+
+  vim.keymap.set("n", "d", api.fs.cut, opts("Cut file"))
+  vim.keymap.set("n", "y", api.fs.copy, opts("Copy file"))
+  vim.keymap.set("n", "p", api.fs.paste, opts("Paste file"))
 end
 
 -- width and height ratio of the nvim-tree floating window (with respect to
