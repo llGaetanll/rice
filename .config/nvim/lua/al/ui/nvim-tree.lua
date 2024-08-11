@@ -52,17 +52,12 @@ local function on_attach(bufnr)
     return { desc = "NvimTree" .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
-  -- default mappings
-  -- api.config.mappings.default_on_attach(bufnr)
-
   -- custom nvim tree keybinds
-  -- `custom_open` is a function that behaves like tabnew, but brings your
-  -- cursor back to the previous window before switching to the new buffer
-  vim.keymap.set("n", "<CR>", custom_open, opts("New Tab"))
-  vim.keymap.set("n", "l", custom_open, opts("New Tab"))
+  vim.keymap.set("n", "l", custom_open, opts("Open file"))
 
   vim.keymap.set("n", "L", api.tree.expand_all, opts("Expand Node Recursively"))
   vim.keymap.set("n", "H", api.tree.collapse_all, opts("Collapse Node Recursively"))
+  vim.keymap.set("n", "R", api.tree.reload, opts("Reload"))
 
   vim.keymap.set("n", "<ESC>", api.tree.close, opts("Close Node"))
 
@@ -70,8 +65,10 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "o", api.node.open.horizontal, opts("Horizontal Split"))
 
   vim.keymap.set("n", "d", api.fs.cut, opts("Cut file"))
-  vim.keymap.set("n", "y", api.fs.copy, opts("Copy file"))
+  vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy file"))
   vim.keymap.set("n", "p", api.fs.paste, opts("Paste file"))
+
+  vim.keymap.set("n", "r", api.fs.rename, opts("Rename file"))
 end
 
 -- width and height ratio of the nvim-tree floating window (with respect to
