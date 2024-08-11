@@ -37,7 +37,10 @@ lazy.setup({
     --[[ TreeSitter ]]
     -- parses the file much more accurately to provide better commenting / syntax-highlighting
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    "hiphish/rainbow-delimiters.nvim",
+    {
+      "hiphish/rainbow-delimiters.nvim",
+      opts = {}
+    },
     "nvim-treesitter/playground",
 
     --[[ Commenting ]]

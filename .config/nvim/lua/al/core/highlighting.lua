@@ -30,25 +30,25 @@ if colorizer_ok then
 end
 
 -- This module contains a number of default definitions
-local raindbow_ok, rainbow_delims = pcall(require, "rainbow-delimiters")
-if raindbow_ok then
-	vim.g.rainbow_delimiters = {
-		strategy = {
-			[""] = rainbow_delims.strategy["global"],
-			vim = rainbow_delims.strategy["local"],
-		},
-		query = {
-			[""] = "rainbow-delimiters",
-			lua = "rainbow-blocks",
-		},
-		highlight = {
-			"RainbowDelimiterRed",
-			"RainbowDelimiterYellow",
-			"RainbowDelimiterBlue",
-			"RainbowDelimiterOrange",
-			"RainbowDelimiterGreen",
-			"RainbowDelimiterViolet",
-			"RainbowDelimiterCyan",
-		},
-	}
-end
+-- local raindbow_ok, rainbow_delims = pcall(require, "rainbow-delimiters")
+-- if raindbow_ok then
+-- 	vim.g.rainbow_delimiters = {
+-- 		strategy = {
+-- 			[""] = rainbow_delims.strategy["global"],
+-- 			vim = rainbow_delims.strategy["local"],
+-- 		},
+-- 		query = {
+-- 			[""] = "rainbow-delimiters",
+-- 			lua = "rainbow-blocks",
+-- 		},
+-- 		highlight = {
+-- 			"RainbowDelimiterRed",
+-- 			"RainbowDelimiterYellow",
+-- 			"RainbowDelimiterBlue",
+-- 			"RainbowDelimiterOrange",
+-- 			"RainbowDelimiterGreen",
+-- 			"RainbowDelimiterViolet",
+-- 			"RainbowDelimiterCyan",
+-- 		},
+-- 	}
+-- end
