@@ -69,6 +69,7 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "p", api.fs.paste, opts("Paste file"))
 
   vim.keymap.set("n", "r", api.fs.rename, opts("Rename file"))
+  vim.keymap.set("n", "a", api.fs.create, opts("New file"))
 end
 
 -- width and height ratio of the nvim-tree floating window (with respect to
