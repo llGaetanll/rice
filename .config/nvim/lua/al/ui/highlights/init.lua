@@ -8,7 +8,7 @@ local M = {}
 local function misc_fixes(colors)
 	return {
 		Normal = { bg = colors.bg0 },
-		NormalFloat = { bg = colors.bg1 },
+		NormalFloat = { bg = colors.bg0, fg = colors.bg3 },
 
 		-- set SignColumn bg to be transparent
 		SignColumn = { bg = "NONE" },
