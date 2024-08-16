@@ -162,7 +162,8 @@ return {
 
   diagnostics = {
     enable = true,
-    show_on_dirs = false,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
     icons = {
       error = lsp_icons.error,
       warning = lsp_icons.warn,
