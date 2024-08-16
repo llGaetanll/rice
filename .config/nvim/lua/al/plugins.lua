@@ -136,7 +136,10 @@ lazy.setup({
 
     --[[ GIT ]]
     "lewis6991/gitsigns.nvim", -- git indicators
-    "sindrets/diffview.nvim",  -- git diff integration
+    { -- git diff integration
+      "sindrets/diffview.nvim",
+      opts = require("al.core.git.diffview").opts
+    },
 
     --[[ GPT autocompletion ]]
     "github/copilot.vim", -- github copilot in nvim
