@@ -9,6 +9,19 @@ return function(colors)
 	local nvim_tree_bg = util.shade_color(colors.bg0, window_shading)
 
 	return {
+    NvimTreeDiagnosticHintFileHL = {
+      link = "DiagnosticHint"
+    },
+    NvimTreeDiagnosticInfoFileHL = {
+      link = "DiagnosticInfo"
+    },
+    NvimTreeDiagnosticWarnFileHL = {
+      link = "DiagnosticWarn"
+    },
+    NvimTreeDiagnosticErrorFileHL = {
+      link = "DiagnosticError"
+    },
+
 		-- hide NvimTree's window separator
 		-- set both fg and bg
 		NvimTreeWinSeparator = {
@@ -28,7 +41,9 @@ return function(colors)
 		},
 
 		-- NvimTree
-		NvimTreeIndentMarker = { fg = colors.bg0 },
+		NvimTreeIndentMarker = {
+      fg = colors.bg3
+    },
 
 		-- this is the title above NvimTree
 		-- this actually belongs to BufferLine but is name NvimTreeHeader as this is

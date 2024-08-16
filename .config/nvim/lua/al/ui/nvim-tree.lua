@@ -138,8 +138,9 @@ return {
     highlight_opened_files = "name",
 
     -- file color matches git file status
-    highlight_git = true,
+    highlight_git = "none",
     highlight_modified = "name",
+    highlight_diagnostics = "name",
 
     indent_markers = {
       enable = true,
