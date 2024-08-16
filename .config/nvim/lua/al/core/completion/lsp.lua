@@ -120,7 +120,7 @@ end
 
 function goto_definition(_, result, ctx, config)
   if result == nil or vim.tbl_isempty(result) then
-    vim.lsp.log.info(ctx.method, 'No location found')
+    local _ = vim.lsp.log.info() and vim.lsp.log.info(ctx.method, 'No location found')
     return nil
   end
   local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
