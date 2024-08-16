@@ -70,6 +70,7 @@ local function on_attach(bufnr)
   vim.keymap.set("n", "d", api.fs.cut, opts("Cut file"))
   vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy file"))
   vim.keymap.set("n", "p", api.fs.paste, opts("Paste file"))
+  vim.keymap.set("n", "C", api.fs.clear_clipboard, opts("Clear Clipboard"))
 
   vim.keymap.set("n", "r", api.fs.rename, opts("Rename file"))
   vim.keymap.set("n", "a", api.fs.create, opts("New file"))

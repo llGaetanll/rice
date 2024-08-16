@@ -155,10 +155,61 @@ return {
 		desc = "Toggle Markdown Preview",
 	},
 
+  -- Diffview
+  {
+    mode = "n",
+    keymap = "<leader>dd",
+		action = require("al.core.git.diffview").toggle,
+		desc = "Diffview Toggle",
+  },
+  {
+    mode = "n",
+    keymap = "<leader>dr",
+		action = "<cmd>DiffviewRefresh<CR>",
+		desc = "[D]iffview [R]efresh",
+  },
+  {
+    mode = "n",
+    keymap = "<leader>dh",
+		action = "<cmd>DiffviewFileHistory<CR>",
+		desc = "[D]iffview File [H]istory",
+  },
+
+  -- Telescope
 	{
 		mode = "n",
-		keymap = "<leader>d",
-		action = "<C-w>q",
-		desc = "Close window",
+		keymap = "<leader>ff",
+		action = require("telescope.builtin").find_files,
+		desc = "[f]ind [f]iles",
+	},
+	{
+		mode = "n",
+		keymap = "<leader>fg",
+		action = require("telescope.builtin").live_grep,
+		desc = "[f]ile [g]rep",
+	},
+	{
+		mode = "n",
+		keymap = "<leader>fb",
+		action = require("telescope.builtin").buffers,
+		desc = "[f]ind [b]uffers",
+	},
+	{
+		mode = "n",
+		keymap = "<leader>fh",
+		action = require("telescope.builtin").help_tags,
+		desc = "[f]ind [h]elp",
+	},
+	{
+		mode = "n",
+		keymap = "<leader>gh",
+		action = require("telescope.builtin").highlights,
+		desc = "[g]et [h]ighlights",
+	},
+	{
+		mode = "n",
+		keymap = "<leader>kb",
+		action = require("telescope.builtin").keymaps,
+		desc = "[k]ey [b]indings",
 	},
 }
