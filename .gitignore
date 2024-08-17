@@ -66,6 +66,7 @@
 !.config/nvim
 .config/nvim/*
 !.config/nvim/init.lua
+!.config/nvim/stylua.toml
 !.config/nvim/lua/
 
 # !.config/nvim/init.vim

@@ -1,2 +1,2 @@
 -- hide tildes at end of buffers
-vim.cmd([[ set fillchars=eob:\ ]])
+vim.cmd [[ set fillchars=eob:\ ]]

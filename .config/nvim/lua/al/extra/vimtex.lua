@@ -3,7 +3,7 @@ if not status_ok then
 	return
 end ]]
 
-vim.cmd([[ syntax enable ]])
+vim.cmd [[ syntax enable ]]
 
 -- Error Suppression
 -- https://github.com/lervag/vimtex/blob/master/doc/vimtex.txt

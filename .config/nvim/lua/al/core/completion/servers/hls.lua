@@ -1,5 +1,5 @@
 return {
-  settings = {
-    cmd = { "hie-wrapper", "--lsp" }
-  }
+    settings = {
+        cmd = { "hie-wrapper", "--lsp" },
+    },
 }
