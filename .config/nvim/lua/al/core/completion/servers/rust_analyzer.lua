@@ -7,6 +7,9 @@ return {
             diagnostics = {
                 enable = true,
             },
+            imports = {
+                granularity = { group = "item" },
+            },
             inlayHints = {
                 parameterHints = true,
                 bindingModeHints = {
