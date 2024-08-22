@@ -26,6 +26,11 @@ local function misc_fixes(colors)
 
     -- WhichKey
     WhichKeyFloat = { bg = colors.bg1 },
+
+    -- Lualine
+    LualineBreadcrumbDir = { fg = colors.fg4, bg = "NONE" }, 
+    LualineBreadcrumbFile = { fg = colors.fg0, bg = "NONE" },
+    LualineBreadcrumbConnector = { fg = colors.bg4, bg = "NONE" }
   }
 end
 

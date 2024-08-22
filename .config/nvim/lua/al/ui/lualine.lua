@@ -11,6 +11,31 @@ for key, value in pairs(lsp_icons) do
   spaced_icons[key] = value .. " "
 end
 
+-- TODO: figure this out
+local breadcrumb_dir_highlight = ""
+local breadcrumb_file_highlight = ""
+local breadcrumb_connector_highlight = ""
+
+-- local breadcrumb_dir_highlight = "%#LualineBreadcrumbDir#"
+-- local breadcrumb_file_highlight = "%#LualineBreadcrumbFile#"
+-- local breadcrumb_connector_highlight = "%#LualineBreadcrumbConnector#"
+
+local function filepath()
+  local path = vim.fn.expand "%:~:."
+  local parts = vim.split(path, "/", { plain = true })
+  local breadcrumbs = {}
+
+  for i, part in ipairs(parts) do
+    if i == #parts then
+      table.insert(breadcrumbs, breadcrumb_file_highlight .. part)
+    else
+      table.insert(breadcrumbs, breadcrumb_dir_highlight .. part)
+    end
+  end
+
+  return table.concat(breadcrumbs, breadcrumb_connector_highlight .. " > ")
+end
+
 local sections = {
   lualine_a = { "mode" },
   lualine_b = {
@@ -21,7 +46,7 @@ local sections = {
       symbols = spaced_icons,
     },
   },
-  lualine_c = { "filename" },
+  lualine_c = { filepath },
   lualine_x = { "encoding" },
   lualine_y = { "progress" },
   lualine_z = { "location" },
