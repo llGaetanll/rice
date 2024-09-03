@@ -43,7 +43,7 @@ local function custom_open()
 end
 
 -- load the lsp icons from the theme
-local lsp_icons = require("al.ui.theme.util").lsp_icons
+local lsp_icons = require("al.ui.styles.util").lsp_icons
 
 local function on_attach(bufnr)
   local api = require "nvim-tree.api"

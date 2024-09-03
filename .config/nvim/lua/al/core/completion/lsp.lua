@@ -19,7 +19,7 @@ if not cmp_nvim_ok then
 end
 
 -- load the lsp icons from the theme
-local lsp_icons = require("al.ui.theme.util").lsp_icons
+local lsp_icons = require("al.ui.styles.util").lsp_icons
 
 -- sign icons used by nvim lsp
 local signs = {

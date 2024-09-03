@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 -- load the lsp icons from the theme
-local lsp_icons = require("al.ui.theme.util").lsp_icons
+local lsp_icons = require("al.ui.styles.util").lsp_icons
 
 local spaced_icons = {}
 for key, value in pairs(lsp_icons) do
