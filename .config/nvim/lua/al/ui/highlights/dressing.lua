@@ -13,7 +13,7 @@ return function(colors)
     -- bleed over to any other plugin
     DressingFloatBorder = {
       bg = nvim_tree_bg,
-      fg = colors.bg4,
+      fg = colors.bg3,
     },
 
     DressingFloatTitle = {
@@ -23,7 +23,7 @@ return function(colors)
 
     DressingInputText = {
       bg = nvim_tree_bg,
-      fg = colors.bg5,
+      fg = colors.bg3,
     },
   }
 end

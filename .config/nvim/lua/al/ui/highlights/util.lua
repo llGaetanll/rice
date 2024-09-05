@@ -3,12 +3,12 @@ local M = {}
 -- Get colors of a highlight group by name
 -- @param name Name of highlight group
 function M.get_hl(name)
-  local hl = vim.api.nvim_get_hl_by_name(name, true) --  true to return RGB color
+  local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
 
   -- convert to hex
   for k, v in pairs(hl) do
     if type(v) == "number" then
-      hl[k] = string.format("#%x", v)
+      hl[k] = string.format("#%06x", v)
     end
   end
 

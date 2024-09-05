@@ -27,18 +27,21 @@ if not status_ok then
   return
 end
 
+-- We need this set specifically for base16 to work
+vim.opt.termguicolors = true;
+
 lazy.setup {
   -- plugins here
   spec = {
     { "llGaetanll/prisma.nvim", branch = "dev" },
 
+    -- base16 colorschemes
     {
-      "ellisonleao/gruvbox.nvim",
+      "llGaetanll/base16.nvim",
       priority = 1000,
-      opts = {},
-      config = function()
-        vim.cmd [[colorscheme gruvbox]]
-      end,
+      opts = {
+        theme = "default-dark"
+      }
     },
 
     --[[ TreeSitter ]]
@@ -80,7 +83,23 @@ lazy.setup {
         require("nvim-treesitter.configs").setup(opts)
       end,
     },
-    "hiphish/rainbow-delimiters.nvim",
+
+    {
+      "hiphish/rainbow-delimiters.nvim",
+      config = function()
+        require('rainbow-delimiters.setup').setup({
+          highlight = {
+            'RainbowDelimiterOrange',
+            'RainbowDelimiterYellow',
+            'RainbowDelimiterGreen',
+            'RainbowDelimiterCyan',
+            'RainbowDelimiterBlue',
+            'RainbowDelimiterViolet',
+            'RainbowDelimiterRed',
+          },
+        })
+      end
+    },
     "nvim-treesitter/playground",
 
     --[[ Commenting ]]

@@ -9,6 +9,10 @@ return function(colors)
   local nvim_tree_bg = util.shade_color(colors.bg0, window_shading)
 
   return {
+    Directory = { link = "Base0BFg" },
+    NvimTreeOpenedHL = { link = "Base04Fg" },
+    NvimTreeSpecialFile = { link = "Base09Fg" },
+
     NvimTreeDiagnosticHintFileHL = {
       link = "DiagnosticHint",
     },

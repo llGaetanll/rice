@@ -11,14 +11,9 @@ for key, value in pairs(lsp_icons) do
   spaced_icons[key] = value .. " "
 end
 
--- TODO: figure this out
-local breadcrumb_dir_highlight = ""
-local breadcrumb_file_highlight = ""
-local breadcrumb_connector_highlight = ""
-
--- local breadcrumb_dir_highlight = "%#LualineBreadcrumbDir#"
--- local breadcrumb_file_highlight = "%#LualineBreadcrumbFile#"
--- local breadcrumb_connector_highlight = "%#LualineBreadcrumbConnector#"
+local breadcrumb_dir_highlight = "%#LualineBreadcrumbDir#"
+local breadcrumb_file_highlight = "%#LualineBreadcrumbFile#"
+local breadcrumb_connector_highlight = "%#LualineBreadcrumbConnector#"
 
 local function filepath()
   local path = vim.fn.expand "%:~:."

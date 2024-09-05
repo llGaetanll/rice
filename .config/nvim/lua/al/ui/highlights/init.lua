@@ -3,71 +3,33 @@ local get_hl = util.get_hl
 
 local M = {}
 
--- some highlight fixes aren't worthy of a separate file, so I just put them all
--- here.
-local function misc_fixes(colors)
-  return {
-    Normal = { bg = colors.bg0 },
-    NormalFloat = { bg = colors.bg0, fg = colors.bg3 },
-
-    -- set SignColumn bg to be transparent
-    SignColumn = { bg = "NONE" },
-
-    -- GitSigns
-    GitSignsAdd = { fg = colors.green, bg = "NONE" },
-    GitSignsChange = { fg = colors.blue, bg = "NONE" },
-    GitSignsDelete = { fg = colors.red, bg = "NONE" },
-
-    -- LSP
-    DiagnosticSignInfo = { fg = colors.blue, bg = "NONE" },
-    DiagnosticSignWarn = { fg = colors.yellow, bg = "NONE" },
-    DiagnosticSignHint = { fg = colors.aqua, bg = "NONE" },
-    DiagnosticSignError = { fg = colors.red, bg = "NONE" },
-
-    -- WhichKey
-    WhichKeyFloat = { bg = colors.bg1 },
-
-    -- Lualine
-    LualineBreadcrumbDir = { fg = colors.fg4, bg = "NONE" }, 
-    LualineBreadcrumbFile = { fg = colors.fg0, bg = "NONE" },
-    LualineBreadcrumbConnector = { fg = colors.bg4, bg = "NONE" }
-  }
-end
-
 -- get main colors
--- TODO: this comes from Gruvbox. generalize
 local colors = {
   -- darks
-  bg0 = get_hl("GruvboxBg0").foreground,
-  bg1 = get_hl("GruvboxBg1").foreground,
-  bg2 = get_hl("GruvboxBg2").foreground,
-  bg3 = get_hl("GruvboxBg3").foreground,
-  bg4 = get_hl("GruvboxBg4").foreground,
+  bg0    = get_hl("Base00Bg").bg,
+  bg1    = get_hl("Base01Bg").bg,
+  bg2    = get_hl("Base02Bg").bg,
+  bg3    = get_hl("Base03Bg").bg,
 
   -- lights
-  fg0 = get_hl("GruvboxFg0").foreground,
-  fg1 = get_hl("GruvboxFg1").foreground,
-  fg2 = get_hl("GruvboxFg2").foreground,
-  fg3 = get_hl("GruvboxFg3").foreground,
-  fg4 = get_hl("GruvboxFg4").foreground,
+  fg0    = get_hl("Base04Bg").bg,
+  fg1    = get_hl("Base05Bg").bg,
+  fg2    = get_hl("Base06Bg").bg,
+  fg3    = get_hl("Base07Bg").bg,
 
   -- accent colors
-  red = get_hl("GruvboxRed").foreground,
-  aqua = get_hl("GruvboxAqua").foreground,
-  blue = get_hl("GruvboxBlue").foreground,
-  gray = get_hl("GruvboxGray").foreground,
-  green = get_hl("GruvboxGreen").foreground,
-  orange = get_hl("GruvboxOrange").foreground,
-  purple = get_hl("GruvboxPurple").foreground,
-  yellow = get_hl("GruvboxYellow").foreground,
+  red    = get_hl("Base08Bg").bg,
+  orange = get_hl("Base09Bg").bg,
+  yellow = get_hl("Base0ABg").bg,
+  green  = get_hl("Base0BBg").bg,
+  cyan   = get_hl("Base0CBg").bg,
+  blue   = get_hl("Base0DBg").bg,
+  purple = get_hl("Base0EBg").bg,
+  gray   = get_hl("Base0FBg").bg,
 }
 
-local fixes = { "cmp", "nvim-tree", "telescope", "dressing" }
+local fixes = { "misc", "cmp", "nvim-tree", "telescope", "dressing", "lualine" }
 local groups = util.merge_groups(fixes, colors)
-
--- add miscelanious
-local misc_groups = misc_fixes(colors)
-groups = vim.tbl_deep_extend("force", groups, misc_groups)
 
 util.set_highlights(groups)
 
