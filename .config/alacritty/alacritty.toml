@@ -1,8 +1,8 @@
 live_config_reload = true
 
 [colors.cursor]
-cursor = "#ffffff"
-text = "#000000"
+cursor = "CellForeground"
+text = "CellBackground"
 
 [colors.vi_mode_cursor]
 cursor = "CellForeground"
