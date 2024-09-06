@@ -31,7 +31,7 @@ return function(colors)
     TSProperty = { link = "Base0DFg" },
     TSInclude = { link = "TSKeyword" },
     TSNamespace = { link = "Base09Fg" },
-    TSFunMacro = { link = "Base0BFg" },
+    TSFuncMacro = { link = "Base0CFg" },
     Operator = { link = "Base09Fg" },
 
     -- rust
