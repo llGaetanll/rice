@@ -64,11 +64,11 @@ lualine.setup {
   options = {
     component_separators = { left = " ", right = " " },
     section_separators = { left = "", right = "" },
-    -- disabled_filetypes = { "NvimTree", "TelescopePrompt", "packer", "toggleterm" },
     always_divide_middle = false,
   },
   -- sections shown when buffer is focused
   sections = sections,
+
   -- sections shown when buffer is not focused
   inactive_sections = sections,
 }

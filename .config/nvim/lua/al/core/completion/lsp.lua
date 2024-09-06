@@ -89,15 +89,15 @@ local lsp_gotos = {
   prev_hint = custom_goto_next(vim.diagnostic.severity.HINT),
 }
 
-function lsp_implementations()
+local lsp_implementations = function()
   require("telescope.builtin").lsp_implementations()
 end
 
-function lsp_references()
+local lsp_references = function()
   require("telescope.builtin").lsp_references()
 end
 
-function jump(location, client, config)
+local jump = function(location, client, config)
   local uri = location.uri or location.targetUri
   local bufnr = vim.uri_to_bufnr(uri)
 
@@ -118,7 +118,7 @@ function jump(location, client, config)
   vim.lsp.util.jump_to_location(location, client.offset_encoding, config.reuse_win)
 end
 
-function goto_definition(_, result, ctx, config)
+local goto_definition = function(_, result, ctx, config)
   if result == nil or vim.tbl_isempty(result) then
     local _ = vim.lsp.log.info() and vim.lsp.log.info(ctx.method, "No location found")
     return nil
