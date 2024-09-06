@@ -35,10 +35,23 @@ local sections = {
   lualine_a = { "mode" },
   lualine_b = {
     "branch",
-    "diff",
+    {
+      "diff",
+      diff_color = {
+        added    = 'LualineDiffAdd',
+        modified = 'LualineDiffChange',
+        removed  = 'LualineDiffDelete',
+      }
+    },
     {
       "diagnostics",
       symbols = spaced_icons,
+      diagnostics_color = {
+        error = 'LualineDiagnosticError',
+        warn  = 'LualineDiagnosticWarn',
+        info  = 'LualineDiagnosticInfo',
+        hint  = 'LualineDiagnosticHint',
+      },
     },
   },
   lualine_c = { filepath },
@@ -51,7 +64,7 @@ lualine.setup {
   options = {
     component_separators = { left = " ", right = " " },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "NvimTree", "TelescopePrompt", "packer", "toggleterm" },
+    -- disabled_filetypes = { "NvimTree", "TelescopePrompt", "packer", "toggleterm" },
     always_divide_middle = false,
   },
   -- sections shown when buffer is focused

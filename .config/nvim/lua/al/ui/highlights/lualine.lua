@@ -15,5 +15,15 @@ return function (colors)
     lualine_a_visual = { fg = colors.bg0, bg = colors.yellow },
     lualine_b_visual = { fg = colors.yellow, bg = colors.bg2 },
     lualine_c_visual = { fg = colors.fg0, bg = colors.bg1 },
+
+    LualineDiffAdd = { fg = colors.green, bg = colors.bg2 },
+    LualineDiffChange = { fg = colors.orange, bg = colors.bg2 },
+    LualineDiffDelete = { fg = colors.red, bg = colors.bg2 },
+
+    LualineDiagnosticError = { fg = colors.red, bg = colors.bg2 },
+    LualineDiagnosticWarn = { fg = colors.yellow, bg = colors.bg2 },
+    LualineDiagnosticInfo = { fg = colors.blue, bg = colors.bg2 },
+    LualineDiagnosticHint = { fg = colors.cyan, bg = colors.bg2 },
   }
 end
+
