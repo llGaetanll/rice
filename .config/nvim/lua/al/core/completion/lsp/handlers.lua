@@ -38,10 +38,14 @@ M.definition = function(_, result, ctx, config)
   end
 end
 
-M.hover = function (_, result, ctx, config)
+M.hover = function(_, result, ctx, config)
   local _, winnr = vim.lsp.handlers.hover(_, result, ctx, config)
 
-  vim.api.nvim_set_option_value('winhighlight', 'Normal:HoverNormal,FloatBorder:HoverBorder', { win = winnr })
+  vim.api.nvim_set_option_value(
+    "winhighlight",
+    "Normal:HoverNormal,FloatBorder:HoverBorder",
+    { win = winnr }
+  )
 end
 
 return M

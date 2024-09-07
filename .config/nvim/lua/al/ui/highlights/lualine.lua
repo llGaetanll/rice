@@ -1,4 +1,4 @@
-return function (colors)
+return function(colors)
   return {
     LualineBreadcrumbDir = { fg = colors.fg0, bg = colors.bg1 },
     LualineBreadcrumbFile = { fg = colors.fg3, bg = colors.bg1 },
@@ -26,4 +26,3 @@ return function (colors)
     LualineDiagnosticHint = { fg = colors.cyan, bg = colors.bg2 },
   }
 end
-

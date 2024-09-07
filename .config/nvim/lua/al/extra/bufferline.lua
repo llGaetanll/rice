@@ -1,9 +1,4 @@
-local status_ok, bufferline = pcall(require, "bufferline")
-if not status_ok then
-  return
-end
-
-bufferline.setup {
+return {
   -- for a list of options, see :h bufferline-configuration
   options = {
     -- use as tabs instead of buffers

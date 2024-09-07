@@ -39,8 +39,8 @@ return function(colors)
     Operator = { link = "Base09Fg" },
 
     -- rust
-    ['@lsp.type.macro.rust'] = { link = "Base0CFg" },
-    ['@lsp.type.property.rust'] = { link = "Base04Fg" },
-    ['@lsp.type.selfKeyword.rust'] = { link = "Base09Fg" }
+    ["@lsp.type.macro.rust"] = { link = "Base0CFg" },
+    ["@lsp.type.property.rust"] = { link = "Base04Fg" },
+    ["@lsp.type.selfKeyword.rust"] = { link = "Base09Fg" },
   }
 end

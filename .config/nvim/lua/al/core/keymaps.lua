@@ -1,4 +1,4 @@
-return {
+local keymaps = {
   {
     mode = "n",
     keymap = "<leader><Space>",
@@ -159,7 +159,11 @@ return {
   {
     mode = "n",
     keymap = "<leader>dd",
-    action = require "al.core.diffview.toggle",
+    action = function()
+      local toggle = require "al.core.diffview.toggle"
+
+      toggle()
+    end,
     desc = "Diffview Toggle",
   },
   {
@@ -179,37 +183,59 @@ return {
   {
     mode = "n",
     keymap = "<leader>ff",
-    action = require("telescope.builtin").find_files,
+    action = function(opts)
+      require("telescope.builtin").find_files(opts)
+    end,
     desc = "[f]ind [f]iles",
   },
   {
     mode = "n",
     keymap = "<leader>fg",
-    action = require("telescope.builtin").live_grep,
+    action = function(opts)
+      require("telescope.builtin").live_grep(opts)
+    end,
     desc = "[f]ile [g]rep",
   },
   {
     mode = "n",
     keymap = "<leader>fb",
-    action = require("telescope.builtin").buffers,
+    action = function(opts)
+      require("telescope.builtin").buffers(opts)
+    end,
     desc = "[f]ind [b]uffers",
   },
   {
     mode = "n",
     keymap = "<leader>fh",
-    action = require("telescope.builtin").help_tags,
+    action = function(opts)
+      require("telescope.builtin").help_tags(opts)
+    end,
     desc = "[f]ind [h]elp",
   },
   {
     mode = "n",
     keymap = "<leader>gh",
-    action = require("telescope.builtin").highlights,
+    action = function(opts)
+      require("telescope.builtin").highlights(opts)
+    end,
     desc = "[g]et [h]ighlights",
   },
   {
     mode = "n",
     keymap = "<leader>kb",
-    action = require("telescope.builtin").keymaps,
+    action = function(opts)
+      require("telescope.builtin").keymaps(opts)
+    end,
     desc = "[k]ey [b]indings",
   },
 }
+
+-- LEADER KEY: <Space>
+vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\" -- needed for VimTeX
+
+-- set keymaps
+for _, km in ipairs(keymaps) do
+  vim.keymap.set(km.mode, km.keymap, km.action, { noremap = true, silent = true, desc = km.desc })
+end

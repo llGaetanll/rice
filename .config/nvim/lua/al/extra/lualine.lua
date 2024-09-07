@@ -33,19 +33,19 @@ local sections = {
     {
       "diff",
       diff_color = {
-        added    = 'LualineDiffAdd',
-        modified = 'LualineDiffChange',
-        removed  = 'LualineDiffDelete',
-      }
+        added = "LualineDiffAdd",
+        modified = "LualineDiffChange",
+        removed = "LualineDiffDelete",
+      },
     },
     {
       "diagnostics",
       symbols = spaced_icons,
       diagnostics_color = {
-        error = 'LualineDiagnosticError',
-        warn  = 'LualineDiagnosticWarn',
-        info  = 'LualineDiagnosticInfo',
-        hint  = 'LualineDiagnosticHint',
+        error = "LualineDiagnosticError",
+        warn = "LualineDiagnosticWarn",
+        info = "LualineDiagnosticInfo",
+        hint = "LualineDiagnosticHint",
       },
     },
   },

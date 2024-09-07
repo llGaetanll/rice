@@ -4,11 +4,8 @@
 -- ██║██║╚██╗██║██║   ██║   ██║     ██║   ██║██╔══██║
 -- ██║██║ ╚████║██║   ██║██╗███████╗╚██████╔╝██║  ██║
 -- ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝
-
-require "al.plugins" -- load all the plugins
-
-require "al.ui"
-
 require "al.core"
 
-require "al.extra"
+require "al.plugins"
+
+require "al.ui"

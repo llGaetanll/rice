@@ -28,7 +28,7 @@ if not status_ok then
 end
 
 -- We need this set specifically for base16 to work
-vim.opt.termguicolors = true;
+vim.opt.termguicolors = true
 
 lazy.setup {
   -- plugins here
@@ -40,8 +40,8 @@ lazy.setup {
       "llGaetanll/base16.nvim",
       priority = 1000,
       opts = {
-        theme = "default-dark"
-      }
+        theme = "default-dark",
+      },
     },
 
     {
@@ -98,18 +98,18 @@ lazy.setup {
       "hiphish/rainbow-delimiters.nvim",
       event = { "VeryLazy" },
       config = function()
-        require('rainbow-delimiters.setup').setup({
+        require("rainbow-delimiters.setup").setup {
           highlight = {
-            'RainbowDelimiterOrange',
-            'RainbowDelimiterYellow',
-            'RainbowDelimiterGreen',
-            'RainbowDelimiterCyan',
-            'RainbowDelimiterBlue',
-            'RainbowDelimiterViolet',
-            'RainbowDelimiterRed',
+            "RainbowDelimiterOrange",
+            "RainbowDelimiterYellow",
+            "RainbowDelimiterGreen",
+            "RainbowDelimiterCyan",
+            "RainbowDelimiterBlue",
+            "RainbowDelimiterViolet",
+            "RainbowDelimiterRed",
           },
-        })
-      end
+        }
+      end,
     },
     {
       "nvim-treesitter/playground",
@@ -120,8 +120,8 @@ lazy.setup {
     {
       "numToStr/Comment.nvim",
       event = { "VeryLazy" },
-      config = function ()
-        require("Comment").setup({
+      config = function()
+        require("Comment").setup {
           pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
           toggler = {
             ---Line-comment toggle keymap
@@ -130,7 +130,7 @@ lazy.setup {
             ---Block-comment toggle keymap
             block = "gbc",
           },
-        })
+        }
       end,
       opts = {},
     },
@@ -153,8 +153,8 @@ lazy.setup {
         scope = {
           show_start = false,
           show_end = false,
-        }
-      }
+        },
+      },
     },
 
     --[[ CMP - Autocomplete ]]
@@ -248,13 +248,13 @@ lazy.setup {
     --[[ GIT ]]
     {
       "lewis6991/gitsigns.nvim", -- git indicators
-      opts = {}
+      opts = {},
     },
 
     {
       "sindrets/diffview.nvim", -- git diff integration
       event = { "VeryLazy" },
-      opts = "al.extra.diffview"
+      opts = "al.extra.diffview",
     },
 
     --[[ GPT autocompletion ]]
@@ -273,19 +273,20 @@ lazy.setup {
     -- pseudo "tabs" to work with nvim tree
     {
       "akinsho/bufferline.nvim",
+      opts = require "al.extra.bufferline",
     },
 
     -- airline for lua
     {
       "nvim-lualine/lualine.nvim",
       dependencies = { "kyazdani42/nvim-web-devicons" },
-      opts = require "al.ui.lualine"
+      opts = require "al.extra.lualine",
     },
 
     -- filesystem tree
     {
       "kyazdani42/nvim-tree.lua",
-      opts = require "al.ui.nvim-tree",
+      opts = require "al.extra.nvim-tree",
     },
 
     -- colorize CSS color codes
@@ -315,16 +316,16 @@ lazy.setup {
       "folke/todo-comments.nvim",
       event = "VeryLazy",
       dependencies = { "nvim-lua/plenary.nvim" },
-      opts = require("al.ui.todos"),
+      opts = require "al.extra.todos",
     },
 
     --[[ Language Specific ]]
     {
       "lervag/vimtex", -- latex support
       event = "VeryLazy",
-      config = function ()
+      config = function()
         require "al.extra.vimtex"
-      end
+      end,
     },
 
     -- markdown preview
