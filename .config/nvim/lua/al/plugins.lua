@@ -96,6 +96,7 @@ lazy.setup {
 
     {
       "hiphish/rainbow-delimiters.nvim",
+      event = { "VeryLazy" },
       config = function()
         require('rainbow-delimiters.setup').setup({
           highlight = {
@@ -110,31 +111,60 @@ lazy.setup {
         })
       end
     },
-    "nvim-treesitter/playground",
+    {
+      "nvim-treesitter/playground",
+      event = { "VeryLazy" },
+    },
 
     --[[ Commenting ]]
     {
       "numToStr/Comment.nvim",
+      event = { "VeryLazy" },
       opts = {},
     },
-    "JoosepAlviste/nvim-ts-context-commentstring", -- for native jsx context-aware commenting
+
+    -- for native jsx context-aware commenting
+    {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      event = { "VeryLazy" },
+    },
 
     -- display indents
     -- "lukas-reineke/indent-blankline.nvim" -- NOTE: slow for large comment blocks
 
     --[[ CMP - Autocomplete ]]
     -- This is actually necessary for lsp to work
-    "hrsh7th/nvim-cmp", -- base
-    "hrsh7th/cmp-nvim-lsp", -- autocompletion from nvim lsp
-    "hrsh7th/cmp-buffer", -- autocompletion from buffers
-    "hrsh7th/cmp-path", -- autocompletion for paths
-    "hrsh7th/cmp-cmdline", -- autocompletion for nvim commands
-    "onsails/lspkind.nvim", -- nvim cmp icons
+    {
+      "hrsh7th/nvim-cmp", -- base
+      event = { "VeryLazy" },
+    },
+    {
+      "hrsh7th/cmp-nvim-lsp", -- autocompletion from nvim lsp
+      event = { "VeryLazy" },
+    },
+    {
+      "hrsh7th/cmp-buffer", -- autocompletion from buffers
+      event = { "VeryLazy" },
+    },
+    {
+      "hrsh7th/cmp-path", -- autocompletion for paths
+      event = { "VeryLazy" },
+    },
+    {
+      "hrsh7th/cmp-cmdline", -- autocompletion for nvim commands
+      event = { "VeryLazy" },
+    },
+    {
+      "onsails/lspkind.nvim", -- nvim cmp icons
+      event = { "VeryLazy" },
+    },
 
     --[[ Snippets ]]
     -- snippets used in autocompletion
     {
       "L3MON4D3/LuaSnip",
+
+      event = { "VeryLazy" },
 
       -- follow latest release.
       version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
@@ -142,18 +172,28 @@ lazy.setup {
       -- massive repo of popular snippets for autocompletion
       dependencies = { "rafamadriz/friendly-snippets" },
     },
-    "saadparwaiz1/cmp_luasnip", -- luasnip completion source for nvim-cmp
+    {
+      "saadparwaiz1/cmp_luasnip", -- luasnip completion source for nvim-cmp
+      event = { "VeryLazy" },
+    },
 
     --[[ Autopairs ]]
-    "windwp/nvim-autopairs", -- autocomplete parentheses, brackets, etc...
+    {
+      "windwp/nvim-autopairs", -- autocomplete parentheses, brackets, etc...
+      event = { "VeryLazy" },
+    },
 
     --[[ File Formatting ]]
-    "mhartington/formatter.nvim", -- automatically format files on save
+    {
+      "mhartington/formatter.nvim", -- automatically format files on save
+      event = { "VeryLazy" },
+    },
 
     --[[ Telescope ]]
     -- fuzzy-finding
     {
       "nvim-telescope/telescope.nvim",
+      event = { "VeryLazy" },
       tag = "0.1.8",
       dependencies = { "nvim-lua/plenary.nvim" },
       opts = require "al.core.search",
@@ -162,23 +202,37 @@ lazy.setup {
     -- telescope for snippets
     {
       "benfowler/telescope-luasnip.nvim",
+      event = { "VeryLazy" },
       module = "telescope._extensions.luasnip", -- if you wish to lazy-load
     },
 
     --[[ LSP - Language Server Protocol ]]
-    "williamboman/mason.nvim", -- simple to use language server installer
-    "williamboman/mason-lspconfig.nvim", -- allows interop between mason and lsconfig
-    "neovim/nvim-lspconfig", -- enable lsp
+    {
+      "williamboman/mason.nvim", -- simple to use language server installer
+      event = { "VeryLazy" },
+    },
+    {
+      "williamboman/mason-lspconfig.nvim", -- allows interop between mason and lsconfig
+      event = { "VeryLazy" },
+    },
+    {
+      "neovim/nvim-lspconfig", -- enable lsp
+      event = { "VeryLazy" },
+    },
 
     --[[ GIT ]]
     "lewis6991/gitsigns.nvim", -- git indicators
     { -- git diff integration
       "sindrets/diffview.nvim",
+      event = { "VeryLazy" },
       opts = require("al.core.git.diffview").opts,
     },
 
     --[[ GPT autocompletion ]]
-    "github/copilot.vim", -- github copilot in nvim
+    {
+      "github/copilot.vim", -- github copilot in nvim
+      event = { "VeryLazy" },
+    },
 
     --[[ OTHER ]]
     { -- tells you all your keybinds
@@ -188,7 +242,9 @@ lazy.setup {
     },
 
     -- pseudo "tabs" to work with nvim tree
-    "akinsho/bufferline.nvim",
+    {
+      "akinsho/bufferline.nvim",
+    },
 
     -- airline for lua
     {
@@ -201,11 +257,11 @@ lazy.setup {
       "kyazdani42/nvim-tree.lua",
       opts = require "al.ui.nvim-tree",
     },
-    "kyazdani42/nvim-web-devicons", -- icons for nvim tree
 
     -- colorize CSS color codes
     {
       "norcalli/nvim-colorizer.lua",
+      event = "VeryLazy",
       opts = {
         "*",
       },
@@ -213,6 +269,7 @@ lazy.setup {
     -- improved UI interfaces
     {
       "stevearc/dressing.nvim",
+      event = "VeryLazy",
       opts = {
         input = {
           win_options = {
@@ -226,23 +283,28 @@ lazy.setup {
 
     {
       "folke/todo-comments.nvim",
+      event = "VeryLazy",
       dependencies = { "nvim-lua/plenary.nvim" },
       opts = require("al.ui.todos"),
     },
 
     --[[ Language Specific ]]
-    "lervag/vimtex", -- latex support
+    {
+      "lervag/vimtex", -- latex support
+      event = "VeryLazy",
+    },
 
     -- markdown preview
     {
       "iamcco/markdown-preview.nvim",
+      event = "VeryLazy",
       run = function()
         vim.fn["mkdp#util#install"]()
       end,
     },
   },
 
-  install = { colorscheme = { "gruvbox" } },
+  -- install = { colorscheme = { "gruvbox" } },
 
   -- automatically check for plugin updates
   checker = { enabled = false },
