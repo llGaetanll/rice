@@ -1,8 +1,3 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-  return
-end
-
 -- load the lsp icons from the theme
 local lsp_icons = require("al.ui.styles.util").lsp_icons
 
@@ -60,7 +55,7 @@ local sections = {
   lualine_z = { "location" },
 }
 
-lualine.setup {
+return {
   options = {
     component_separators = { left = " ", right = " " },
     section_separators = { left = "", right = "" },

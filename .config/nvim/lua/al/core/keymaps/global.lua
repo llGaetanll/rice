@@ -159,7 +159,7 @@ return {
   {
     mode = "n",
     keymap = "<leader>dd",
-    action = require("al.core.git.diffview").toggle,
+    action = require "al.core.diffview.toggle",
     desc = "Diffview Toggle",
   },
   {

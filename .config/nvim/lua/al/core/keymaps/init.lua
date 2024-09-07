@@ -1,5 +1,4 @@
 local global = require "al.core.keymaps.global"
--- local telescope = require("al.core.keymaps.telescope")
 
 local keymap = vim.api.nvim_set_keymap
 

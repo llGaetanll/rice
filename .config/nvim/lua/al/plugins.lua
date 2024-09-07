@@ -50,7 +50,7 @@ lazy.setup {
       cmd = "StartupTime",
       -- init is called during startup. Configuration for vim plugins typically should be set in an init function
       init = function()
-        vim.g.startuptime_tries = 10
+        vim.g.startuptime_tries = 20
       end,
     },
 
@@ -120,6 +120,18 @@ lazy.setup {
     {
       "numToStr/Comment.nvim",
       event = { "VeryLazy" },
+      config = function ()
+        require("Comment").setup({
+          pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+          toggler = {
+            ---Line-comment toggle keymap
+            line = "gcc",
+
+            ---Block-comment toggle keymap
+            block = "gbc",
+          },
+        })
+      end,
       opts = {},
     },
 
@@ -196,7 +208,7 @@ lazy.setup {
       event = { "VeryLazy" },
       tag = "0.1.8",
       dependencies = { "nvim-lua/plenary.nvim" },
-      opts = require "al.core.search",
+      opts = require "al.extra.telescope",
     },
 
     -- telescope for snippets
@@ -221,11 +233,15 @@ lazy.setup {
     },
 
     --[[ GIT ]]
-    "lewis6991/gitsigns.nvim", -- git indicators
-    { -- git diff integration
-      "sindrets/diffview.nvim",
+    {
+      "lewis6991/gitsigns.nvim", -- git indicators
+      opts = {}
+    },
+
+    {
+      "sindrets/diffview.nvim", -- git diff integration
       event = { "VeryLazy" },
-      opts = require("al.core.git.diffview").opts,
+      opts = "al.extra.diffview"
     },
 
     --[[ GPT autocompletion ]]
@@ -250,6 +266,7 @@ lazy.setup {
     {
       "nvim-lualine/lualine.nvim",
       dependencies = { "kyazdani42/nvim-web-devicons" },
+      opts = require "al.ui.lualine"
     },
 
     -- filesystem tree
@@ -292,6 +309,9 @@ lazy.setup {
     {
       "lervag/vimtex", -- latex support
       event = "VeryLazy",
+      config = function ()
+        require "al.extra.vimtex"
+      end
     },
 
     -- markdown preview
