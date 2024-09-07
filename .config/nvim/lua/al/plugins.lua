@@ -142,7 +142,20 @@ lazy.setup {
     },
 
     -- display indents
-    -- "lukas-reineke/indent-blankline.nvim" -- NOTE: slow for large comment blocks
+    {
+      "lukas-reineke/indent-blankline.nvim",
+      event = { "VeryLazy" },
+      main = "ibl",
+      ---@module "ibl"
+      ---@type ibl.config
+      opts = {
+        indent = { char = "▏" },
+        scope = {
+          show_start = false,
+          show_end = false,
+        }
+      }
+    },
 
     --[[ CMP - Autocomplete ]]
     -- This is actually necessary for lsp to work
@@ -254,7 +267,7 @@ lazy.setup {
     { -- tells you all your keybinds
       "folke/which-key.nvim",
       event = "VeryLazy",
-      opts = require "al.core.keymaps.whichkey",
+      opts = require "al.extra.whichkey",
     },
 
     -- pseudo "tabs" to work with nvim tree
