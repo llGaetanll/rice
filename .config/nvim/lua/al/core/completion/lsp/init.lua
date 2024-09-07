@@ -229,9 +229,6 @@ vim.diagnostic.config(lsp_params)
 local handlers = require "al.core.completion.lsp.handlers"
 
 vim.lsp.handlers["textDocument/definition"] = handlers.definition
-
--- setup the hover and signature help handlers
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, window_styles)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(handlers.hover, window_styles)
 
 vim.lsp.handlers["textDocument/signatureHelp"] =

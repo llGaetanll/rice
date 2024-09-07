@@ -24,6 +24,10 @@ return function(colors)
     DiagnosticUnderlineWarning = { undercurl = true, sp = colors.yellow },
     DiagnosticUnderlineError = { undercurl = true, sp = colors.red },
 
+    -- LSP Hover
+    HoverNormal = { link = "Normal" },
+    HoverBorder = { link = "WinSeparator" },
+
     -- TreeSitter
     TSVariable = { link = "Base06Fg" },
     TSVariableBuiltin = { link = "Base06Fg" },
