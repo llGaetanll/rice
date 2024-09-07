@@ -97,63 +97,6 @@ local lsp_references = function()
   require("telescope.builtin").lsp_references()
 end
 
-local jump = function(location, client, config)
-  local uri = location.uri or location.targetUri
-  local bufnr = vim.uri_to_bufnr(uri)
-
-  -- for each tab
-  for _, tabnr in ipairs(vim.api.nvim_list_tabpages()) do
-    -- for each window in each tab
-    for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(tabnr)) do
-      if vim.api.nvim_win_get_buf(winid) == bufnr then
-        vim.api.nvim_set_current_tabpage(tabnr) -- Switch to the tab with the buffer
-        vim.api.nvim_set_current_win(winid) -- Switch to the window with the buffer
-        vim.lsp.util.jump_to_location(location, client.offset_encoding, config.reuse_win)
-        return
-      end
-    end
-  end
-
-  vim.cmd "tabnew"
-  vim.lsp.util.jump_to_location(location, client.offset_encoding, config.reuse_win)
-end
-
-local goto_definition = function(_, result, ctx, config)
-  if result == nil or vim.tbl_isempty(result) then
-    local _ = vim.lsp.log.info() and vim.lsp.log.info(ctx.method, "No location found")
-    return nil
-  end
-  local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
-
-  config = config or {}
-
-  -- textDocument/definition can return Location or Location[]
-  -- https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_definition
-  if not vim.tbl_islist(result) then
-    result = { result }
-  end
-
-  local title = "LSP locations"
-  local items = vim.lsp.util.locations_to_items(result, client.offset_encoding)
-
-  if config.on_list then
-    assert(vim.is_callable(config.on_list), "on_list is not a function")
-    config.on_list { title = title, items = items }
-    return
-  end
-  if #result == 1 then
-    jump(result[1], client, config)
-    return
-  end
-  if config.loclist then
-    vim.fn.setloclist(0, {}, " ", { title = title, items = items })
-    vim.cmd.lopen()
-  else
-    vim.fn.setqflist({}, " ", { title = title, items = items })
-    vim.cmd "botright copen"
-  end
-end
-
 local lsp_keymaps = {
   -- goto declaration of variable
   { mode = "n", keymap = "gD", action = vim.lsp.buf.declaration, desc = "[G]oto [D]eclaration" },
@@ -283,9 +226,13 @@ end
 -- setup the diagnostics config
 vim.diagnostic.config(lsp_params)
 
-vim.lsp.handlers["textDocument/definition"] = goto_definition
+local handlers = require "al.core.completion.lsp.handlers"
+
+vim.lsp.handlers["textDocument/definition"] = handlers.definition
 
 -- setup the hover and signature help handlers
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, window_styles)
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, window_styles)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(handlers.hover, window_styles)
+
 vim.lsp.handlers["textDocument/signatureHelp"] =
   vim.lsp.with(vim.lsp.handlers.signature_help, window_styles)
