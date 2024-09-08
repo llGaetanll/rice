@@ -1,3 +1,5 @@
+local util = require "al.ui.highlights.util"
+
 return function(colors)
   return {
     -- Normal = { bg = colors.bg0 },
@@ -11,6 +13,23 @@ return function(colors)
     GitSignsAdd = { fg = colors.green, bg = "NONE" },
     GitSignsChange = { fg = colors.orange, bg = "NONE" },
     GitSignsDelete = { fg = colors.red, bg = "NONE" },
+
+    DiffDelete = {
+      fg = util.to_diff_color_text(colors.red, colors.bg0),
+      bg = util.to_diff_color(colors.red, colors.bg0)
+    },
+    DiffAdd = {
+      fg = util.to_diff_color_text(colors.green, colors.bg0),
+      bg = util.to_diff_color(colors.green, colors.bg0)
+    },
+    DiffChange = {
+      fg = util.to_diff_color_text(colors.orange, colors.bg0),
+      bg = util.to_diff_color(colors.orange, colors.bg0)
+    },
+    DiffText = {
+      fg = util.to_diff_color_text(colors.yellow, colors.bg0),
+      bg = util.to_diff_color(colors.yellow, colors.bg0)
+    },
 
     -- LSP
     DiagnosticInfo = { link = "Base0DFg" },
@@ -34,13 +53,17 @@ return function(colors)
     Identifier = { link = "Base0DFg" },
     TSProperty = { link = "Base0DFg" },
     TSInclude = { link = "TSKeyword" },
+    TSField = { link = "Base0DFg" },
+    TSFunction = { link = "Base0BFg" },
+    TSMethod = { link = "TSFunction" },
     TSNamespace = { link = "Base09Fg" },
     TSFuncMacro = { link = "Base0CFg" },
     Operator = { link = "Base09Fg" },
+    TSOperator = { link = "Base09Fg" },
 
     -- rust
     ["@lsp.type.macro.rust"] = { link = "Base0CFg" },
-    ["@lsp.type.property.rust"] = { link = "Base04Fg" },
+    ["@lsp.type.property.rust"] = { link = "Base0DFg" },
     ["@lsp.type.selfKeyword.rust"] = { link = "Base09Fg" },
   }
 end

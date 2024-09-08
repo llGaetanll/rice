@@ -16,6 +16,10 @@ return function(colors)
     lualine_b_visual = { fg = colors.yellow, bg = colors.bg2 },
     lualine_c_visual = { fg = colors.fg0, bg = colors.bg1 },
 
+    lualine_a_command = { fg = colors.bg0, bg = colors.red },
+    lualine_b_command = { fg = colors.red, bg = colors.bg2 },
+    lualine_c_command = { fg = colors.fg0, bg = colors.bg1 },
+
     LualineDiffAdd = { fg = colors.green, bg = colors.bg2 },
     LualineDiffChange = { fg = colors.orange, bg = colors.bg2 },
     LualineDiffDelete = { fg = colors.red, bg = colors.bg2 },
