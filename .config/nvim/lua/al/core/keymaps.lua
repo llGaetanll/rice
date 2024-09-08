@@ -160,9 +160,8 @@ local keymaps = {
     mode = "n",
     keymap = "<leader>dd",
     action = function()
-      local toggle = require "al.core.diffview.toggle"
-
-      toggle()
+      local diffview = require "al.core.diffview"
+      diffview.toggle([[DiffviewOpen]])
     end,
     desc = "Diffview Toggle",
   },
@@ -175,7 +174,10 @@ local keymaps = {
   {
     mode = "n",
     keymap = "<leader>dh",
-    action = "<cmd>DiffviewFileHistory<CR>",
+    action = function()
+      local diffview = require "al.core.diffview"
+      diffview.toggle([[DiffviewFileHistory]])
+    end,
     desc = "[D]iffview File [H]istory",
   },
 
