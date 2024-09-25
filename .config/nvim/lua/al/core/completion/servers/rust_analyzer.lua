@@ -22,6 +22,10 @@ return {
           enable = true,
         },
       },
+      rustfmt = {
+        overrideCommand = { "rustfmt", "+nightly" },
+        extraArgs = { "--check", "--unstable-features" }
+      }
     },
   },
 }
