@@ -5,6 +5,7 @@
 # whitelist gitignore and readme
 !.gitignore
 !README.md
+!install.sh
 
 !.local
 .local/*
