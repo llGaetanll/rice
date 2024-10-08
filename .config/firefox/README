@@ -1,0 +1,5 @@
+To use this userChrome, you can run 
+
+`ln -s userChrome.css ~/.mozilla/firefox/<profile>/chrome/userChrome.css`
+
+where `<profile>` is your default profile folder
