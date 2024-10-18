@@ -18,7 +18,7 @@ local function custom_open()
 
     -- expand or collapse dir
   elseif node.nodes then
-    require("nvim-tree.lib").expand_or_collapse(node)
+    require("nvim-tree.api").node.open.edit(node)
 
     -- if the node is a file
   else
