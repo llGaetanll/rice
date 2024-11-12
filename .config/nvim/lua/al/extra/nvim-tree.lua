@@ -10,7 +10,7 @@
 --        switching
 local function custom_open()
   -- get the current node
-  local node = require("nvim-tree.lib").get_node_at_cursor()
+  local node = require("nvim-tree.api").tree.get_node_under_cursor()
 
   -- mode up dir
   if node.name == ".." then
