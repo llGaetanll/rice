@@ -1,25 +1,35 @@
 #!/bin/sh
-# this script overrides dmenu_run and launches a theme-colored
-# version of dmenu using pywal generated colors.
+# This script overrides dmenu_run and launches a theme-colored
+# version of dmenu using pywal generated colors. If the colors
+# file can't be found, the script defaults to the base dmenu
+# command
 
-# note that the `unset LS_COLORS` is there because not having it
+# Note that the `unset LS_COLORS` is there because not having it
 # messes with lf's color system. It's not a great solution but it
 # works.
 
-[ -e "${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.sh" ] && \
-    . "${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.sh" && \
-    unset LS_COLORS && \
-    dmenu_run \
-        -nb "$color0" \
-        -sb "$color6" \
-        -sf "$color0" \
-        -nf "$color15" \
-        -nhb "$color1" \
-        -nhf "$color0" \
-        -shb "$color1" \
-        -shf "$color0" \
-        -h 70 \
-        -l 5 \
-        -c \
-        "$@"
+COLORS_HOME="${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.sh"
 
+if [ -e "$COLORS_HOME" ]; then
+  . "$COLORS_HOME" || exit
+
+  unset LS_COLORS || exit
+
+  dmenu_run \
+    -nb "$color0" \
+    -sb "$color6" \
+    -sf "$color0" \
+    -nf "$color15" \
+    -nhb "$color1" \
+    -nhf "$color0" \
+    -shb "$color1" \
+    -shf "$color0" \
+    -h 70 \
+    -l 5 \
+    -c \
+    "$@"
+else
+  dmenu_run -h 70 -l 5 -c "$@"
+fi
+
+unset COLORS_HOME
