@@ -2,7 +2,8 @@
 
 # set any system-dependent environment variables here
 export POLYBAR="$XDG_CONFIG_HOME/polybar/lines.ini" # path to the polybar loaded on startup
-export BAR_HEIGHT=45 # matched by polybar and dmenu
+export BAR_BOTTOM=false # alternative is polybar is at the top
+export BAR_HEIGHT=45   # matched by polybar and dmenu
 export DEF_WIN_GAP=20
 
 # source any files required by any programming languages
