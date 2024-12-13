@@ -143,19 +143,16 @@ lazy.setup {
 
     -- display indents
     {
-      "lukas-reineke/indent-blankline.nvim",
-      event = { "VeryLazy" },
-      main = "ibl",
-      ---@module "ibl"
-      ---@type ibl.config
-      opts = {
-        indent = { char = "▏", highlight = "Base01Fg" },
-        scope = {
-          enabled = false,
-          show_start = false,
-          show_end = false,
-        },
-      },
+      "shellRaining/hlchunk.nvim",
+      event = { "BufReadPre", "BufNewFile" },
+      config = function()
+        require("hlchunk").setup({
+          indent = {
+            enable = true,
+            style = { vim.api.nvim_get_hl(0, { name = "Base01Fg" }) },
+          },
+        })
+      end
     },
 
     --[[ CMP - Autocomplete ]]
