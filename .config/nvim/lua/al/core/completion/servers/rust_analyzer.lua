@@ -10,6 +10,10 @@ return {
       imports = {
         granularity = { group = "item" },
       },
+      rustfmt = {
+        overrideCommand = { "rustfmt", "+nightly" },
+        extraArgs = { "--check", "--unstable-features" }
+      },
       inlayHints = {
         parameterHints = true,
         bindingModeHints = {

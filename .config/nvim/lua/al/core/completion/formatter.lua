@@ -4,12 +4,12 @@ if not status_ok then
 end
 
 -- format on save
--- vim.cmd([[
---   augroup FormatAutogroup
---     autocmd!
---     autocmd BufWritePost * FormatWrite
---   augroup END
--- ]])
+vim.cmd([[
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost * Format
+  augroup END
+]])
 
 -- formatters are opt-in
 -- so you need to define them for the languages that you like
