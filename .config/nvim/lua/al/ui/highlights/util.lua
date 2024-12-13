@@ -69,6 +69,7 @@ function M.shade_color(color, percent)
     return "NONE"
   end
   local r, g, b = hex_to_rgb(color)
+  r, g, b = r * 0xff, g * 0xff, b * 0xff
   if not r or not g or not b then
     return "NONE"
   end
