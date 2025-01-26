@@ -11,8 +11,7 @@ return {
         granularity = { group = "item" },
       },
       rustfmt = {
-        overrideCommand = { "rustfmt", "+nightly" },
-        extraArgs = { "--check", "--unstable-features" }
+        overrideCommand = { "rustfmt", "+nightly", "--edition", "2021" },
       },
       inlayHints = {
         parameterHints = true,
