@@ -3,7 +3,7 @@ local util = require "al.ui.highlights.util"
 return function(colors)
   return {
     -- Normal = { bg = colors.bg0 },
-    NormalFloat = { bg = colors.bg1 },
+    NormalFloat = { fg = colors.bg3, bg = colors.bg0 },
     WinSeparator = { fg = colors.bg3, bg = colors.bg0 },
 
     -- set SignColumn bg to be transparent
@@ -16,16 +16,19 @@ return function(colors)
 
     DiffDelete = {
       fg = util.to_diff_color_text(colors.red, colors.bg0),
-      bg = util.to_diff_color(colors.red, colors.bg0)
+      bg = util.to_diff_color(colors.red, colors.bg0),
     },
     DiffAdd = {
-      bg = util.to_diff_color(colors.green, colors.bg0)
+      fg = util.to_diff_color_text(colors.green, colors.bg0),
+      bg = util.to_diff_color(colors.green, colors.bg0),
     },
     DiffChange = {
-      bg = util.to_diff_color(colors.orange, colors.bg0)
+      fg = util.to_diff_color_text(colors.orange, colors.bg0),
+      bg = util.to_diff_color(colors.orange, colors.bg0),
     },
     DiffText = {
-      bg = util.to_diff_color(colors.yellow, colors.bg0)
+      fg = util.to_diff_color_text(colors.yellow, colors.bg0),
+      bg = util.to_diff_color(colors.yellow, colors.bg0),
     },
 
     -- LSP
