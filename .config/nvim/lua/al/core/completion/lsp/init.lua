@@ -52,11 +52,6 @@ local lsp_params = {
   },
 }
 
-local window_styles = {
-  border = "rounded",
-  width = 50,
-}
-
 -- settings directory for language server parameters
 local servers_dir = "al.core.completion.servers"
 
@@ -105,7 +100,18 @@ local lsp_keymaps = {
   { mode = "n", keymap = "gd", action = vim.lsp.buf.definition, desc = "[G]et [d]efinition" },
 
   -- get info about object
-  { mode = "n", keymap = "K", action = vim.lsp.buf.hover, desc = "Get Info" },
+  {
+    mode = "n",
+    keymap = "K",
+    action = function()
+      -- This config extends `vim.lsp.util.open_floating_preview.Opts`
+      vim.lsp.buf.hover {
+        border = "rounded",
+        max_width = 50,
+      }
+    end,
+    desc = "Get Info",
+  },
 
   -- get signature of fn
   { mode = "n", keymap = "gS", action = vim.lsp.buf.signature_help, desc = "[G]et [S]ignature" },
@@ -225,11 +231,3 @@ end
 
 -- setup the diagnostics config
 vim.diagnostic.config(lsp_params)
-
-local handlers = require "al.core.completion.lsp.handlers"
-
-vim.lsp.handlers["textDocument/definition"] = handlers.definition
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(handlers.hover, window_styles)
-
-vim.lsp.handlers["textDocument/signatureHelp"] =
-  vim.lsp.with(vim.lsp.handlers.signature_help, window_styles)
