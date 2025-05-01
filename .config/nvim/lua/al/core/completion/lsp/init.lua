@@ -93,9 +93,6 @@ local lsp_references = function()
 end
 
 local lsp_keymaps = {
-  -- goto declaration of variable
-  { mode = "n", keymap = "gD", action = vim.lsp.buf.declaration, desc = "[G]oto [D]eclaration" },
-
   -- goto definition of variable
   { mode = "n", keymap = "gd", action = vim.lsp.buf.definition, desc = "[G]et [d]efinition" },
 
