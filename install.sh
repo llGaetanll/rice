@@ -2,19 +2,26 @@
 
 # This script makes config file installation easier.
 #
-# If you only want, say, nvim, alacritty, tmux, and lf, you can run
+# Usage:
+#     ./install.sh DESTINATION_DIR [program1 program2 ...]
 #
-#     ./install.sh nvim alacritty tmux lf
+# Example:
+#     ./install.sh $HOME nvim alacritty tmux lf
 #
-# Each of these programs will then be symlinked to your `$HOME/.config/`
-# directory.
+# Each of these programs will then be symlinked to DESTINATION_DIR/.config/
 
-# get the directory the script is in (this is the source directory)
+# Get the directory the script is in (this is the source directory)
 SRC=$(cd $(dirname "$0") && pwd)
 cd - > /dev/null
 
-DST="$HOME"
+# First parameter is the destination directory
+DST="$1"
+shift
 
+# Create .config directory if it doesn't exist
+mkdir -p "$DST/.config"
+
+# Process remaining parameters as program names
 for prog in "$@"; do
   ln -s "$SRC/.config/$prog" "$DST/.config/$prog"
 done
