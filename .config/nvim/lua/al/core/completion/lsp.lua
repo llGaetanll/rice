@@ -18,40 +18,6 @@ if not cmp_nvim_ok then
     return
 end
 
--- load the lsp icons from the theme
-local lsp_icons = require("al.ui.styles.util").lsp_icons
-
--- sign icons used by nvim lsp
-local signs = {
-    { name = "DiagnosticSignError", text = lsp_icons.error },
-    { name = "DiagnosticSignWarn", text = lsp_icons.warn },
-    { name = "DiagnosticSignHint", text = lsp_icons.hint },
-    { name = "DiagnosticSignInfo", text = lsp_icons.info },
-}
-
--- this is how lsp looks
-local lsp_params = {
-    -- disable virtual text
-    virtual_text = true,
-
-    -- show signs
-    signs = {
-        active = signs,
-    },
-
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-        focusable = false,
-        style = "minimal",
-        source = "always",
-        header = "",
-        prefix = "",
-        border = "rounded",
-    },
-}
-
 -- settings directory for language server parameters
 local servers_dir = "al.core.completion.servers"
 
@@ -241,10 +207,32 @@ mason_lsp.setup {
     end,
 }
 
--- setup the diagnostics
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
+local lsp_icons = require("al.ui.styles.util").lsp_icons
 
 -- setup the diagnostics config
-vim.diagnostic.config(lsp_params)
+vim.diagnostic.config {
+    -- disable virtual text
+    virtual_text = true,
+
+    -- show signs
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = lsp_icons.error,
+            [vim.diagnostic.severity.WARN] = lsp_icons.warn,
+            [vim.diagnostic.severity.HINT] = lsp_icons.hint,
+            [vim.diagnostic.severity.INFO] = lsp_icons.info,
+        },
+    },
+
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        source = "always",
+        header = "",
+        prefix = "",
+        border = "rounded",
+    },
+}
