@@ -17,7 +17,7 @@ super + {_,alt + } BackSpace
 # volume up
 super + {equal,plus}
 	pulsemixer --change-volume {+5,+15}
-  
+
 # volume down
 super + {_,shift + } minus
 	pulsemixer --change-volume {-5,-15}
@@ -67,7 +67,7 @@ super + {_,shift + }{1-9}
 # close and kill a window
 super + {_,shift + }q
     bspc node -{c,k}
- 
+
 # # set the node flags
 # super + ctrl + {m,x,y,z}
 	# bspc node -g {marked,locked,sticky,private}
@@ -95,4 +95,3 @@ super + {_,shift + }q
 	# bspc wm -h on
 
 # }}}
-
