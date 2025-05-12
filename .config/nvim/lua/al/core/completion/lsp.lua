@@ -223,10 +223,8 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 mason.setup { ensure_installed = servers }
-mason_lsp.setup {}
-
-mason_lsp.setup_handlers {
-    function(server_name)
+mason_lsp.setup {
+    handlers = function(server_name)
         -- directory of the current language server setting (if it exists)
         local server_dir = servers_dir .. "." .. server_name
 
