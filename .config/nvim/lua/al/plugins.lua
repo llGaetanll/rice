@@ -225,18 +225,19 @@ lazy.setup {
 
         --[[ LSP - Language Server Protocol ]]
         {
-            "williamboman/mason.nvim", -- simple to use language server installer
-            event = { "VeryLazy" },
-        },
-        {
-            "williamboman/mason-lspconfig.nvim", -- allows interop between mason and lsconfig
-            event = { "VeryLazy" },
-        },
-        {
             "neovim/nvim-lspconfig", -- enable lsp
             event = { "VeryLazy" },
+            dependencies = {
+                {
+                    "williamboman/mason.nvim", -- simple to use language server installer
+                    event = { "VeryLazy" },
+                },
+                {
+                    "williamboman/mason-lspconfig.nvim", -- allows interop between mason and lsconfig
+                    event = { "VeryLazy" },
+                },
+            },
         },
-
         --[[ GIT ]]
         {
             "lewis6991/gitsigns.nvim", -- git indicators
