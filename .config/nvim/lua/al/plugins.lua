@@ -206,12 +206,6 @@ lazy.setup {
       event = { "VeryLazy" },
     },
 
-    --[[ File Formatting ]]
-    {
-      "mhartington/formatter.nvim", -- automatically format files on save
-      event = { "VeryLazy" },
-    },
-
     --[[ Telescope ]]
     -- fuzzy-finding
     {
