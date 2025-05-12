@@ -1,4 +1,4 @@
-local lsp_ok, lsp = pcall(require, "lspconfig")
+local lsp_ok, _ = pcall(require, "lspconfig")
 if not lsp_ok then
     return
 end
@@ -17,9 +17,6 @@ local cmp_nvim_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_ok then
     return
 end
-
--- settings directory for language server parameters
-local servers_dir = "al.core.completion.servers"
 
 -- the list of language servers to set up
 local servers = { "lua_ls" }
@@ -188,24 +185,19 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function (event)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = event.buf,
+        callback = function()
+            vim.lsp.buf.format { bufnr = event.buf }
+        end,
+    })
+  end
+})
+
 mason.setup { ensure_installed = servers }
-mason_lsp.setup {
-    handlers = function(server_name)
-        -- directory of the current language server setting (if it exists)
-        local server_dir = servers_dir .. "." .. server_name
-
-        -- check for any language server specific settings
-        -- if not, this will just be nil
-        local conf_ok, conf = pcall(require, server_dir)
-
-        lsp[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = conf_ok and conf.settings or nil,
-            filetypes = (conf or {}).filetypes,
-        }
-    end,
-}
+mason_lsp.setup {}
 
 local lsp_icons = require("al.ui.styles.util").lsp_icons
 
