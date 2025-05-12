@@ -1,3 +1,3 @@
 return {
-  enhanced_diff_hl = true,
+    enhanced_diff_hl = true,
 }
