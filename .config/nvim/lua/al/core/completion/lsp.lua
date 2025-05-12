@@ -18,9 +18,6 @@ if not cmp_nvim_ok then
     return
 end
 
--- the list of language servers to set up
-local servers = { "lua_ls" }
-
 local function custom_goto_prev(severity)
     return function()
         vim.diagnostic.goto_prev { severity = severity }
@@ -169,19 +166,6 @@ local servers_dir = "al.core.completion.servers"
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
-        -- Get the LSP client for this buffer. There could be more than one, but for now we just get the first.
-        local client = vim.lsp.get_clients({ bufnr = event.buf, id = event.data.client_id })[1]
-        local server_name = client.server_info.name
-
-        -- Check for any language server specific settings
-        local server_dir = servers_dir .. "." .. server_name
-        local conf_ok, conf = pcall(require, server_dir)
-        vim.lsp.config(server_name, {
-            capabilities = capabilities,
-            settings = conf_ok and conf.settings or nil,
-            filetypes = conf_ok and conf.filetypes or nil,
-        })
-
         -- LSP key bindings
         for _, km in ipairs(lsp_keymaps) do
             vim.keymap.set(
@@ -196,18 +180,35 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = event.buf,
             callback = function()
-                vim.lsp.buf.format { bufnr = event.buf }
+                vim.lsp.buf.format()
             end,
         })
     end,
 })
 
-mason.setup { ensure_installed = servers }
+mason.setup {}
 mason_lsp.setup {}
 
-local lsp_icons = require("al.ui.styles.util").lsp_icons
+-- TODO:
+-- 1. We can probably do better than a hardcoded list of servers
+-- 2. Loading the settings upfront for each server like this is wasteful. It
+--    would be better if they were lazily loaded (i.e. when we open a file of the
+--    right type) but for the life of me, I cannot figure out how to do this.
+local servers = { "rust_analyzer", "lua_ls", "hls" }
+for _, server in ipairs(servers) do
+    local server_dir = servers_dir .. "." .. server
+    local conf_ok, conf = pcall(require, server_dir)
+    if conf_ok then
+        vim.lsp.config(server, {
+            capabilities = capabilities,
+            settings = conf.settings,
+            filetypes = conf.filetypes,
+        })
+    end
+end
 
 -- setup the diagnostics config
+local lsp_icons = require("al.ui.styles.util").lsp_icons
 vim.diagnostic.config {
     -- disable virtual text
     virtual_text = true,
