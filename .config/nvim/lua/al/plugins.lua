@@ -146,13 +146,13 @@ lazy.setup {
       "shellRaining/hlchunk.nvim",
       event = { "BufReadPre", "BufNewFile" },
       config = function()
-        require("hlchunk").setup({
+        require("hlchunk").setup {
           indent = {
             enable = true,
             style = { vim.api.nvim_get_hl(0, { name = "Base01Fg" }) },
           },
-        })
-      end
+        }
+      end,
     },
 
     --[[ CMP - Autocomplete ]]
@@ -254,12 +254,6 @@ lazy.setup {
       event = { "VeryLazy" },
       dependencies = { "nvim-tree/nvim-web-devicons" },
       opts = "al.extra.diffview",
-    },
-
-    --[[ GPT autocompletion ]]
-    {
-      "github/copilot.vim", -- github copilot in nvim
-      event = { "VeryLazy" },
     },
 
     --[[ OTHER ]]
