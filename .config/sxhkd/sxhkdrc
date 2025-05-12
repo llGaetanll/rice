@@ -12,7 +12,7 @@ super + {_,alt + }Print
 
 # shutdown/reboot computer
 super + {_,alt + } BackSpace
-	prompt {"Shutdown computer?" "sudo -A shutdown -h now", "Reboot computer?" "sudo -A reboot"}
+	prompt {"Shutdown computer?" "sudo poweroff", "Reboot computer?" "sudo reboot"}
 
 # volume up
 super + {equal,plus}
