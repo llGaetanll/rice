@@ -160,40 +160,46 @@ local lsp_keymaps = {
     },
 }
 
--- This is the function that is attached to a language server when it is attached to a buffer
-local function on_attach(client, bufnr)
-    -- key bindings for LSP
-    for _, km in ipairs(lsp_keymaps) do
-        -- keymap(bufnr, km.mode, km.keymap, km.action, { noremap = true, silent = true, desc = km.desc })
-        vim.keymap.set(
-            km.mode,
-            km.keymap,
-            km.action,
-            { buffer = bufnr, noremap = true, silent = true, desc = "[LSP]: " .. km.desc }
-        )
-    end
-
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = bufnr,
-        callback = function()
-            vim.lsp.buf.format { bufnr = bufnr, id = client.id }
-        end,
-    })
-end
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function (event)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = event.buf,
-        callback = function()
-            vim.lsp.buf.format { bufnr = event.buf }
-        end,
-    })
-  end
+-- settings directory for language server parameters
+local servers_dir = "al.core.completion.servers"
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(event)
+        -- Get the LSP client for this buffer. There could be more than one, but for now we just get the first.
+        local client = vim.lsp.get_clients({ bufnr = event.buf, id = event.data.client_id })[1]
+        local server_name = client.server_info.name
+
+        -- Check for any language server specific settings
+        local server_dir = servers_dir .. "." .. server_name
+        local conf_ok, conf = pcall(require, server_dir)
+        vim.lsp.config(server_name, {
+            capabilities = capabilities,
+            settings = conf_ok and conf.settings or nil,
+            filetypes = conf_ok and conf.filetypes or nil,
+        })
+
+        -- LSP key bindings
+        for _, km in ipairs(lsp_keymaps) do
+            vim.keymap.set(
+                km.mode,
+                km.keymap,
+                km.action,
+                { buffer = event.buf, noremap = true, silent = true, desc = "[LSP]: " .. km.desc }
+            )
+        end
+
+        -- Format on save
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = event.buf,
+            callback = function()
+                vim.lsp.buf.format { bufnr = event.buf }
+            end,
+        })
+    end,
 })
 
 mason.setup { ensure_installed = servers }
