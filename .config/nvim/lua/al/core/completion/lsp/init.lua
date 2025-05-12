@@ -24,9 +24,9 @@ local lsp_icons = require("al.ui.styles.util").lsp_icons
 -- sign icons used by nvim lsp
 local signs = {
   { name = "DiagnosticSignError", text = lsp_icons.error },
-  { name = "DiagnosticSignWarn", text = lsp_icons.warn },
-  { name = "DiagnosticSignHint", text = lsp_icons.hint },
-  { name = "DiagnosticSignInfo", text = lsp_icons.info },
+  { name = "DiagnosticSignWarn",  text = lsp_icons.warn },
+  { name = "DiagnosticSignHint",  text = lsp_icons.hint },
+  { name = "DiagnosticSignInfo",  text = lsp_icons.info },
 }
 
 -- this is how lsp looks
@@ -94,7 +94,7 @@ end
 
 local lsp_keymaps = {
   -- goto definition of variable
-  { mode = "n", keymap = "gd", action = vim.lsp.buf.definition, desc = "[G]et [d]efinition" },
+  { mode = "n", keymap = "gd",         action = vim.lsp.buf.definition,     desc = "[G]et [d]efinition" },
 
   -- get info about object
   {
@@ -111,16 +111,16 @@ local lsp_keymaps = {
   },
 
   -- get signature of fn
-  { mode = "n", keymap = "gS", action = vim.lsp.buf.signature_help, desc = "[G]et [S]ignature" },
+  { mode = "n", keymap = "gS",         action = vim.lsp.buf.signature_help, desc = "[G]et [S]ignature" },
 
   -- get implementation info
-  { mode = "n", keymap = "gi", action = lsp_implementations, desc = "[G]et [i]mplementation" },
+  { mode = "n", keymap = "gi",         action = lsp_implementations,        desc = "[G]et [i]mplementation" },
 
   -- rename an object
-  { mode = "n", keymap = "<leader>rn", action = vim.lsp.buf.rename, desc = "[r]e[n]ame" },
+  { mode = "n", keymap = "<leader>rn", action = vim.lsp.buf.rename,         desc = "[r]e[n]ame" },
 
   -- list all references of object
-  { mode = "n", keymap = "gr", action = lsp_references, desc = "[g]et [r]eferences" },
+  { mode = "n", keymap = "gr",         action = lsp_references,             desc = "[g]et [r]eferences" },
 
   -- get code actions
   {
@@ -145,28 +145,28 @@ local lsp_keymaps = {
   { mode = "n", keymap = "]d", action = vim.diagnostic.goto_next, desc = "Next Def" },
 
   -- goto previous error
-  { mode = "n", keymap = "[e", action = lsp_gotos.prev_error, desc = "Prev Error" },
+  { mode = "n", keymap = "[e", action = lsp_gotos.prev_error,     desc = "Prev Error" },
 
   -- goto next error
-  { mode = "n", keymap = "]e", action = lsp_gotos.next_error, desc = "Next Error" },
+  { mode = "n", keymap = "]e", action = lsp_gotos.next_error,     desc = "Next Error" },
 
   -- goto previous warning
-  { mode = "n", keymap = "[w", action = lsp_gotos.prev_warn, desc = "Prev Warning" },
+  { mode = "n", keymap = "[w", action = lsp_gotos.prev_warn,      desc = "Prev Warning" },
 
   -- goto next warning
-  { mode = "n", keymap = "]w", action = lsp_gotos.next_warn, desc = "Next Warning" },
+  { mode = "n", keymap = "]w", action = lsp_gotos.next_warn,      desc = "Next Warning" },
 
   -- goto previous info
-  { mode = "n", keymap = "[i", action = lsp_gotos.prev_info, desc = "Prev Info" },
+  { mode = "n", keymap = "[i", action = lsp_gotos.prev_info,      desc = "Prev Info" },
 
   -- goto next info
-  { mode = "n", keymap = "]i", action = lsp_gotos.next_info, desc = "Next Info" },
+  { mode = "n", keymap = "]i", action = lsp_gotos.next_info,      desc = "Next Info" },
 
   -- goto previous hint
-  { mode = "n", keymap = "[h", action = lsp_gotos.prev_hint, desc = "Prev Hint" },
+  { mode = "n", keymap = "[h", action = lsp_gotos.prev_hint,      desc = "Prev Hint" },
 
   -- goto next error
-  { mode = "n", keymap = "]h", action = lsp_gotos.next_hint, desc = "Next Hint" },
+  { mode = "n", keymap = "]h", action = lsp_gotos.next_hint,      desc = "Next Hint" },
 
   -- set loc list
   {
@@ -178,7 +178,7 @@ local lsp_keymaps = {
 }
 
 -- This is the function that is attached to a language server when it is attached to a buffer
-local function on_attach(_, bufnr)
+local function on_attach(client, bufnr)
   -- key bindings for LSP
   for _, km in ipairs(lsp_keymaps) do
     -- keymap(bufnr, km.mode, km.keymap, km.action, { noremap = true, silent = true, desc = km.desc })
@@ -190,10 +190,12 @@ local function on_attach(_, bufnr)
     )
   end
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-    vim.lsp.buf.format()
-  end, { desc = "Format current buffer with LSP" })
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    buffer = bufnr,
+    callback = function()
+      vim.lsp.buf.format { bufnr = bufnr, id = client.id }
+    end,
+  })
 end
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
