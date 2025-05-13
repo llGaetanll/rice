@@ -102,17 +102,22 @@ local function on_attach(client, bufnr)
     end
 
     -- Format on save
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = bufnr,
-        callback = function()
-            vim.lsp.buf.format {
-                -- Formatting for {j/t}sx? files should be handled by prettier
-                filter = function(client)
-                    return client.name ~= "ts_ls"
-                end,
-            }
-        end,
-    })
+    if client.name == "ts_ls" then
+        -- TypeScript LSP should not handle formatting, prettier should
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
+            callback = function()
+                vim.cmd("silent !prettier --write %")
+            end,
+        })
+    else
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format()
+            end,
+        })
+    end
 end
 
 -- TODO:
@@ -120,7 +125,7 @@ end
 -- 2. Loading the settings upfront for each server like this is wasteful. It
 --    would be better if they were lazily loaded (i.e. when we open a file of the
 --    right type) but for the life of me, I cannot figure out how to do this.
-local servers = { "rust_analyzer", "lua_ls" }
+local servers = { "rust_analyzer", "lua_ls", "ts_ls" }
 
 -- settings directory for language server parameters
 local servers_dir = "al.core.completion.servers"

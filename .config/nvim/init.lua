@@ -9,5 +9,3 @@ require "al.core"
 require "al.plugins"
 
 require "al.ui"
-
-require "al.extra"
