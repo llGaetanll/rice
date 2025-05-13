@@ -207,13 +207,13 @@ lazy.setup {
         },
 
         --[[ Telescope ]]
-        -- fuzzy-finding
+        -- Fuzzy finding, live grep, and more
         {
             "nvim-telescope/telescope.nvim",
             event = { "VeryLazy" },
             tag = "0.1.8",
             dependencies = { "nvim-lua/plenary.nvim" },
-            opts = require "al.extra.telescope",
+            opts = require "al.core.telescope",
         },
 
         -- telescope for snippets

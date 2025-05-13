@@ -1,4 +1,4 @@
--- search is handled by telescope
+-- Search is handled by Telescope
 return {
     defaults = {
         selection_caret = " ",
