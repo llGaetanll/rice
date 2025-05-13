@@ -274,7 +274,7 @@ lazy.setup {
         -- filesystem tree
         {
             "kyazdani42/nvim-tree.lua",
-            opts = require "al.extra.nvim-tree",
+            opts = require "al.core.nvim-tree",
         },
 
         -- colorize CSS color codes
