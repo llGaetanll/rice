@@ -10,7 +10,7 @@ return function(colors)
 
     return {
         Directory = { link = "Base0BFg" },
-        NvimTreeOpenedHL = { link = "Base04Fg" },
+        NvimTreeOpenedHL = { link = "Base0EFg" },
         NvimTreeSpecialFile = { link = "Base09Fg" },
 
         NvimTreeDiagnosticHintFileHL = {
