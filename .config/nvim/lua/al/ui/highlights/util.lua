@@ -35,6 +35,32 @@ function M.set_highlights(highlights)
     end
 end
 
+function M.gen_colors()
+    return {
+        -- darks
+        bg0    = M.get_hl("Base00Bg").bg,
+        bg1    = M.get_hl("Base01Bg").bg,
+        bg2    = M.get_hl("Base02Bg").bg,
+        bg3    = M.get_hl("Base03Bg").bg,
+
+        -- lightsutil
+        fg0    = M.get_hl("Base04Bg").bg,
+        fg1    = M.get_hl("Base05Bg").bg,
+        fg2    = M.get_hl("Base06Bg").bg,
+        fg3    = M.get_hl("Base07Bg").bg,
+
+        -- accent colors
+        red    = M.get_hl("Base08Bg").bg,
+        orange = M.get_hl("Base09Bg").bg,
+        yellow = M.get_hl("Base0ABg").bg,
+        green  = M.get_hl("Base0BBg").bg,
+        cyan   = M.get_hl("Base0CBg").bg,
+        blue   = M.get_hl("Base0DBg").bg,
+        purple = M.get_hl("Base0EBg").bg,
+        gray   = M.get_hl("Base0FBg").bg,
+    }
+end
+
 -- taken from the bufferline source
 
 ---@param color string

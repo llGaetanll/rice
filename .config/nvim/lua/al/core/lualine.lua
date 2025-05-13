@@ -55,15 +55,43 @@ local sections = {
     lualine_z = { "location" },
 }
 
-return {
-    options = {
-        component_separators = { left = " ", right = " " },
-        section_separators = { left = "", right = "" },
-        always_divide_middle = false,
-    },
-    -- sections shown when buffer is focused
-    sections = sections,
+return function()
+    local util = require "al.ui.highlights.util"
+    local colors = util.gen_colors()
 
-    -- sections shown when buffer is not focused
-    inactive_sections = sections,
-}
+    require("lualine").setup({
+        options = {
+            theme = {
+                normal = {
+                    a = { fg = colors.bg0, bg = colors.blue },
+                    b = { fg = colors.blue, bg = colors.bg2 },
+                    c = { fg = colors.fg0, bg = colors.bg1 },
+                },
+                insert = {
+                    a = { fg = colors.bg0, bg = colors.green },
+                    b = { fg = colors.green, bg = colors.bg2 },
+                    c = { fg = colors.fg0, bg = colors.bg1 },
+                },
+                visual = {
+                    a = { fg = colors.bg0, bg = colors.yellow },
+                    b = { fg = colors.yellow, bg = colors.bg2 },
+                    c = { fg = colors.fg0, bg = colors.bg1 },
+                },
+                command = {
+                    a = { fg = colors.bg0, bg = colors.red },
+                    b = { fg = colors.red, bg = colors.bg2 },
+                    c = { fg = colors.fg0, bg = colors.bg1 },
+                },
+            },
+            component_separators = { left = " ", right = " " },
+            section_separators = { left = "", right = "" },
+            always_divide_middle = false,
+        },
+
+        -- sections shown when buffer is focused
+        sections = sections,
+
+        -- sections shown when buffer is not focused
+        inactive_sections = sections,
+    })
+end
