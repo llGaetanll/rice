@@ -255,7 +255,7 @@ lazy.setup {
         { -- tells you all your keybinds
             "folke/which-key.nvim",
             event = "VeryLazy",
-            opts = require "al.extra.whichkey",
+            opts = require "al.core.whichkey",
         },
 
         -- pseudo "tabs" to work with nvim tree
