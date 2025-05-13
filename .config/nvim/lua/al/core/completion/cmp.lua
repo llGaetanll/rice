@@ -78,6 +78,7 @@ cmp.setup {
             "i",
             "s",
         }),
+        ["<A-y>"] = require('minuet').make_cmp_map()
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -102,6 +103,7 @@ cmp.setup {
         end,
     },
     sources = {
+        { name = "minuet" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
