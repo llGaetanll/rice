@@ -16,11 +16,11 @@ local function custom_open()
     if node.name == ".." then
         require("nvim-tree.actions.root.change-dir").fn ".."
 
-    -- expand or collapse dir
+        -- expand or collapse dir
     elseif node.nodes then
         require("nvim-tree.api").node.open.edit(node)
 
-    -- if the node is a file
+        -- if the node is a file
     else
         -- get number of windows in current tab page
         local num_wins = #vim.api.nvim_tabpage_list_wins(0)
@@ -31,7 +31,7 @@ local function custom_open()
             -- open the file in place
             require("nvim-tree.api").node.open.edit(node)
 
-        -- if we have more than one window open
+            -- if we have more than one window open
         else
             -- switch focus back from tree to file
             vim.api.nvim_command [[ wincmd p ]]
@@ -88,31 +88,25 @@ end
 local HEIGHT_RATIO = 0.8
 local WIDTH_RATIO = 0.4
 
+-- See `:h nvim-tree-setup`
 return {
-    -- Note: for a full list of options, see `:h nvim-tree-setup`
     disable_netrw = true,
-    hijack_cursor = true, -- no need to move left and right within tree
+    hijack_cursor = true,  -- Don't move left and right within tree
     update_cwd = true,
+    on_attach = on_attach, -- Attach keybinds
 
-    -- attach keybinds
-    on_attach = on_attach,
-
-    -- NvimTree tab settings
     tab = {
         sync = {
-            -- NvimTree stays open in all tabs
-            open = true,
-
-            -- NvimTree closes if closed in one tab
-            close = true,
+            open = true,  -- NvimTree stays open in all tabs
+            close = true, -- NvimTree closes if closed in one tab
         },
     },
 
-    -- NvimTree appearance settings
+    -- Appearance settings
     renderer = {
         root_folder_label = ":t",
         icons = {
-            git_placement = "after", -- put the git icon after the filename
+            git_placement = "after", -- Put the git icon after the filename
             show = {
                 folder_arrow = false,
             },
@@ -182,19 +176,14 @@ return {
 
     actions = {
         open_file = {
-            -- NvimTree will close after opening a file
-            quit_on_open = true,
-
-            -- if `nvim .` is ran, NvimTree will launch to let you pick a file to open
-            window_picker = { enable = true },
+            quit_on_open = true,               -- NvimTree will close after opening a file
+            window_picker = { enable = true }, -- If `nvim .` is ran, NvimTree will launch to let you pick a file to open
         },
     },
 
     view = {
-        width = 30, -- width of the tree buffer
-        side = "left", -- tree spawns on the left side of the screen
-        -- hide_root_folder = true, -- don't display the root folder
-        -- mappings = mappings,
+        width = 30,    -- Width of the tree buffer
+        side = "left", -- Tree spawns on the left side of the screen
         float = {
             enable = true,
             open_win_config = function()
