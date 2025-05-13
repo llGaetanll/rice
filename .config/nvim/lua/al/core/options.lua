@@ -1,53 +1,51 @@
 local options = {
-    backup = false, -- creates a backup file
-    -- clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-    cmdheight = 1, -- more space in the neovim command line for displaying messages
+    backup = false,                          -- creates a backup file
+    cmdheight = 1,                           -- more space in the neovim command line for displaying messages
     completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-    conceallevel = 0, -- so that `` is visible in markdown files
-    fileencoding = "utf-8", -- the encoding written to a file
-    hlsearch = true, -- highlight all matches on previous search pattern
-    ignorecase = true, -- ignore case in search patterns
-    mouse = "", -- disable the mouse
-    pumheight = 10, -- pop up menu height
-    -- showmode = false,                     -- whether to display the current mode (INSERT, VISUAL, ...)
-    shortmess = "IfilnxtToOF", -- don't show nvim splash screen
+    conceallevel = 0,                        -- so that `` is visible in markdown files
+    fileencoding = "utf-8",                  -- the encoding written to a file
+    hlsearch = true,                         -- highlight all matches on previous search pattern
+    ignorecase = true,                       -- ignore case in search patterns
+    mouse = "",                              -- disable the mouse
+    pumheight = 10,                          -- pop up menu height
+    shortmess = "IfilnxtToOF",               -- don't show nvim splash screen
 
-    laststatus = 3, -- remove status lines on upper windows if windows are stacked vertically
+    laststatus = 3,                          -- remove status lines on upper windows if windows are stacked vertically
+    showtabline = 2,                         -- Always show tabs
 
     -- TABS
-    showtabline = 2, -- always show tabs
-    smartcase = true, -- smart case
-    smartindent = true, -- make indenting smarter again
-    expandtab = true, -- convert tabs to spaces
-    shiftwidth = 2, -- the number of spaces inserted for each indentation
-    tabstop = 2, -- insert 2 spaces for a tab
+    smartcase = true,       -- Smart case
+    autoindent = true,      -- Copy indent from current line when starting new line
+    smartindent = true,     -- Smart auto-indenting for some languages
+    expandtab = true,       -- Convert tabs to spaces
+    shiftwidth = 4,         -- The number of spaces inserted for each indentation
+    tabstop = 4,            -- Insert 2 spaces for a tab
 
-    splitbelow = true, -- force all horizontal splits to go below current window
-    splitright = true, -- force all vertical splits to go to the right of current window
+    splitbelow = true,      -- Force all horizontal splits to go below current window
+    splitright = true,      -- Force all vertical splits to go to the right of current window
 
-    swapfile = false, -- creates a swapfile
-    termguicolors = true, -- set term gui colors (most terminals support this)
-    timeoutlen = 300, -- time to wait for a mapped sequence to complete (in milliseconds)
-    undofile = true, -- enable persistent undo
-    updatetime = 300, -- faster completion (4000ms default)
-    -- writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+    swapfile = false,       -- Creates a swapfile
+    termguicolors = true,   -- Set term gui colors (most terminals support this)
+    timeoutlen = 300,       -- Time to wait for a mapped sequence to complete (in milliseconds)
+    undofile = true,        -- Enable persistent undo
+    updatetime = 300,       -- Faster completion (4000ms default)
 
-    cursorline = false, -- highlight the current line
-    number = true, -- set numbered lines
+    cursorline = false,     -- highlight the current line
+    number = true,          -- set numbered lines
     relativenumber = false, -- set relative numbered lines
-    numberwidth = 4, -- set number column width to 2 {default 4}
+    numberwidth = 4,        -- set number column width to 2 {default 4}
 
     -- Folding
-    foldmethod = "indent", -- folds based on indent
-    foldlevel = 9, -- folds off by default
+    foldmethod = "indent",     -- folds based on indent
+    foldlevel = 9,             -- folds off by default
 
-    signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time the LSP complains
-    wrap = false, -- whether to wrap lines
-    linebreak = false, -- companion to wrap, don't split words
-    tw = 80, -- wrap lines at 80 characters
+    signcolumn = "yes",        -- always show the sign column, otherwise it would shift the text each time the LSP complains
+    wrap = false,              -- whether to wrap lines
+    linebreak = false,         -- companion to wrap, don't split words
+    tw = 80,                   -- wrap lines at 80 characters
 
-    scrolloff = 2, -- minimal number of screen lines to keep above and below the cursor
-    sidescrolloff = 2, -- minimal number of screen columns either side of cursor if wrap is `false`
+    scrolloff = 2,             -- minimal number of screen lines to keep above and below the cursor
+    sidescrolloff = 2,         -- minimal number of screen columns either side of cursor if wrap is `false`
 
     guifont = "monospace:h17", -- the font used in graphical neovim applications
 }
