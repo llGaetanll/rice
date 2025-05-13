@@ -18,6 +18,34 @@ luasnip.filetype_extend("typescriptreact", { "html" })
 -- load vscode snippets
 require("luasnip/loaders/from_vscode").lazy_load()
 
+local symbol_map = {
+    Text = "󰉿",
+    Method = "󰆧",
+    Function = "󰊕",
+    Constructor = "",
+    Field = "󰜢",
+    Variable = "󰀫",
+    Class = "󰠱",
+    Interface = "",
+    Module = "",
+    Property = "󰜢",
+    Unit = "󰑭",
+    Value = "󰎠",
+    Enum = "",
+    Keyword = "󰌋",
+    Snippet = "",
+    Color = "󰏘",
+    File = "󰈙",
+    Reference = "󰈇",
+    Folder = "󰉋",
+    EnumMember = "",
+    Constant = "󰏿",
+    Struct = "󰙅",
+    Event = "",
+    Operator = "󰆕",
+    TypeParameter = "󰀫",
+}
+
 cmp.setup {
     -- cmp needs a snippet engine, in our case this is luasnip
     snippet = {
@@ -83,23 +111,41 @@ cmp.setup {
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
-            local kind = require("lspkind").cmp_format {
+            local old_kind = vim_item.kind
+
+            local format = require("lspkind").cmp_format {
                 mode = "symbol",
                 ellipsis_char = '…',
+                preset = "codicons",
+                symbol_map = symbol_map,
+                menu = {
+                    nvim_lsp = "[lsp]",
+                    nvim_lua = "[lua]",
+                    minuet = "[minuet]",
+                    luasnip = "[luasnip]",
+                    npm = "[npm]",
+                    buffer = "[buf]",
+                    path = "[path]",
+                    cmdline = "[cmd]",
+                },
                 maxwidth = {
                     menu = 50,
-                    abbr = 50
+                    abbr = 30
                 },
-            } (
-                entry,
-                vim_item
-            )
+            }
 
-            local strings = vim.split(kind.kind, "%s", { trimempty = true })
-            kind.kind = " " .. (strings[1] or "") .. " "
-            kind.menu = "    " .. (strings[2] or "")
+            local vim_item = format(entry, vim_item)
+            local strings = vim.split(vim_item.kind, "%s", { trimempty = true })
 
-            return kind
+            if vim_item.menu == "[minuet]" then
+                vim_item.kind = " 󰊕 "
+            else
+                vim_item.kind = " " .. (strings[1] or "") .. " "
+            end
+
+            vim_item.menu = old_kind
+
+            return vim_item
         end,
     },
     sources = {
