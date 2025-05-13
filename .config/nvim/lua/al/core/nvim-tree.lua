@@ -80,11 +80,6 @@ local function on_attach(bufnr)
     vim.keymap.set("n", "D", api.fs.remove, opts "Delete file")
 end
 
--- width and height ratio of the nvim-tree floating window (with respect to
--- screen width and height)
-local HEIGHT_RATIO = 0.8
-local WIDTH_RATIO = 0.4
-
 -- Load the lsp icons from the theme
 local icons = require "al.ui.styles.icons"
 
@@ -176,7 +171,6 @@ return {
 
     actions = {
         open_file = {
-            quit_on_open = true,               -- NvimTree will close after opening a file
             window_picker = { enable = true }, -- If `nvim .` is ran, NvimTree will launch to let you pick a file to open
         },
     },
@@ -184,27 +178,5 @@ return {
     view = {
         width = 30,    -- Width of the tree buffer
         side = "left", -- Tree spawns on the left side of the screen
-        float = {
-            enable = true,
-            open_win_config = function()
-                local screen_w = vim.opt.columns:get()
-                local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-                local window_w = screen_w * WIDTH_RATIO
-                local window_h = screen_h * HEIGHT_RATIO
-                local window_w_int = math.floor(window_w)
-                local window_h_int = math.floor(window_h)
-                local center_x = (screen_w - window_w) / 2
-                local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
-
-                return {
-                    border = "none",
-                    relative = "editor",
-                    row = center_y,
-                    col = center_x,
-                    width = window_w_int,
-                    height = window_h_int,
-                }
-            end,
-        },
     },
 }
