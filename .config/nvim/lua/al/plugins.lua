@@ -13,7 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(install_path) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
+            { out,                            "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -73,9 +73,9 @@ lazy.setup {
             cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
             opts = {
                 ensure_installed = { "rust" }, -- one of "all" or a list of languages
-                ignore_install = { "" }, -- List of parsers to ignore installing
+                ignore_install = { "" },       -- List of parsers to ignore installing
                 highlight = {
-                    enable = true, -- false will disable the whole extension
+                    enable = true,             -- false will disable the whole extension
                     disable = {
                         "css",
                         "latex",
@@ -248,7 +248,7 @@ lazy.setup {
             "sindrets/diffview.nvim", -- git diff integration
             event = { "VeryLazy" },
             dependencies = { "nvim-tree/nvim-web-devicons" },
-            opts = "al.extra.diffview",
+            opts = "al.core.diffview",
         },
 
         --[[ OTHER ]]
