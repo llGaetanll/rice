@@ -19,15 +19,12 @@ return function(colors)
             bg = util.to_diff_color(colors.red, colors.bg0),
         },
         DiffAdd = {
-            fg = util.to_diff_color_text(colors.green, colors.bg0),
             bg = util.to_diff_color(colors.green, colors.bg0),
         },
         DiffChange = {
-            fg = util.to_diff_color_text(colors.orange, colors.bg0),
             bg = util.to_diff_color(colors.orange, colors.bg0),
         },
         DiffText = {
-            fg = util.to_diff_color_text(colors.yellow, colors.bg0),
             bg = util.to_diff_color(colors.yellow, colors.bg0),
         },
 
