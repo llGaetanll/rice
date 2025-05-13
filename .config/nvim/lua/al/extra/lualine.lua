@@ -1,8 +1,8 @@
--- load the lsp icons from the theme
-local lsp_icons = require("al.ui.styles.util").lsp_icons
+-- Load the lsp icons from the theme
+local icons = require "al.ui.styles.icons"
 
 local spaced_icons = {}
-for key, value in pairs(lsp_icons) do
+for key, value in pairs(icons) do
     spaced_icons[key] = value .. " "
 end
 

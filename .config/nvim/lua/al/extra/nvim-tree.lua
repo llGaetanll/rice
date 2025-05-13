@@ -42,9 +42,6 @@ local function custom_open()
     end
 end
 
--- load the lsp icons from the theme
-local lsp_icons = require("al.ui.styles.util").lsp_icons
-
 local function on_attach(bufnr)
     local api = require "nvim-tree.api"
 
@@ -87,6 +84,9 @@ end
 -- screen width and height)
 local HEIGHT_RATIO = 0.8
 local WIDTH_RATIO = 0.4
+
+-- Load the lsp icons from the theme
+local icons = require "al.ui.styles.icons"
 
 -- See `:h nvim-tree-setup`
 return {
@@ -167,10 +167,10 @@ return {
         show_on_dirs = true,
         show_on_open_dirs = true,
         icons = {
-            error = lsp_icons.error,
-            warning = lsp_icons.warn,
-            hint = lsp_icons.hint,
-            info = lsp_icons.info,
+            error = icons.error,
+            warning = icons.warn,
+            hint = icons.hint,
+            info = icons.info,
         },
     },
 

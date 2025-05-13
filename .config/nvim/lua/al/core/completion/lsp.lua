@@ -141,7 +141,7 @@ for _, server in ipairs(servers) do
 end
 
 -- setup the diagnostics config
-local lsp_icons = require("al.ui.styles.util").lsp_icons
+local icons = require "al.ui.styles.icons"
 vim.diagnostic.config {
     -- disable virtual text
     virtual_text = true,
@@ -149,10 +149,10 @@ vim.diagnostic.config {
     -- show signs
     signs = {
         text = {
-            [vim.diagnostic.severity.ERROR] = lsp_icons.error,
-            [vim.diagnostic.severity.WARN] = lsp_icons.warn,
-            [vim.diagnostic.severity.HINT] = lsp_icons.hint,
-            [vim.diagnostic.severity.INFO] = lsp_icons.info,
+            [vim.diagnostic.severity.ERROR] = icons.error,
+            [vim.diagnostic.severity.WARN] = icons.warn,
+            [vim.diagnostic.severity.HINT] = icons.hint,
+            [vim.diagnostic.severity.INFO] = icons.info,
         },
     },
 
