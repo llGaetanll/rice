@@ -261,7 +261,7 @@ lazy.setup {
         -- pseudo "tabs" to work with nvim tree
         {
             "akinsho/bufferline.nvim",
-            opts = require "al.extra.bufferline",
+            opts = require "al.core.bufferline",
         },
 
         -- airline for lua
