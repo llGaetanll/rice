@@ -268,7 +268,7 @@ lazy.setup {
         {
             "nvim-lualine/lualine.nvim",
             dependencies = { "kyazdani42/nvim-web-devicons" },
-            opts = require "al.extra.lualine",
+            opts = require "al.core.lualine",
         },
 
         -- filesystem tree
