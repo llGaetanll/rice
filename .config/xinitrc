@@ -7,7 +7,10 @@ export BAR_HEIGHT=45   # matched by polybar and dmenu
 export DEF_WIN_GAP=20
 
 # source any files required by any programming languages
-. "$XDG_CONFIG_HOME/langinit"
+[ -f "$XDG_CONFIG_HOME/langinit" ] && . "$XDG_CONFIG_HOME/langinit"
+
+# source any LLM API keys (used by nvim)
+[ -f "$XDG_CONFIG_HOME/llminit" ] && . "$XDG_CONFIG_HOME/llminit"
 
 # source xprofile which launches all the programs
 . ~/.xprofile
