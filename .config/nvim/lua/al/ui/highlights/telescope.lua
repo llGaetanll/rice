@@ -18,12 +18,12 @@ return function(colors)
         TelescopePromptNormal = { fg = colors.fg0, bg = dark },
         TelescopePromptPrefix = { fg = colors.fg0, bg = dark, bold = true },
         TelescopePromptTitle = { fg = dark, bg = colors.blue, bold = true },
-        TelescopePromptCounter = { fg = colors.fg3, bg = dark },
+        TelescopePromptCounter = { fg = colors.bg3, bg = dark },
 
         -- bottom left
         TelescopeResultsTitle = { fg = darker, bg = colors.green, bold = true },
         TelescopeResultsBorder = { fg = darker, bg = darker },
-        TelescopeResultsNormal = { bg = darker },
+        TelescopeResultsNormal = { fg = colors.fg0, bg = darker },
         TelescopeSelection = { bg = base_color },
 
         -- right
