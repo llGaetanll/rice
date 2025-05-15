@@ -84,99 +84,118 @@ end
 local icons = require "al.ui.styles.icons"
 
 -- See `:h nvim-tree-setup`
-return {
-    disable_netrw = true,
-    hijack_cursor = true,  -- Don't move left and right within tree
-    update_cwd = true,
-    on_attach = on_attach, -- Attach keybinds
+return function()
+    require("nvim-tree").setup({
+        disable_netrw = true,
+        hijack_cursor = true,  -- Don't move left and right within tree
+        update_cwd = true,
+        on_attach = on_attach, -- Attach keybinds
 
-    tab = {
-        sync = {
-            open = true,  -- NvimTree stays open in all tabs
-            close = true, -- NvimTree closes if closed in one tab
-        },
-    },
-
-    -- Appearance settings
-    renderer = {
-        root_folder_label = ":t",
-        icons = {
-            git_placement = "after", -- Put the git icon after the filename
-            show = {
-                folder_arrow = false,
-            },
-            glyphs = {
-                default = "",
-                symlink = "",
-                folder = {
-                    arrow_open = "",
-                    arrow_closed = "",
-                    default = "",
-                    open = "",
-                    empty = "",
-                    empty_open = "",
-                    symlink = "",
-                    symlink_open = "",
-                },
-                git = {
-                    unstaged = "M",
-                    staged = "S",
-                    unmerged = "",
-                    renamed = "R",
-                    untracked = "U",
-                    deleted = "D",
-                    ignored = "",
-                },
+        tab = {
+            sync = {
+                open = true,  -- NvimTree stays open in all tabs
+                close = true, -- NvimTree closes if closed in one tab
             },
         },
 
-        -- opened files are highlighted
-        highlight_opened_files = "name",
-
-        -- file color matches git file status
-        highlight_git = "none",
-        highlight_modified = "name",
-        highlight_diagnostics = "name",
-
-        indent_markers = {
-            enable = true,
-            inline_arrows = true,
+        -- Appearance settings
+        renderer = {
+            root_folder_label = ":t",
             icons = {
-                corner = "└",
-                edge = "│",
-                item = "│",
-                bottom = "─",
-                none = " ",
+                git_placement = "after", -- Put the git icon after the filename
+                show = {
+                    folder_arrow = false,
+                },
+                glyphs = {
+                    default = "",
+                    symlink = "",
+                    folder = {
+                        arrow_open = "",
+                        arrow_closed = "",
+                        default = "",
+                        open = "",
+                        empty = "",
+                        empty_open = "",
+                        symlink = "",
+                        symlink_open = "",
+                    },
+                    git = {
+                        unstaged = "M",
+                        staged = "S",
+                        unmerged = "",
+                        renamed = "R",
+                        untracked = "U",
+                        deleted = "D",
+                        ignored = "",
+                    },
+                },
+            },
+
+            -- opened files are highlighted
+            highlight_opened_files = "name",
+
+            -- file color matches git file status
+            highlight_git = "none",
+            highlight_modified = "name",
+            highlight_diagnostics = "name",
+
+            indent_markers = {
+                enable = true,
+                inline_arrows = true,
+                icons = {
+                    corner = "└",
+                    edge = "│",
+                    item = "│",
+                    bottom = "─",
+                    none = " ",
+                },
             },
         },
-    },
 
-    update_focused_file = {
-        enable = true,
-        update_root = true,
-        ignore_list = {},
-    },
-
-    diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        show_on_open_dirs = true,
-        icons = {
-            error = icons.error,
-            warning = icons.warn,
-            hint = icons.hint,
-            info = icons.info,
+        update_focused_file = {
+            enable = true,
+            update_root = true,
+            ignore_list = {},
         },
-    },
 
-    actions = {
-        open_file = {
-            window_picker = { enable = true }, -- If `nvim .` is ran, NvimTree will launch to let you pick a file to open
+        diagnostics = {
+            enable = true,
+            show_on_dirs = true,
+            show_on_open_dirs = true,
+            icons = {
+                error = icons.error,
+                warning = icons.warn,
+                hint = icons.hint,
+                info = icons.info,
+            },
         },
-    },
 
-    view = {
-        width = 30,    -- Width of the tree buffer
-        side = "left", -- Tree spawns on the left side of the screen
-    },
-}
+        actions = {
+            open_file = {
+                window_picker = { enable = true }, -- If `nvim .` is ran, NvimTree will launch to let you pick a file to open
+            },
+        },
+
+        view = {
+            width = 30,    -- Width of the tree buffer
+            side = "left", -- Tree spawns on the left side of the screen
+        },
+    })
+
+    -- Close nvim-tree if it's the last buffer in a tab, unless it's the only buffer
+    vim.api.nvim_create_autocmd("BufEnter", {
+        nested = true,
+        callback = function()
+            local numtabs = vim.fn.tabpagenr("$")
+            local tabnr = vim.fn.tabpagenr()
+
+            -- list of buffers on the current tab page
+            local bufs = vim.fn.tabpagebuflist(tabnr)
+            local bufname = vim.api.nvim_buf_get_name(0)
+
+            if numtabs > 1 and #bufs == 1 and bufname:match("NvimTree_") then
+                vim.cmd "quit"
+            end
+        end
+    })
+end
