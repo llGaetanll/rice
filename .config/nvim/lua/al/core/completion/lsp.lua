@@ -49,7 +49,7 @@ local lsp_implementations = function()
 end
 
 local lsp_references = function()
-    require("telescope.builtin").lsp_references()
+    require("telescope.builtin").lsp_references({ trim_text = true })
 end
 
 local hover = function()
