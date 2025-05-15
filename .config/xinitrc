@@ -9,8 +9,8 @@ export DEF_WIN_GAP=20
 # source any files required by any programming languages
 [ -f "$XDG_CONFIG_HOME/langinit" ] && . "$XDG_CONFIG_HOME/langinit"
 
-# source any LLM API keys (used by nvim)
-[ -f "$XDG_CONFIG_HOME/llminit" ] && . "$XDG_CONFIG_HOME/llminit"
+# source LLM API keys, or any other secret env variables
+[ -f "$XDG_CONFIG_HOME/env-secrets" ] && . "$XDG_CONFIG_HOME/env-secrets"
 
 # source xprofile which launches all the programs
 . ~/.xprofile
