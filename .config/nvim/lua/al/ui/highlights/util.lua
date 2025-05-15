@@ -43,7 +43,7 @@ function M.gen_colors()
         bg2    = M.get_hl("Base02Bg").bg,
         bg3    = M.get_hl("Base03Bg").bg,
 
-        -- lightsutil
+        -- lights
         fg0    = M.get_hl("Base04Bg").bg,
         fg1    = M.get_hl("Base05Bg").bg,
         fg2    = M.get_hl("Base06Bg").bg,
