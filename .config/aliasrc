@@ -1,19 +1,18 @@
 #!/bin/sh
 
-alias \
-    nrd="npm run dev" \
-    ns="npm start" \
-    py3="python3" \
-    gs="git add" \
-    gs="git status" \
-    gp="git push" \
-    gc="git checkout" \
-    gb="git branch" \
-    dcu="docker-compose up" \
-    dcd="docker-compose down" \
-    synctime="sudo ntpdate pool.ntp.org" \
-    tmux="tmux -u" \
-    lg="lazygit" \
-    tdl="yt-dlp -f mp4 -o \"$HOME/desktop/%(id)s.%(ext)s\"" \
-    ydl="yt-dlp -o \"$HOME/Videos/downloads/%(id)s.%(ext)s\"" \
-    ytthumbnail="yt-dlp --write-thumbnail --convert-thumbnails jpg --skip-download" \
+alias nrd="npm run dev"
+alias ns="npm start"
+alias py3="python3"
+alias gs="git add"
+alias gs="git status"
+alias gp="git push"
+alias gc="git checkout"
+alias gb="git branch"
+alias dcu="docker-compose up"
+alias dcd="docker-compose down"
+alias synctime="sudo ntpdate pool.ntp.org"
+alias tmux="tmux -u"
+alias lg="lazygit"
+alias tdl="yt-dlp -f mp4 -o \"$HOME/desktop/%(id)s.%(ext)s\""
+alias ydl="yt-dlp -o \"$HOME/Videos/downloads/%(id)s.%(ext)s\""
+alias ytthumbnail="yt-dlp --write-thumbnail --convert-thumbnails jpg --skip-download"
