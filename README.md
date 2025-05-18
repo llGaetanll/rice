@@ -106,6 +106,20 @@ You can move between panes with `h` `j` `k` `l`.
 
 ## nvim
 
+**Note**: The `nvim` part of this config was moved to
+[`llGaetanll/nvim`](https://github.com/llGaetanll/nvim). In short: Over the
+years, the config grew large and complex. It even became the majority of the
+code in this repo. I think this is not in the spirit of these dotfiles, which
+are meant to be kept simple. If you still want to use that configuration, you
+can of course `git clone` its repository as usual, and set a symlink.
+
+```
+ln -s /path/to/nvim/repo $XDG_CONFIG_HOME/nvim
+```
+
+If perhaps you want an simpler configuration, see
+[`llGaetanll/nvim-lite`](https://github.com/llGaetanll/nvim-lite).
+
 <img width=100% src="https://i.imgur.com/ONIpqjU.png" alt="Neovim">
 
 <details>
@@ -131,11 +145,6 @@ You can move between panes with `h` `j` `k` `l`.
 
 Neovim is a community rewrite of vim. The config file `.config/nvim/init.lua` is well
 documented if you want to see what features are included.
-
-This is arguably the most interesting part of this configuration. If you want to
-use my vim config without having to install the rest of the system, you can
-simply copy the files inside of the `.config/nvim/` directory to your local
-neovim config directory.
 
 If you don't know how to find your local neovim config directory, you can open
 neovim and use the following command
