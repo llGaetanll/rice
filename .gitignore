@@ -65,15 +65,6 @@
 # Basically: un-ignore parent dir, ignore all files within, unignore ones you want
 # git won't let you un-ignore files if the parent is ignored. So we have to do this
 # So this only keeps init.vim
-!.config/nvim
-.config/nvim/*
-!.config/nvim/init.lua
-!.config/nvim/stylua.toml
-!.config/nvim/lua/
-
-# !.config/nvim/init.vim
-# !.config/nvim/local.vim
-# !.config/nvim/coc-settings.json
 
 !.config/polybar
 
