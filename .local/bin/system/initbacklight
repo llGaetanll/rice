@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Should be ran as root. Correctly sets the permissions for the backlight file
+# See also `setbacklight` script
+
+basedir="/sys/class/backlight"
+handler=$(ls $basedir)
+
+chmod 666 "$basedir/$handler/brightness"
