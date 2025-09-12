@@ -1,138 +1,233 @@
 #!/bin/sh
 
-# to compress:
-# ffmpeg -i gif-210312-0824-33.gif -c:v libx265 -crf 26 -preset fast out.mp4
+# Recordings directory
+REC_DIR="$HOME/files/videos/recordings"
 
-# recordingsdir=$RECORD_DIR
-recordingsdir="$HOME/files/videos/recordings"
+# Raw files go here
+RAW_DIR="$REC_DIR/raw"
 
-# TODO: update polybar ipc recording module
-updateicon() {
-	echo "$1" > /tmp/recordingicon
-	pkill -RTMIN+9 "${STATUSBAR:-dwmblocks}"
-}
+# Compressed files go here
+CMP_DIR="$REC_DIR/compressed"
 
-killrecording() {
-	recpid="$(cat /tmp/recordingpid)"
+stop_recording() {
+    read -r recpid filepath < /tmp/recordingpid
 
 	# kill with SIGTERM, allowing finishing touches.
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
-	updateicon ""
-	pkill -RTMIN+9 "${STATUSBAR:-dwmblocks}"
 
 	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
 	sleep 3
 	kill -9 "$recpid"
-	exit
+
+    # In case the user wants to rename the file
+    prompt_rename_file
+
+    # Compress the file
+    compress_file
+
+    exit
 }
 
-# Different ways to record
-promptrecording() {
-	choice=$(printf "video\\nvideo selection\\naudio\\ngif" | dm -i -p "Recording Style")
+# Which kind of recording is this?
+prompt_recording() {
+	choice=$(printf "video\\ngif\\naudio" | dm -i -p "Recording Style")
+
 	case "$choice" in
-		video) video;;
-		"video selection") videoselected;;
-		audio) audio;;
-		gif) gif;;
+		video) 
+            {
+                prompt_capture_style
+                record_video
+            }
+            ;;
+		gif) 
+            {
+                prompt_capture_style
+                record_gif
+            }
+            ;;
+		audio)
+            {
+                record_audio
+            }
+            ;;
 	esac
 }
 
-gif_old() {
-	slop -f "%x %y %w %h" > /tmp/slop
-	read -r X Y W H < /tmp/slop
-	rm /tmp/slop
+# Creates variables x y w h for the visual selection chosen by the user.
+prompt_capture_style() {
+	choice=$(printf "Current Window\\nSelection\\nEntire Screen" | dm -i -p "Capture Style")
+	case "$choice" in
+		"Current Window") 
+            {
+                xdotool getactivewindow getwindowgeometry --shell \
+              | tr '\n' ' ' \
+              | sed -n 's/.*X=\([0-9]*\).*Y=\([0-9]*\).*WIDTH=\([0-9]*\).*HEIGHT=\([0-9]*\).*/\1 \2 \3 \4/p' \
+              > /tmp/dims
 
-	ffmpeg \
-	-f x11grab \
-	-framerate 10 \
-	-video_size "$W"x"$H" \
-	-i :0.0+"$X,$Y" \
-	"$recordingsdir/gif-$(date '+%y%m%d-%H%M-%S').gif" &
-	echo $! > /tmp/recordingpid
-	updateicon "⏺️"
+                read -r x y w h < /tmp/dims
+                rm /tmp/dims
+            }
+            ;;
+		"Selection")
+            {
+                slop -f "%x %y %w %h" > /tmp/dims
+                read -r x y w h < /tmp/dims
+                rm /tmp/dims
+            }
+            ;;
+		"Entire Screen") 
+            {
+                x=0
+                y=0
+                xdpyinfo | grep dimensions | awk '{print $2}' | sed 's/x/ /' > /tmp/dims
+
+                read -r w h < /tmp/dims
+                rm /tmp/dims
+            }
+            ;;
+	esac
 }
 
-gif() {
-	slop -f "%x %y %w %h" > /tmp/slop
-	read -r X Y W H < /tmp/slop
-	rm /tmp/slop
+prompt_rename_file() {
+	choice=$(printf "Yes\\nNo" | dm -i -p "Rename Recording?")
+	case "$choice" in
+		"Yes") 
+            {
+                newfilename=$(dm -p "Rename" < /dev/null)
 
-	ffmpeg \
-	-f x11grab \
-	-framerate 10 \
-	-video_size "$W"x"$H" \
-	-i :0.0+"$X,$Y" \
-	"$recordingsdir/gif-$(date '+%y%m%d-%H%M-%S').gif" &
-	echo $! > /tmp/recordingpid
-	updateicon "⏺️"
+                fileext="${filepath##*.}"
+                filedir=$(dirname "$filepath")
+                newfilepath="$filedir/$newfilename.$fileext"
+
+                mv "$filepath" "$newfilepath"
+
+                filepath="$newfilepath"
+            }
+            ;;
+		"No") : ;;
+	esac
 }
 
-# record audio only
-audio() {
+# Record video using ffmpeg. Expects $x $y $w $h to be defined.
+record_video() {
+    # Create the raw dir if it doesn't already exist
+    mkdir -p "$RAW_DIR"
+
+    filename="rec_$(date '+%Y-%m-%d_%H:%M:%S').mp4"
+    filepath="$RAW_DIR/$filename"
+
+    echo "x: $x, y: $y, w: $w, h: $h"
+    echo "Recording to: $filepath"
+
+    framerate=24
+
+    ffmpeg -y \
+    -f x11grab \
+    -framerate "$framerate" \
+	-video_size "$w"x"$h" \
+	-i :0.0+"$x,$y" \
+    -r "$framerate" \
+    -c:v h264 -crf 0 -preset ultrafast -c:a aac \
+    "$filepath" &
+
+	echo "$! $filepath" > /tmp/recordingpid
+}
+
+record_gif() {
+    # Create the raw dir if it doesn't already exist
+    mkdir -p "$RAW_DIR"
+
+    filename="rec_$(date '+%Y-%m-%d_%H:%M:%S').gif"
+    filepath="$RAW_DIR/$filename"
+
+    echo "Recording to: $filepath"
+
+    framerate=10
+
+    ffmpeg -y \
+    -f x11grab \
+    -framerate "$framerate" \
+	-video_size "$w"x"$h" \
+	-i :0.0+"$x,$y" \
+    -r "$framerate" \
+    "$filepath" &
+
+	echo "$! $filepath" > /tmp/recordingpid
+}
+
+record_audio() {
+    # Create the raw dir if it doesn't already exist
+    mkdir -p "$RAW_DIR"
+
+    filename="rec_$(date '+%Y-%m-%d_%H:%M:%S').flac"
+    filepath="$RAW_DIR/$filename"
+
+    echo "Recording to: $filepath"
+
 	ffmpeg \
 	-f alsa -i default \
 	-c:a flac \
-	"$recordingsdir/audio-$(date '+%y%m%d-%H%M-%S').flac" &
-	echo $! > /tmp/recordingpid
-	updateicon "🎙️"
+	"$filepath" &
+
+	echo "$! $filepath" > /tmp/recordingpid
 }
 
-# record fullscreen video w/ audio. Note that this may cause multi-monitor 
-# setups to record on all screens due to Xorgs autistic nature
-video() {
-  # path of the file
-  filename="$recordingsdir/video-$(date '+%y%m%d-%H%M-%S').mp4" 
+compress_file() {
+    if [ -z "$filepath" ]; then
+        echo "filepath needs to be defined to compress the file"
 
-  FRAMERATE=60
+        return 1
+    fi
 
-	ffmpeg -y \
-  -f x11grab \
-  -framerate "$FRAMERATE" \
-  -s "$(xdpyinfo | grep dimensions | awk '{print $2;}')" \
-  -i "$DISPLAY" \
-  -f alsa -i default \
-  -r 30 \
-  -c:v h264 -crf 0 -preset ultrafast -c:a aac \
-	"$filename" &
+    # Create the compressed dir if it doesn't already exist
+    mkdir -p "$CMP_DIR"
 
-	echo $! > /tmp/recordingpid
+    # Get the file extension to figure out what kind of recording this was
+    fileext="${filepath##*.}"
 
- #  # you have to give the file a name
-	# newfilename=$(dm -i -p "File Name" < /dev/null)
-	#
- #  notify-send "Compressing..."
-	#
- #  # compress the file
- #  ffmpeg -i "$filename" -c:v libx265 -crf 26 -preset fast "$newfilename"
-	#
- #  # remove uncompressed file
- #  rm "$filename"
-	#
- #  notify-send "Saved file as $newfilename"
+    # Path of the compressed file
+    filename=$(basename "$filepath")
+    filepathcmp="$CMP_DIR/$filename"
 
-	updateicon "⏺️🎙️"
+    case "$fileext" in
+        "mp4")
+            {
+                echo "Compressing $filepath -> $filepathcmp"
+
+                ffmpeg \
+                -i "$filepath" \
+                -c:v libx264 \
+                -crf 23 \
+                -preset medium \
+                -c:a aac \
+                -b:a 128k \
+                "$filepathcmp"
+            }
+            ;;
+        "gif")
+            {
+                echo "Compressing $filepath -> $filepathcmp"
+
+                ffmpeg \
+                -i "$filepath" \
+                -c:v libx264 \
+                -crf 23 \
+                -preset medium \
+                "$filepathcmp"
+            }
+            ;;
+        "flac")
+            {
+                echo "TODO: Support flac compression"
+            }
+            ;;
+        *)
+            {
+                echo "Unrecognized file extension '$fileext'"
+            }
+            ;;
+    esac
 }
 
-# record a selected area as a video w/ audio
-videoselected() {
-	# get coordinates of selected screen
-	slop -f "%x %y %w %h" > /tmp/slop
-	read -r X Y W H < /tmp/slop
-	rm /tmp/slop
-
-	ffmpeg \
-	-f x11grab \
-	-framerate 60 \
-	-video_size "$W"x"$H" \
-	-i :0.0+"$X,$Y" \
-	-f alsa -i default \
-	-r 30 \
-	-c:v h264 -crf 0 -preset ultrafast -c:a aac \
-	"$recordingsdir/selected-$(date '+%y%m%d-%H%M-%S').mp4" &
-	echo $! > /tmp/recordingpid
-	updateicon "⏺️"
-}
-
-# if we're recording, stop the recording, otherwise prompt it
-[ -f /tmp/recordingpid ] && killrecording && exit || promptrecording
+[ -f /tmp/recordingpid ] && stop_recording && exit || prompt_recording
