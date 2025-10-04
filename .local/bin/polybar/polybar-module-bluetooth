@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Get connected device name
+device=$(bluetoothctl devices Connected | head -n1 | cut -d' ' -f3-)
+
+echo "%{A1:$TERMINAL -e bluetui:} $device%{A}"
+
+# Get all connected devices
+connected=$(bluetoothctl devices Connected)
+count=$(echo "$connected" | grep -c "^Device")
+
+if [ "$count" -eq 0 ]; then
+    device_info=""
+elif [ "$count" -eq 1 ]; then
+    device_info=" $(echo "$connected" | cut -d' ' -f3-)"
+else
+    device_info=" *"
+fi
+
+echo "%{A1:$TERMINAL -e bluetui:}$device_info%{A}"
