@@ -38,8 +38,8 @@ super + {d,Return,w}
 	{dm_run,$TERMINAL,$BROWSER}
 
 # Terminal-based programs
-super + {r,p,t,b}
-	$TERMINAL -e {lf,pulsemixer,trans-start,bluetui}
+super + {r,p,t,b,n}
+	$TERMINAL -e {lf,pulsemixer,trans-start,bluetui,nmtui}
 
 # }}}
 
