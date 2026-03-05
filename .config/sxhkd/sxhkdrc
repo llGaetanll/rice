@@ -1,4 +1,6 @@
 ### In this file are any keybinds that work in any window manager
+Alt_R
+    whisper-dictate.sh
 
 ## Scripts {{{
 
