@@ -15,3 +15,6 @@ image/gif=img.desktop;
 inode/directory=file.desktop;
 inode/symlink=text.desktop;
 x-scheme-handler/notion=notion-app.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+text/html=firefox.desktop
