@@ -127,6 +127,7 @@ record_video() {
     -framerate "$framerate" \
 	-video_size "$w"x"$h" \
 	-i :0.0+"$x,$y" \
+    -f pulse -i default \
     -r "$framerate" \
     -c:v h264 -crf 0 -preset ultrafast -c:a aac \
     "$filepath" &
