@@ -10,4 +10,5 @@ mpv \
 --title="mpvfloat" \
 --profile=low-latency \
 --untimed \
-/dev/video0
+--demuxer-lavf-o=video_size=1280x720,input_format=mjpeg \
+av://v4l2:/dev/video0
