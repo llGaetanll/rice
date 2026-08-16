@@ -16,6 +16,8 @@ stop_recording() {
 	kill -15 "$recpid"
 	rm -f /tmp/recordingpid
 
+	notify-send "Recording stopped" "Saved to $filepath"
+
 	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
 	sleep 3
 	kill -9 "$recpid"
