@@ -203,6 +203,10 @@ compress_file() {
                 -c:v libx264 \
                 -crf 23 \
                 -preset medium \
+                -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2" \
+                -pix_fmt yuv420p \
+                -profile:v high \
+                -movflags +faststart \
                 -c:a aac \
                 -b:a 128k \
                 "$filepathcmp"
