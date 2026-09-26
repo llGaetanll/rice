@@ -20,7 +20,7 @@ export MOZ_USE_XINPUT2=1
 
 # stop firefox from crashing when opening multiple links in signal or discord
 # see: https://www.reddit.com/r/archlinux/comments/n7cu62/comment/hzof4cc/?utm_source=share&utm_medium=web2x&context=3
-export DBUS_SESSION_BUS_ADDRESS="autolaunch:"
+# export DBUS_SESSION_BUS_ADDRESS="autolaunch:"
 
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
